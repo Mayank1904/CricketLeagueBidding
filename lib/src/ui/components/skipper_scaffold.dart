@@ -19,7 +19,7 @@ class SkipperScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: backgroundColor ?? AppColor.backgroundColor,
+        backgroundColor: backgroundColor ?? AppColors.backgroundColor,
         appBar: appBar,
         key: scaffoldKey,
         body: body != null

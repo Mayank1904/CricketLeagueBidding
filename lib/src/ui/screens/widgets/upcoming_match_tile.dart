@@ -10,7 +10,7 @@ class UpcomingMatchTile extends StatelessWidget {
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
-        color: AppColor.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: const [
           BoxShadow(

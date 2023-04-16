@@ -19,7 +19,7 @@ class SkipperCheckBox extends StatelessWidget {
         children: [
           Checkbox(
             activeColor: Colors.white,
-            checkColor: AppColor.black,
+            checkColor: AppColors.black,
             value: value,
             onChanged: onChanged != null
                 ? (checked) => onChanged!(checked ?? false)

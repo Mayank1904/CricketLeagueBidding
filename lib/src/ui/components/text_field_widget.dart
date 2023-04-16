@@ -15,7 +15,7 @@ class TextFieldWidget extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.text,
       style: const TextStyle(
-          fontSize: 16.0, color: AppColor.black, fontWeight: FontWeight.w600),
+          fontSize: 16.0, color: AppColors.black, fontWeight: FontWeight.w600),
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,

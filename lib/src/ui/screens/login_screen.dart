@@ -3,11 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:skipper11/src/ui/components/skipper_scaffold.dart';
 import 'package:skipper11/src/ui/components/text_field_widget.dart';
 import 'package:skipper11/src/ui/screens/widgets/otp_widget.dart';
+import 'package:skipper11/src/ui/screens/widgets/select_player_tile.dart';
 import 'package:skipper11/src/ui/screens/widgets/upcoming_match_tile.dart';
 
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
+import 'widgets/contest_tile.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -27,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
         margin: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            UpcomingMatchTile(),
+            const Expanded(child: SelectPlayerTile()),
             Column(
               children: [
                 SkipperButton(

@@ -20,8 +20,8 @@ class SkipperButton extends StatelessWidget {
           key: key,
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            foregroundColor: AppColor.black,
-            backgroundColor: AppColor.yellow,
+            foregroundColor: AppColors.black,
+            backgroundColor: AppColors.yellow,
             textStyle:
                 const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w600),
           ),

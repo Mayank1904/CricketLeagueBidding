@@ -7,6 +7,7 @@ class SkipperAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final String? subTitle;
   final double barHeight;
+  final List<Widget>? actions;
   static const double defaultBarHeight = 56;
 
   SkipperAppbar(
@@ -15,18 +16,20 @@ class SkipperAppbar extends StatelessWidget implements PreferredSizeWidget {
       this.barHeight = defaultBarHeight,
       this.onGoBack,
       this.title,
-      this.subTitle})
+      this.subTitle,
+      this.actions})
       : preferredSize = Size.fromHeight(barHeight),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColor.backgroundColor,
+      backgroundColor: AppColors.backgroundColor,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: AppColor.yellow),
+        icon: const Icon(Icons.arrow_back, color: AppColors.yellow),
         onPressed: () => Navigator.of(context).pop(),
       ),
+      actions: actions,
       title: Text(title ?? '',
           style: const TextStyle(
               fontWeight: FontWeight.w600,

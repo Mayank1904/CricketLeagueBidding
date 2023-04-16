@@ -39,7 +39,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.4.0
   sms_autofill: ^2.3.0
-
+  step_progress_indicator: ^1.0.2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
