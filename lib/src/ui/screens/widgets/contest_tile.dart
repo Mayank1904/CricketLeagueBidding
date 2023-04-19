@@ -133,7 +133,13 @@ class ContestTile extends StatelessWidget {
             width: 320,
             padding: const EdgeInsets.only(
                 left: 12.0, right: 12.0, top: 5.0, bottom: 5.0),
-            decoration: const BoxDecoration(color: Color(0xffeaeaea)),
+            decoration: const BoxDecoration(
+              color: Color(0xffeaeaea),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(8.0),
+                bottomRight: Radius.circular(8.0),
+              ),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

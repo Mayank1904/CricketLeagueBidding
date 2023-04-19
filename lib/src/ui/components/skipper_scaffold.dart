@@ -6,6 +6,7 @@ class SkipperScaffold extends StatelessWidget {
   final Key? scaffoldKey;
   final Widget? body;
   final Widget? floatingActionButton;
+  final Widget? drawer;
   final Color? backgroundColor;
   final SkipperAppbar? appBar;
   const SkipperScaffold(
@@ -14,7 +15,8 @@ class SkipperScaffold extends StatelessWidget {
       this.backgroundColor,
       this.body,
       this.floatingActionButton,
-      this.appBar});
+      this.appBar,
+      this.drawer});
 
   @override
   Widget build(BuildContext context) {

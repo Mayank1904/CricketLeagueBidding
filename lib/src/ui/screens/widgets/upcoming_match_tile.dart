@@ -57,7 +57,7 @@ class UpcomingMatchTile extends StatelessWidget {
                           Column(
                             children: [
                               Image.asset(
-                                'images/man_2.png',
+                                'assets/images/man.png',
                                 width: 30,
                                 height: 28,
                                 fit: BoxFit.cover,
@@ -112,7 +112,7 @@ class UpcomingMatchTile extends StatelessWidget {
                           Column(
                             children: [
                               Image.asset(
-                                'images/man_2.png',
+                                'assets/images/man.png',
                                 width: 30,
                                 height: 28,
                                 fit: BoxFit.cover,

@@ -4,7 +4,7 @@ import 'colors.dart';
 
 class AppTextStyles {
   static const normalBlackw600 = TextStyle(
-      color: AppColors.white,
+      color: AppColors.black,
       fontWeight: FontWeight.w600,
       fontFamily: "Graphik",
       fontStyle: FontStyle.normal,
