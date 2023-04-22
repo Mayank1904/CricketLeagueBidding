@@ -31,7 +31,7 @@ class SkipperButton extends StatelessWidget {
                   baselineType: TextBaseline.alphabetic,
                   child: Text(
                     text,
-                    selectionColor: Colors.yellow,
+                    selectionColor: AppColors.yellow,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                   ),
@@ -41,7 +41,7 @@ class SkipperButton extends StatelessWidget {
                   baselineType: TextBaseline.alphabetic,
                   child: Text(
                     text,
-                    selectionColor: Colors.yellow,
+                    selectionColor: AppColors.yellow,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                   ),

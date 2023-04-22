@@ -58,8 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20.0),
                   child: SkipperCheckBox(
-                      value: true,
-                      label: 'By registering, I agree to My Fantasy 11’s T&Cs'),
+                      value: true, label: 'By registering, I agree to My '),
                 )
               ],
             ),
