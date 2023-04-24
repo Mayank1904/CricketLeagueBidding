@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../components/skipper_text.dart';
 
 import '../../../resources/constants/colors.dart';
 
@@ -21,22 +22,15 @@ class SliderWidget extends StatelessWidget {
         children: [
           Image(image: AssetImage(image)),
           const SizedBox(height: 30),
-          Text(
+          SkipperText.header(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w600,
-                color: AppColors.white),
           ),
           const SizedBox(height: 10),
-          Text(
+          SkipperText.textSmall(
             description,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 13.0,
-                fontWeight: FontWeight.w400,
-                color: AppColors.whiteGrey),
+            color: AppColors.whiteGrey,
           ),
         ],
       ),

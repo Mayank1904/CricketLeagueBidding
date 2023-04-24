@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/ui/components/skipper_checkbox.dart';
-import 'package:skipper11/src/ui/components/skipper_scaffold.dart';
-import 'package:skipper11/src/ui/components/text_field_widget.dart';
+import '../components/skipper_scaffold.dart';
+import '../components/text_field_widget.dart';
 
-import '../components/skipper_app_bar.dart';
+import '../../resources/constants/colors.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
+import 'home_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -24,12 +24,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      "assets/images/man_2.png",
+                      "assets/images/man.png",
                       width: 80,
                       height: 80,
                     ),
@@ -51,10 +50,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 15.0),
-                    child: SkipperText.bodySmall(
-                      'NOTE: We will use this to generate a name for Your Team.You can change your team’s name later.',
-                      color: Colors.white,
-                    ),
+                    child: RichText(
+                        text: const TextSpan(children: [
+                      TextSpan(
+                          style: TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Graphik",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 12.0),
+                          text: "NOTE: "),
+                      TextSpan(
+                          style: TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Graphik",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 12.0),
+                          text:
+                              "We will use this to generate a name for Your Team. You can change your team’s name later.")
+                    ])),
                   ),
                 ],
               ),
@@ -62,7 +77,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Column(
               children: [
                 SkipperButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                    )
+                  },
                   text: 'SAVE NAME',
                 ),
                 Padding(

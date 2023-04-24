@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
+import '../../../resources/constants/colors.dart';
 
 class UpcomingMatchTile extends StatelessWidget {
   const UpcomingMatchTile({super.key});
@@ -21,7 +21,6 @@ class UpcomingMatchTile extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             child: Column(
@@ -47,7 +46,7 @@ class UpcomingMatchTile extends StatelessWidget {
                   color: Color(0xffededed),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 9.0, left: 8.0),
+                  padding: const EdgeInsets.only(top: 9.0, left: 14.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -57,7 +56,7 @@ class UpcomingMatchTile extends StatelessWidget {
                           Column(
                             children: [
                               Image.asset(
-                                'assets/images/man.png',
+                                'assets/images/image_14.png',
                                 width: 30,
                                 height: 28,
                                 fit: BoxFit.cover,
@@ -97,39 +96,42 @@ class UpcomingMatchTile extends StatelessWidget {
                           fontStyle: FontStyle.normal,
                         ),
                       ),
-                      Row(
-                        children: [
-                          const Text(
-                            "GUJR",
-                            style: TextStyle(
-                              fontFamily: 'Graphik',
-                              color: Color(0xff000000),
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              Image.asset(
-                                'assets/images/man.png',
-                                width: 30,
-                                height: 28,
-                                fit: BoxFit.cover,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 14.0),
+                        child: Row(
+                          children: [
+                            const Text(
+                              "GUJR",
+                              style: TextStyle(
+                                fontFamily: 'Graphik',
+                                color: Color(0xff000000),
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
                               ),
-                              const Text(
-                                "Gujarat",
-                                style: TextStyle(
-                                  fontFamily: 'Graphik',
-                                  color: Color(0xff17001d),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
+                            ),
+                            Column(
+                              children: [
+                                Image.asset(
+                                  'assets/images/scroll_group_2.png',
+                                  width: 30,
+                                  height: 28,
+                                  fit: BoxFit.cover,
                                 ),
-                              )
-                            ],
-                          ),
-                        ],
+                                const Text(
+                                  "Gujarat",
+                                  style: TextStyle(
+                                    fontFamily: 'Graphik',
+                                    color: Color(0xff17001d),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

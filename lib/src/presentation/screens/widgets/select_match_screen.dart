@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:skipper11/src/ui/screens/widgets/contest_tile.dart';
+import '../create_team_screen.dart';
+import 'contest_tile.dart';
 
 import '../../../resources/constants/colors.dart';
 import '../../components/skipper_app_bar.dart';
@@ -101,9 +100,18 @@ class SelectMatchScreen extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: 7,
                   itemBuilder: (ctx, index) {
-                    return const Padding(
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: ContestTile(),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const CreateTeamScreen()));
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: ContestTile(),
+                      ),
                     );
                   })
             ],

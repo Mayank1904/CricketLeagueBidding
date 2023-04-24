@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/ui/components/skipper_checkbox.dart';
-import 'package:skipper11/src/ui/components/skipper_scaffold.dart';
-import 'package:skipper11/src/ui/components/text_field_widget.dart';
+import '../components/skipper_checkbox.dart';
+import '../components/skipper_scaffold.dart';
+import '../components/text_field_widget.dart';
 
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_button.dart';
@@ -41,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 15.0),
-                    child: SkipperText.bodySmall(
+                    child: SkipperText.textSmall(
                       'You will receive an OTP for verification',
                       color: Colors.white,
                     ),

@@ -38,7 +38,61 @@ class SkipperText extends StatelessWidget {
             maxLines: maxLines,
             key: key);
 
-  SkipperText.bodySmall(String text,
+  SkipperText.subHeadingBold(String text,
+      {Color? color,
+      TextAlign? textAlign,
+      bool? softwrap,
+      TextOverflow? overflow,
+      int? maxLines,
+      Key? keyText,
+      Key? key})
+      : this._(
+            text,
+            (c) => TextStyle(
+                color: color, fontSize: 18.0, fontWeight: FontWeight.w600),
+            textAlign: textAlign,
+            softwrap: softwrap,
+            overflow: overflow,
+            maxLines: maxLines,
+            key: key);
+
+  SkipperText.bodyBold(String text,
+      {Color? color,
+      TextAlign? textAlign,
+      bool? softwrap,
+      TextOverflow? overflow,
+      int? maxLines,
+      Key? keyText,
+      Key? key})
+      : this._(
+            text,
+            (c) => TextStyle(
+                color: color, fontSize: 16.0, fontWeight: FontWeight.w600),
+            textAlign: textAlign,
+            softwrap: softwrap,
+            overflow: overflow,
+            maxLines: maxLines,
+            key: key);
+
+  SkipperText.titleBold(String text,
+      {Color? color,
+      TextAlign? textAlign,
+      bool? softwrap,
+      TextOverflow? overflow,
+      int? maxLines,
+      Key? keyText,
+      Key? key})
+      : this._(
+            text,
+            (c) => TextStyle(
+                color: color, fontSize: 14.0, fontWeight: FontWeight.w600),
+            textAlign: textAlign,
+            softwrap: softwrap,
+            overflow: overflow,
+            maxLines: maxLines,
+            key: key);
+
+  SkipperText.textSmall(String text,
       {Color? color,
       TextAlign? textAlign,
       bool? softwrap,
@@ -56,7 +110,7 @@ class SkipperText extends StatelessWidget {
             maxLines: maxLines,
             key: key);
 
-  SkipperText.textSmall(String text,
+  SkipperText.textExtraSmall(String text,
       {Color? color,
       TextAlign? textAlign,
       bool? softwrap,

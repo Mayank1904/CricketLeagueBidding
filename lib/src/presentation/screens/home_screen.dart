@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/ui/components/skipper_app_bar.dart';
-import 'package:skipper11/src/ui/components/skipper_scaffold.dart';
-import 'package:skipper11/src/ui/screens/widgets/upcoming_match_tile.dart';
+import '../components/skipper_app_bar.dart';
+import '../components/skipper_scaffold.dart';
+import 'widgets/select_match_screen.dart';
+import 'widgets/upcoming_match_tile.dart';
 
 import '../../resources/constants/colors.dart';
 import 'home/sidemenu/side_menu.dart';
@@ -71,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Padding(
                       padding: const EdgeInsets.only(left: 10.0),
                       child: Image.asset(
-                        'assets/images/banner.jpg',
+                        'assets/images/banner1.png',
                       ),
                     );
                   },
@@ -104,10 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   shrinkWrap: true,
                   itemCount: 7,
                   itemBuilder: (ctx, index) {
-                    return const Padding(
-                      padding:
-                          EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
-                      child: UpcomingMatchTile(),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const SelectMatchScreen()));
+                      },
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
+                        child: UpcomingMatchTile(),
+                      ),
                     );
                   })
             ],

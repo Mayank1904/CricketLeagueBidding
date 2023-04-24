@@ -1,7 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
-import 'package:skipper11/src/ui/components/skipper_scaffold.dart';
-import 'package:skipper11/src/ui/screens/register_screen.dart';
+import '../../resources/constants/colors.dart';
+import '../components/skipper_scaffold.dart';
+import '../components/skipper_text.dart';
+import 'login_screen.dart';
+import 'register_screen.dart';
 
 import '../../models/intro/slider_model.dart';
 import 'widgets/slider.dart';
@@ -73,7 +76,7 @@ class _IntroScreenState extends State<IntroScreen> {
               // Button
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const RegisterScreen()),
@@ -88,12 +91,9 @@ class _IntroScreenState extends State<IntroScreen> {
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
-                child: const Text(
+                child: SkipperText.bodyBold(
                   "Register",
-                  style: TextStyle(
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14.0),
+                  color: AppColors.black,
                 ),
               ),
             ),
@@ -117,15 +117,25 @@ class _IntroScreenState extends State<IntroScreen> {
                     ),
                   ),
                   RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: 'Already a user?\n',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w400,
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                            text: 'Log in',
-                            style: TextStyle(fontWeight: FontWeight.w700)),
+                          text: 'Log in',
+                          style: const TextStyle(fontWeight: FontWeight.w700),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginScreen(),
+                                ),
+                              );
+                            },
+                        ),
                       ],
                     ),
                   ),

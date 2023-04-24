@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/ui/screens/widgets/select_player_tile.dart';
+import 'widgets/select_player_tile.dart';
 
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
@@ -93,7 +93,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                     Row(
                       children: [
                         Image.asset(
-                          'assets/images/player.jpg',
+                          'assets/images/image_14.png',
                           width: 50,
                           height: 28,
                           fit: BoxFit.cover,
@@ -147,7 +147,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                           ],
                         ),
                         Image.asset(
-                          'assets/images/player.jpg',
+                          'assets/images/scroll_group_2.png',
                           width: 50,
                           height: 28,
                           fit: BoxFit.cover,

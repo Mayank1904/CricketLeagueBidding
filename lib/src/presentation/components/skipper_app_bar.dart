@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
+import '../../resources/constants/colors.dart';
 
 class SkipperAppbar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onClose;
@@ -37,7 +37,10 @@ class SkipperAppbar extends StatelessWidget implements PreferredSizeWidget {
           ),
       actions: actions,
       title: (centerTitle ?? false)
-          ? const Icon(Icons.face, color: AppColors.yellow)
+          ? Image.asset(
+              'assets/images/skipper_icon.png',
+              height: 52,
+            )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

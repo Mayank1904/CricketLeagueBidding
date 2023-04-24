@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
-import 'package:skipper11/src/ui/components/skipper_text.dart';
+import '../../../resources/constants/colors.dart';
+import '../../components/skipper_text.dart';
 
 import '../../../resources/constants/text_styles.dart';
 

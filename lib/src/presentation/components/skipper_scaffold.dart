@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
-import 'package:skipper11/src/ui/components/skipper_app_bar.dart';
+import '../../resources/constants/colors.dart';
+import 'skipper_app_bar.dart';
 
 class SkipperScaffold extends StatelessWidget {
   final Key? scaffoldKey;

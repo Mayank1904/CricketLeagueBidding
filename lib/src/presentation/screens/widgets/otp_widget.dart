@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+import '../../../resources/constants/colors.dart';
 import '../../components/skipper_text.dart';
 
 class OtpWidget extends StatelessWidget {
@@ -38,19 +39,31 @@ class OtpWidget extends StatelessWidget {
           ),
           codeLength: 6,
           onCodeChanged: (code) {
-            print("OnCodeChanged : $code");
             otpCode = code.toString();
           },
-          onCodeSubmitted: (val) {
-            print("OnCodeSubmitted : $val");
-          },
+          onCodeSubmitted: (val) {},
         ),
         Padding(
           padding: const EdgeInsets.only(top: 15.0),
-          child: SkipperText.bodySmall(
-            'You should receive the OTP in 30 Second',
-            color: Colors.white,
-          ),
+          child: RichText(
+              text: const TextSpan(children: [
+            TextSpan(
+                style: TextStyle(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "Graphik",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 12.0),
+                text: "You should receive the OTP in 3"),
+            TextSpan(
+                style: TextStyle(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Graphik",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 12.0),
+                text: "30 Second")
+          ])),
         ),
       ],
     );
