@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/ui/screens/login_screen.dart';
-import 'package:skipper11/src/ui/screens/profile_screen.dart';
-
-import 'ui/screens/register_screen.dart';
+import 'resources/constants/colors.dart';
+import 'presentation/screens/intro_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,8 +8,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
-      home: const LoginScreen(),
+      theme: ThemeData(
+          primaryColor: AppColors.backgroundColor, fontFamily: 'Graphik'),
+      home: const IntroScreen(),
     );
   }
 }
