@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../components/skipper_checkbox.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/text_field_widget.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
@@ -19,7 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return SkipperScaffold(
       appBar: SkipperAppbar(
-        title: 'Register & Play',
+        title: AppLocalizations.of(context).registerAndPlay,
       ),
       body: Container(
         margin: const EdgeInsets.all(20.0),
@@ -30,19 +30,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SkipperText.header(
-                    'Enter Your\nMobile Number',
+                    AppLocalizations.of(context).enterMobileNo,
                     color: Colors.white,
                   ),
                   const SizedBox(
                     height: 25.0,
                   ),
-                  const TextFieldWidget(
-                    hintValue: 'Mobile No.',
+                  TextFieldWidget(
+                    hintValue: AppLocalizations.of(context).mobileNo,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 15.0),
                     child: SkipperText.textSmall(
-                      'You will receive an OTP for verification',
+                      AppLocalizations.of(context).receiveOtpVerification,
                       color: Colors.white,
                     ),
                   ),
@@ -53,12 +53,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 SkipperButton(
                   onPressed: () => {},
-                  text: 'REGISTER',
+                  text: AppLocalizations.of(context).register.toUpperCase(),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: SkipperCheckBox(
-                      value: true, label: 'By registering, I agree to My '),
+                      value: true,
+                      label: AppLocalizations.of(context).registerAgree),
                 )
               ],
             ),

@@ -43,6 +43,7 @@ class SkipperAppbar extends StatelessWidget implements PreferredSizeWidget {
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   title ?? '',
@@ -55,17 +56,19 @@ class SkipperAppbar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                Text(
-                  subTitle ?? '',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: 0.14,
-                    fontFamily: "Graphik",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 12.0,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
+                subTitle != null
+                    ? Text(
+                        subTitle ?? '',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.14,
+                          fontFamily: "Graphik",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 12.0,
+                        ),
+                        textAlign: TextAlign.left,
+                      )
+                    : const SizedBox()
               ],
             ),
       titleSpacing: 0,

@@ -103,27 +103,28 @@ class _IntroScreenState extends State<IntroScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RichText(
-                    text: const TextSpan(
-                      text: 'Invited by a friend?\n',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'Enter code',
-                            style: TextStyle(fontWeight: FontWeight.w700)),
-                      ],
-                    ),
-                  ),
-                  RichText(
                     text: TextSpan(
-                      text: 'Already a user?\n',
+                      text: AppLocalizations.of(context).invitedByFriend,
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Log in',
+                            text: AppLocalizations.of(context).enterCode,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.w700)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: AppLocalizations.of(context).alreadyUser,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: AppLocalizations.of(context).logIn,
                           style: const TextStyle(fontWeight: FontWeight.w700),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
