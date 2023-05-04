@@ -50,6 +50,9 @@ dependencies:
   # state management
   flutter_bloc: ^8.1.2
 
+  # analytics
+  firebase_crashlytics: ^3.1.1
+
   # others
   equatable: ^2.0.5
   get_it: ^7.2.0
@@ -57,6 +60,8 @@ dependencies:
   auto_route: ^6.3.0
   awesome_dio_interceptor: ^0.0.2+4
   oktoast: ^3.3.1
+
+
   
 dev_dependencies:
   flutter_test:
@@ -73,7 +78,7 @@ dev_dependencies:
   retrofit_generator: ^4.1.2
   floor_generator: ^1.4.1
   build_runner: ^2.3.3
-
+  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
