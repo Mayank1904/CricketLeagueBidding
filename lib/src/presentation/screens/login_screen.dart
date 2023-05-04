@@ -5,7 +5,7 @@ import '../components/skipper_text.dart';
 import '../components/text_field_widget.dart';
 import 'profile_screen.dart';
 import 'widgets/select_player_tile.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_button.dart';
@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SkipperScaffold(
       appBar: SkipperAppbar(
-        title: 'Log In',
+        title: AppLocalizations.of(context).logIn,
       ),
       body: Container(
         margin: const EdgeInsets.all(20.0),
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             onPressed: () {},
                             icon: const FaIcon(FontAwesomeIcons.facebook),
-                            label: Text('Facebook'),
+                            label: Text(AppLocalizations.of(context).facebook),
                           ),
                         ),
                       ),
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                             onPressed: () {},
                             icon: const FaIcon(FontAwesomeIcons.googlePlusG),
-                            label: Text('Google')),
+                            label: Text(AppLocalizations.of(context).google)),
                       ),
                     ],
                   ),
@@ -66,18 +66,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: SkipperText.titleBold(
-                          "Or",
+                          AppLocalizations.of(context).or,
                           color: AppColors.white,
                         )),
                   ),
-                  const TextFieldWidget(
-                    hintValue: 'Mobile No.',
+                  TextFieldWidget(
+                    hintValue: AppLocalizations.of(context).mobileNo,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15.0,
                   ),
                   SkipperText.textSmall(
-                      "You will receive an OTP for verification",
+                      AppLocalizations.of(context).receiveOtpVerification,
                       color: AppColors.white,
                       textAlign: TextAlign.left)
                 ],
@@ -93,28 +93,28 @@ class _LoginScreenState extends State<LoginScreen> {
                           builder: (context) => const ProfileScreen()),
                     )
                   },
-                  text: 'NEXT',
+                  text: AppLocalizations.of(context).next,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: RichText(
-                      text: const TextSpan(children: [
+                      text: TextSpan(children: [
                     TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: AppColors.white,
                             fontWeight: FontWeight.w400,
                             fontFamily: "Graphik",
                             fontStyle: FontStyle.normal,
                             fontSize: 13.0),
-                        text: "Not a member? "),
+                        text: AppLocalizations.of(context).notAMember),
                     TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: AppColors.yellow,
                             fontWeight: FontWeight.w600,
                             fontFamily: "Graphik",
                             fontStyle: FontStyle.normal,
                             fontSize: 13.0),
-                        text: "Register")
+                        text: AppLocalizations.of(context).register)
                   ])),
                 )
               ],

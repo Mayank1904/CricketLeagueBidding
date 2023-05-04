@@ -1,0 +1,22 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "register": "Register",
+  "invitedByFriend": "Invited by a friend?\n",
+  "enterCode": "Enter code",
+  "alreadyUser": "Already a user?\n",
+  "logIn": "Log in",
+  "facebook": "Facebook",
+  "google": "Google",
+  "mobileNo": "Mobile No.",
+  "receiveOtpVerification": "You will receive an OTP for verification",
+  "notAMember": "Not a member? ",
+  "register": "Register",
+  "next": "NEXT",
+  "or": "Or",
+  "registerAndPlay": "Register & Play",
+  "enterMobileNo": "Enter Your\nMobile Number",
+  "registerAgree": "By registering, I agree to My "
+}

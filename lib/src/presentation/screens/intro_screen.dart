@@ -5,7 +5,7 @@ import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/intro/slider_model.dart';
 import 'widgets/slider.dart';
 
@@ -41,7 +41,6 @@ class _IntroScreenState extends State<IntroScreen> {
         Expanded(
           // PageView Builder
           child: PageView.builder(
-              scrollDirection: Axis.horizontal,
               onPageChanged: (value) {
                 setState(() {
                   currentIndex = value;
@@ -92,7 +91,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   ),
                 ),
                 child: SkipperText.bodyBold(
-                  "Register",
+                  AppLocalizations.of(context).register,
                   color: AppColors.black,
                 ),
               ),
@@ -104,27 +103,28 @@ class _IntroScreenState extends State<IntroScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RichText(
-                    text: const TextSpan(
-                      text: 'Invited by a friend?\n',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'Enter code',
-                            style: TextStyle(fontWeight: FontWeight.w700)),
-                      ],
-                    ),
-                  ),
-                  RichText(
                     text: TextSpan(
-                      text: 'Already a user?\n',
+                      text: AppLocalizations.of(context).invitedByFriend,
                       style: const TextStyle(
                         fontWeight: FontWeight.w400,
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Log in',
+                            text: AppLocalizations.of(context).enterCode,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.w700)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: AppLocalizations.of(context).alreadyUser,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: AppLocalizations.of(context).logIn,
                           style: const TextStyle(fontWeight: FontWeight.w700),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
