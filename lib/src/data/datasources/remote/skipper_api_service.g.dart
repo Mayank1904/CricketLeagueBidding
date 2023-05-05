@@ -36,7 +36,7 @@ class _SkipperApiService implements SkipperApiService {
     )
             .compose(
               _dio.options,
-              '/register',
+              '/auth/register',
               queryParameters: queryParameters,
               data: _data,
             )

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
+import '../../resources/constants/colors.dart';
 
 class SkipperCheckBox extends StatelessWidget {
   final bool value;
@@ -17,12 +17,13 @@ class SkipperCheckBox extends StatelessWidget {
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 16.0,
             width: 16.0,
             child: Checkbox(
+              activeColor: AppColors.white,
+              focusColor: AppColors.white,
               fillColor: MaterialStateProperty.resolveWith(getColor),
               checkColor: AppColors.black,
               value: value,
@@ -67,6 +68,6 @@ class SkipperCheckBox extends StatelessWidget {
     if (states.any(interactiveStates.contains)) {
       return Colors.white;
     }
-    return Colors.pink;
+    return Colors.white;
   }
 }

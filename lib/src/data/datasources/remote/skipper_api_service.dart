@@ -11,7 +11,7 @@ part 'skipper_api_service.g.dart';
 abstract class SkipperApiService {
   factory SkipperApiService(Dio dio, {String baseUrl}) = _SkipperApiService;
 
-  @POST('/register')
+  @POST('/auth/register')
   Future<HttpResponse<RegisterResponse>> register({
     @Body() RegisterRequest? request,
   });

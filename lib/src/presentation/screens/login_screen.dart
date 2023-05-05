@@ -71,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         )),
                   ),
                   TextFieldWidget(
+                    isNumeric: true,
                     hintValue: AppLocalizations.of(context).mobileNo,
                   ),
                   const SizedBox(

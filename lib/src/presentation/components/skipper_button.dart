@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
+import '../../resources/constants/colors.dart';
 
 class SkipperButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -22,30 +22,18 @@ class SkipperButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             foregroundColor: AppColors.black,
             backgroundColor: AppColors.yellow,
-            textStyle:
-                const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w600),
+            disabledBackgroundColor: AppColors.warmGrey,
+            textStyle: const TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          child: onPressed != null
-              ? Baseline(
-                  baseline: 15,
-                  baselineType: TextBaseline.alphabetic,
-                  child: Text(
-                    text,
-                    selectionColor: AppColors.yellow,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              : Baseline(
-                  baseline: 15,
-                  baselineType: TextBaseline.alphabetic,
-                  child: Text(
-                    text,
-                    selectionColor: AppColors.yellow,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+          child: Text(
+            text,
+            selectionColor: AppColors.yellow,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+          ),
         ));
   }
 }

@@ -44,9 +44,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 25.0,
                       ),
                       TextFieldWidget(
+                        isNumeric: true,
                         hintValue: AppLocalizations.of(context).mobileNo,
-                        onChanged: () {},
+                        onChanged: (val) {
+                          registerCubit.validatePhone(val);
+                        },
                       ),
+                      (state is RegisterStateFailed)
+                          ? getErrorText(state.phoneNumberValidationMsg)
+                          : Container(),
                       Padding(
                         padding: const EdgeInsets.only(top: 15.0),
                         child: SkipperText.textSmall(
@@ -60,13 +66,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Column(
                   children: [
                     SkipperButton(
-                      onPressed: () => {registerCubit.doRegister()},
+                      onPressed: () => {
+                        registerCubit.doRegister(),
+                      },
                       text: AppLocalizations.of(context).register.toUpperCase(),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
                       child: SkipperCheckBox(
-                          value: true,
+                          value: false,
+                          onChanged: (val) => {},
                           label: AppLocalizations.of(context).registerAgree),
                     )
                   ],
@@ -77,5 +86,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
         },
       ),
     );
+  }
+
+  Widget getErrorText(String? errorText) {
+    return errorText != null
+        ? Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: SizedBox(
+                height: 16,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      errorText!,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        fontStyle: FontStyle.italic,
+                        color: Color(0xFFFF0000),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                )),
+          )
+        : Container();
   }
 }

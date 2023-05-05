@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => RegisterCubit(
             locator<SkipperApiRepository>(),
-          )..doRegister(),
+          ),
         ),
       ],
       child: ChangeNotifierProvider(
