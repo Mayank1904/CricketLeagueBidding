@@ -7,12 +7,17 @@ import '../../../utils/constants/strings.dart';
 
 part 'skipper_api_service.g.dart';
 
-@RestApi(baseUrl: baseUrl, parser: Parser.MapSerializable)
+@RestApi(baseUrl: baseUrl, parser: Parser.JsonSerializable)
 abstract class SkipperApiService {
   factory SkipperApiService(Dio dio, {String baseUrl}) = _SkipperApiService;
 
   @POST('/auth/register')
   Future<HttpResponse<RegisterResponse>> register({
+    @Body() RegisterRequest? request,
+  });
+
+  @POST('/auth/verify')
+  Future<HttpResponse<RegisterResponse>> verify({
     @Body() RegisterRequest? request,
   });
 }

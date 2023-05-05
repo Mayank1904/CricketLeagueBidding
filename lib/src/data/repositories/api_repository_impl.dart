@@ -17,4 +17,11 @@ class ApiRepositoryImpl extends BaseApiRepository
     return getStateOf<RegisterResponse>(
         request: () => _skipperApiService.register(request: request));
   }
+
+  @override
+  Future<DataState<RegisterResponse>> verify(
+      {required RegisterRequest request}) {
+    return getStateOf<RegisterResponse>(
+        request: () => _skipperApiService.verify(request: request));
+  }
 }

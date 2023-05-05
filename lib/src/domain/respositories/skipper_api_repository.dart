@@ -6,4 +6,7 @@ abstract class SkipperApiRepository {
   Future<DataState<RegisterResponse>> doRegister({
     required RegisterRequest request,
   });
+  Future<DataState<RegisterResponse>> verify({
+    required RegisterRequest request,
+  });
 }

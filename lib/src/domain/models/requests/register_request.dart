@@ -19,7 +19,7 @@ class RegisterRequest extends Equatable {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'apiBody': apiBody,
+      'api_body': apiBody,
     };
   }
 

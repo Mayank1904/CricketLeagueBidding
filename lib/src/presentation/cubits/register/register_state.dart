@@ -3,10 +3,21 @@ part of 'register_cubit.dart';
 abstract class RegisterState extends Equatable {
   final String? phoneNumberValidationMsg;
   final DioError? error;
-  const RegisterState({this.error, this.phoneNumberValidationMsg});
+  final bool? isApiSuccess;
+  final bool? isOtpVerified;
+  const RegisterState({
+    this.error,
+    this.phoneNumberValidationMsg,
+    this.isApiSuccess = false,
+    this.isOtpVerified,
+  });
 
   @override
-  List<Object> get props => [error!];
+  List<Object?> get props => [error, phoneNumberValidationMsg, isApiSuccess];
+}
+
+class RegisterStateInitial extends RegisterState {
+  const RegisterStateInitial();
 }
 
 class RegisterStateLoading extends RegisterState {
@@ -14,7 +25,8 @@ class RegisterStateLoading extends RegisterState {
 }
 
 class RegisterStateSuccess extends RegisterState {
-  const RegisterStateSuccess({super.phoneNumberValidationMsg});
+  const RegisterStateSuccess(
+      {super.phoneNumberValidationMsg, super.isApiSuccess});
 }
 
 class RegisterStateFailed extends RegisterState {

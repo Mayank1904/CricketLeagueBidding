@@ -4,7 +4,6 @@ import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
 import '../components/text_field_widget.dart';
 import 'profile_screen.dart';
-import 'widgets/select_player_tile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
@@ -78,9 +77,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 15.0,
                   ),
                   SkipperText.textSmall(
-                      AppLocalizations.of(context).receiveOtpVerification,
-                      color: AppColors.white,
-                      textAlign: TextAlign.left)
+                    AppLocalizations.of(context).receiveOtpVerification,
+                    color: AppColors.white,
+                    textAlign: TextAlign.left,
+                  )
                 ],
               ),
             ),

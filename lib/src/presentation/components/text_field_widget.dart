@@ -18,6 +18,7 @@ class TextFieldWidget extends StatelessWidget {
     return TextField(
       controller: controller,
       keyboardType: isNumeric ? TextInputType.phone : TextInputType.text,
+      maxLength: isNumeric ? 10 : 20,
       style: const TextStyle(
         fontSize: 16.0,
         color: AppColors.black,
@@ -27,6 +28,15 @@ class TextFieldWidget extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
         hintText: hintValue ?? '',
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 0.0),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.all(
+            Radius.circular(0.0),
+          ),
+        ),
         hintStyle: const TextStyle(
             backgroundColor: Colors.white,
             color: Color(0xffa3a3a3),
@@ -35,8 +45,9 @@ class TextFieldWidget extends StatelessWidget {
             fontStyle: FontStyle.normal,
             fontSize: 16.0),
         contentPadding: const EdgeInsets.all(16.0),
+        isDense: true,
       ),
-      onChanged: (value) => onChanged,
+      onChanged: (value) => onChanged!(value),
     );
   }
 }

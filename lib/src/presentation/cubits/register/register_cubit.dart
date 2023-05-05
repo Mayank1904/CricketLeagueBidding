@@ -15,12 +15,13 @@ class RegisterCubit extends BaseCubit<RegisterState, RegisterResponse>
   final SkipperApiRepository _apiRepository;
 
   RegisterCubit(this._apiRepository)
-      : super(const RegisterStateLoading(), const RegisterResponse());
+      : super(const RegisterStateInitial(), const RegisterResponse());
 
   Future<void> doRegister() async {
     if (isBusy) return;
 
     await run(() async {
+      emit(const RegisterStateLoading());
       final response = await _apiRepository.doRegister(
         request: const RegisterRequest(
           apiBody:
@@ -29,7 +30,27 @@ class RegisterCubit extends BaseCubit<RegisterState, RegisterResponse>
       );
 
       if (response is DataSuccess) {
-        emit(const RegisterStateSuccess());
+        emit(const RegisterStateSuccess(isApiSuccess: true));
+      } else if (response is DataFailed) {
+        emit(RegisterStateFailed(error: response.error));
+      }
+    });
+  }
+
+  Future<void> verify() async {
+    if (isBusy) return;
+
+    await run(() async {
+      emit(const RegisterStateLoading());
+      final response = await _apiRepository.verify(
+        request: const RegisterRequest(
+          apiBody:
+              "eyJtb2JpbGVObyI6ICI5OTk2NDcwMDAxIiwiY291bnRyeUNvZGUiOiAiKzkxIiwic291cmNlIjoiUkVHSVNURVIifQ==",
+        ),
+      );
+
+      if (response is DataSuccess) {
+        emit(const RegisterStateSuccess(isApiSuccess: true));
       } else if (response is DataFailed) {
         emit(RegisterStateFailed(error: response.error));
       }
@@ -41,11 +62,7 @@ class RegisterCubit extends BaseCubit<RegisterState, RegisterResponse>
 
     await run(() async {
       final res = validateMobile(phoneNumber);
-      if (res == null) {
-        emit(RegisterStateSuccess(phoneNumberValidationMsg: res));
-      } else {
-        emit(RegisterStateFailed(phoneNumberValidationMsg: res));
-      }
+      emit(RegisterStateSuccess(phoneNumberValidationMsg: res));
     });
   }
 }
