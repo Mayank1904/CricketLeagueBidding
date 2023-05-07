@@ -1,12 +1,14 @@
 import '../../utils/resources/data_state.dart';
-import '../models/requests/register_request.dart';
-import '../models/responses/register_response.dart';
+import '../models/requests/user_auth_request.dart';
+import '../models/responses/user_auth_response.dart';
 
 abstract class SkipperApiRepository {
-  Future<DataState<RegisterResponse>> doRegister({
-    required RegisterRequest request,
+  Future<DataState<UserAuthResponse>> doRegister({
+    required UserAuthRequest request,
   });
-  Future<DataState<RegisterResponse>> verify({
-    required RegisterRequest request,
+  Future<DataState<UserAuthResponse>> verify(
+      {required UserAuthRequest request, String? token});
+  Future<DataState<UserAuthResponse>> loginWithPhone({
+    required UserAuthRequest request,
   });
 }

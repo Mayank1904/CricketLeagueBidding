@@ -3,16 +3,16 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class RegisterRequest extends Equatable {
+class UserAuthRequest extends Equatable {
   final String? apiBody;
-  const RegisterRequest({
+  const UserAuthRequest({
     this.apiBody,
   });
 
-  RegisterRequest copyWith({
+  UserAuthRequest copyWith({
     String? apiBody,
   }) {
-    return RegisterRequest(
+    return UserAuthRequest(
       apiBody: apiBody ?? this.apiBody,
     );
   }
@@ -23,16 +23,16 @@ class RegisterRequest extends Equatable {
     };
   }
 
-  factory RegisterRequest.fromMap(Map<String, dynamic> map) {
-    return RegisterRequest(
+  factory UserAuthRequest.fromMap(Map<String, dynamic> map) {
+    return UserAuthRequest(
       apiBody: map['apiBody'] != null ? map['apiBody'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory RegisterRequest.fromJson(String source) =>
-      RegisterRequest.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserAuthRequest.fromJson(String source) =>
+      UserAuthRequest.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

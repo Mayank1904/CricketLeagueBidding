@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:neopop/neopop.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
@@ -67,14 +70,10 @@ class _IntroScreenState extends State<IntroScreen> {
         Column(
           children: [
             Container(
-              height: 40,
               margin: const EdgeInsets.all(20.0),
-              width: double.infinity,
-              color: AppColors.yellow,
-
-              // Button
-              child: TextButton(
-                onPressed: () {
+              child: NeoPopTiltedButton(
+                color: AppColors.yellow,
+                onTapUp: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -85,15 +84,18 @@ class _IntroScreenState extends State<IntroScreen> {
                   //     duration: const Duration(milliseconds: 100),
                   //     curve: Curves.bounceIn);
                 },
-                style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-                child: SkipperText.bodyBold(
-                  AppLocalizations.of(context).register,
-                  color: AppColors.black,
-                ),
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SkipperText.bodyBold(
+                          AppLocalizations.of(context).register,
+                          color: AppColors.black,
+                        ),
+                      ],
+                    )),
               ),
             ),
             Padding(

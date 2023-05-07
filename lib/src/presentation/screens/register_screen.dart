@@ -1,19 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:oktoast/oktoast.dart';
+import '../../resources/constants/colors.dart';
 import '../components/skipper_checkbox.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/text_field_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../components/skipper_app_bar.dart';
-import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
 import '../cubits/register/register_cubit.dart';
 import 'profile_screen.dart';
 import 'widgets/otp_widget.dart';
 
-@RoutePage()
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -22,99 +22,140 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _mobileInputController = TextEditingController();
+  late RegisterCubit registerCubit;
+  @override
+  void dispose() {
+    _mobileInputController.dispose();
+    registerCubit.initState();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final registerCubit = BlocProvider.of<RegisterCubit>(context);
+    registerCubit = BlocProvider.of<RegisterCubit>(context);
     return SkipperScaffold(
         appBar: SkipperAppbar(
           title: AppLocalizations.of(context).registerAndPlay,
         ),
         body: BlocConsumer<RegisterCubit, RegisterState>(
           listener: (context, state) {
-            if (state is RegisterStateSuccess) {
-              if (state.isApiSuccess!) {
-                Navigator.of(context).pop();
-                if (state.isOtpVerified!) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()),
-                  );
-                }
+            if (state.isApiSuccess ?? false) {
+              Navigator.of(context).pop();
+              if (state.user?.message == 'User Already Exist') {
+                showToast(state.user?.message ?? 'Something Went Wrong');
               }
-            } else if (state is RegisterStateFailed) {
+              if (state.isOtpVerified ?? false) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileScreen()),
+                );
+              }
+            } else if (state.error?.message != null) {
               showToast("Something went wrong");
             }
           },
           builder: (context, state) {
-            return Container(
-              margin: const EdgeInsets.all(20.0),
-              child: state.isApiSuccess!
-                  ? OtpWidget(
-                      otpCode: "123456",
-                      onSubmitted: (val) {
-                        registerCubit.verify();
-                      },
-                    )
-                  : Column(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SkipperText.header(
-                                AppLocalizations.of(context).enterMobileNo,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(
-                                height: 25.0,
-                              ),
-                              TextFieldWidget(
-                                isNumeric: true,
-                                hintValue:
-                                    AppLocalizations.of(context).mobileNo,
-                                onChanged: (val) {
-                                  registerCubit.validatePhone(val);
-                                },
-                              ),
-                              getErrorText(state.phoneNumberValidationMsg),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 2.0),
-                                child: SkipperText.textSmall(
-                                  AppLocalizations.of(context)
-                                      .receiveOtpVerification,
+            return WillPopScope(
+              onWillPop: () async {
+                registerCubit.backToMainScreen();
+                return true;
+              },
+              child: Container(
+                margin: const EdgeInsets.all(20.0),
+                child: ((state.isApiSuccess ?? false) &&
+                        state.user?.message != 'User Already Exist')
+                    ? OtpWidget(
+                        otpCode: "88888",
+                        onSubmitted: (val) {
+                          registerCubit.verify(
+                              val, _mobileInputController.text);
+                        },
+                      )
+                    : Column(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SkipperText.header(
+                                  AppLocalizations.of(context).enterMobileNo,
                                   color: Colors.white,
                                 ),
-                              ),
+                                const SizedBox(
+                                  height: 25.0,
+                                ),
+                                TextFieldWidget(
+                                  controller: _mobileInputController,
+                                  isNumeric: true,
+                                  hintValue:
+                                      AppLocalizations.of(context).mobileNo,
+                                  onChanged: (val) {
+                                    registerCubit.validatePhone(val);
+                                  },
+                                ),
+                                getErrorText(state.phoneNumberValidationMsg),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 2.0),
+                                  child: SkipperText.textSmall(
+                                    AppLocalizations.of(context)
+                                        .receiveOtpVerification,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              NeoPopButton(
+                                  color: AppColors.yellow,
+                                  disabledColor: AppColors.shadowGrey,
+                                  bottomShadowColor: state.isAllValid ?? false
+                                      ? AppColors.darkYellow
+                                      : AppColors.shadowGrey2,
+                                  onTapUp: state.isAllValid ?? false
+                                      ? () => {
+                                            showLoaderDialog(context),
+                                            registerCubit.doRegister(
+                                              _mobileInputController.text,
+                                            ),
+                                          }
+                                      : null,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SkipperText.bodyBold(
+                                          AppLocalizations.of(context)
+                                              .register
+                                              .toUpperCase(),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20.0),
+                                child: SkipperCheckBox(
+                                    value:
+                                        state.isTermsConditionChecked ?? false,
+                                    onChecked: (val) => {
+                                          registerCubit
+                                              .checkTermsAndConditions(val),
+                                        },
+                                    label: AppLocalizations.of(context)
+                                        .registerAgree),
+                              )
                             ],
                           ),
-                        ),
-                        Column(
-                          children: [
-                            SkipperButton(
-                              onPressed: state.phoneNumberValidationMsg == null
-                                  ? () => {
-                                        showLoaderDialog(context),
-                                        registerCubit.doRegister(),
-                                      }
-                                  : null,
-                              text: AppLocalizations.of(context)
-                                  .register
-                                  .toUpperCase(),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 20.0),
-                              child: SkipperCheckBox(
-                                  value: false,
-                                  onChanged: (val) => {},
-                                  label: AppLocalizations.of(context)
-                                      .registerAgree),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+              ),
             );
           },
         ));
@@ -138,10 +179,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     AlertDialog alert = AlertDialog(
       content: Row(
         children: [
-          const CircularProgressIndicator(),
+          const CircularProgressIndicator(
+            color: AppColors.yellow,
+          ),
           Container(
               margin: const EdgeInsets.only(left: 7),
-              child: const Text("Loading...")),
+              child: const Text("Waiting...")),
         ],
       ),
     );

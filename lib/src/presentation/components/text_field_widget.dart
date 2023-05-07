@@ -25,6 +25,7 @@ class TextFieldWidget extends StatelessWidget {
         fontWeight: FontWeight.w600,
       ),
       decoration: InputDecoration(
+        isCollapsed: true,
         filled: true,
         fillColor: Colors.white,
         hintText: hintValue ?? '',

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
@@ -7,7 +9,9 @@ import '../../components/skipper_text.dart';
 class OtpWidget extends StatelessWidget {
   final String? otpCode;
   final Function? onSubmitted;
-  const OtpWidget({super.key, required this.otpCode, this.onSubmitted});
+  final Function? onChanged;
+  const OtpWidget(
+      {super.key, required this.otpCode, this.onSubmitted, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,8 @@ class OtpWidget extends StatelessWidget {
           height: 25.0,
         ),
         PinFieldAutoFill(
-          currentCode: '123456',
+          codeLength: otpCode?.length ?? 5,
+          currentCode: otpCode,
           decoration: BoxLooseDecoration(
             textStyle: const TextStyle(
                 color: Colors.black,
@@ -38,7 +43,14 @@ class OtpWidget extends StatelessWidget {
               Color(0xFFFFFFFF),
             ),
           ),
-          onCodeChanged: (code) {},
+          onCodeChanged: (code) {
+            if (code?.length == otpCode?.length) {
+              Timer(const Duration(seconds: 5), () {
+                // <-- Delay here
+                onSubmitted!(code);
+              });
+            }
+          },
           onCodeSubmitted: (val) {
             onSubmitted!(val);
           },

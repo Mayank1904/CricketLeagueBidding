@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import '../../resources/constants/colors.dart';
 
 class SkipperButton extends StatelessWidget {
@@ -16,23 +17,20 @@ class SkipperButton extends StatelessWidget {
     return SizedBox(
         width: double.infinity,
         height: 40,
-        child: ElevatedButton(
+        child: NeoPopButton(
           key: key,
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            foregroundColor: AppColors.black,
-            backgroundColor: AppColors.yellow,
-            disabledBackgroundColor: AppColors.warmGrey,
-            textStyle: const TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          onTapUp: onPressed,
+          color: AppColors.yellow,
+          disabledColor: AppColors.warmGrey,
           child: Text(
             text,
             selectionColor: AppColors.yellow,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ));
   }
