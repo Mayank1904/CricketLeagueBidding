@@ -1,25 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
+import '../../resources/constants/colors.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintValue;
   final Function? onChanged;
+  final bool isNumeric;
   const TextFieldWidget(
-      {super.key, this.hintValue, this.controller, this.onChanged});
+      {super.key,
+      this.hintValue,
+      this.controller,
+      this.onChanged,
+      required this.isNumeric});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      textAlign: TextAlign.start,
       controller: controller,
-      keyboardType: TextInputType.text,
+      keyboardType: isNumeric ? TextInputType.phone : TextInputType.text,
+      maxLength: isNumeric ? 10 : 20,
       style: const TextStyle(
-          fontSize: 16.0, color: AppColors.black, fontWeight: FontWeight.w600),
+        fontSize: 16.0,
+        color: AppColors.black,
+        fontWeight: FontWeight.w600,
+      ),
       decoration: InputDecoration(
+        isCollapsed: true,
         filled: true,
         fillColor: Colors.white,
         hintText: hintValue ?? '',
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 0.0),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.all(
+            Radius.circular(0.0),
+          ),
+        ),
         hintStyle: const TextStyle(
             backgroundColor: Colors.white,
             color: Color(0xffa3a3a3),
@@ -28,8 +46,9 @@ class TextFieldWidget extends StatelessWidget {
             fontStyle: FontStyle.normal,
             fontSize: 16.0),
         contentPadding: const EdgeInsets.all(16.0),
+        isDense: true,
       ),
-      onChanged: (value) => onChanged,
+      onChanged: (value) => onChanged!(value),
     );
   }
 }

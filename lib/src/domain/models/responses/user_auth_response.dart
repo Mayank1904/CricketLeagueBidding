@@ -3,37 +3,37 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class RegisterResponse extends Equatable {
+class UserAuthResponse extends Equatable {
   final String? apiResponse;
-  const RegisterResponse({
+  const UserAuthResponse({
     this.apiResponse,
   });
 
-  RegisterResponse copyWith({
+  UserAuthResponse copyWith({
     String? apiResponse,
   }) {
-    return RegisterResponse(
+    return UserAuthResponse(
       apiResponse: apiResponse ?? this.apiResponse,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'apiResponse': apiResponse,
+      'api_response': apiResponse,
     };
   }
 
-  factory RegisterResponse.fromMap(Map<String, dynamic> map) {
-    return RegisterResponse(
+  factory UserAuthResponse.fromMap(Map<String, dynamic> map) {
+    return UserAuthResponse(
       apiResponse:
-          map['apiResponse'] != null ? map['apiResponse'] as String : null,
+          map['api_response'] != null ? map['api_response'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory RegisterResponse.fromJson(String source) =>
-      RegisterResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserAuthResponse.fromJson(String source) =>
+      UserAuthResponse.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

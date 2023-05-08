@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
@@ -5,8 +7,11 @@ import '../../../resources/constants/colors.dart';
 import '../../components/skipper_text.dart';
 
 class OtpWidget extends StatelessWidget {
-  String? otpCode;
-  OtpWidget({super.key, required this.otpCode});
+  final String? otpCode;
+  final Function? onSubmitted;
+  final Function? onChanged;
+  const OtpWidget(
+      {super.key, required this.otpCode, this.onSubmitted, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,8 @@ class OtpWidget extends StatelessWidget {
           height: 25.0,
         ),
         PinFieldAutoFill(
-          currentCode: '123456',
+          codeLength: otpCode?.length ?? 5,
+          currentCode: otpCode,
           decoration: BoxLooseDecoration(
             textStyle: const TextStyle(
                 color: Colors.black,
@@ -37,11 +43,17 @@ class OtpWidget extends StatelessWidget {
               Color(0xFFFFFFFF),
             ),
           ),
-          codeLength: 6,
           onCodeChanged: (code) {
-            otpCode = code.toString();
+            if (code?.length == otpCode?.length) {
+              Timer(const Duration(seconds: 5), () {
+                // <-- Delay here
+                onSubmitted!(code);
+              });
+            }
           },
-          onCodeSubmitted: (val) {},
+          onCodeSubmitted: (val) {
+            onSubmitted!(val);
+          },
         ),
         Padding(
           padding: const EdgeInsets.only(top: 15.0),
@@ -54,7 +66,7 @@ class OtpWidget extends StatelessWidget {
                     fontFamily: "Graphik",
                     fontStyle: FontStyle.normal,
                     fontSize: 12.0),
-                text: "You should receive the OTP in 3"),
+                text: "You should receive the OTP in "),
             TextSpan(
                 style: TextStyle(
                     color: AppColors.white,

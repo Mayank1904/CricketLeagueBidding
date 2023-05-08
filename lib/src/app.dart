@@ -12,6 +12,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:oktoast/oktoast.dart';
 
+import 'utils/auth_service.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -21,8 +23,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => RegisterCubit(
-            locator<SkipperApiRepository>(),
-          )..doRegister(),
+              locator<SkipperApiRepository>(), locator<AuthService>()),
         ),
       ],
       child: ChangeNotifierProvider(
@@ -30,15 +31,18 @@ class App extends StatelessWidget {
           builder: (context, child) {
             return Consumer<LocaleProvider>(
                 builder: (context, provider, child) {
-              return MaterialApp(
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                locale: provider.locale,
-                supportedLocales: L10n.support,
-                debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                    primaryColor: AppColors.backgroundColor,
-                    fontFamily: 'Graphik'),
-                home: const IntroScreen(),
+              return OKToast(
+                child: MaterialApp(
+                  localizationsDelegates:
+                      AppLocalizations.localizationsDelegates,
+                  locale: provider.locale,
+                  supportedLocales: L10n.support,
+                  debugShowCheckedModeBanner: false,
+                  theme: ThemeData(
+                      primaryColor: AppColors.backgroundColor,
+                      fontFamily: 'Graphik'),
+                  home: const IntroScreen(),
+                ),
               );
             });
           }),

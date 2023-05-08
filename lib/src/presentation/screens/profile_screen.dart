@@ -46,6 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 25.0,
                   ),
                   const TextFieldWidget(
+                    isNumeric: false,
                     hintValue: 'Enter Name',
                   ),
                   Padding(

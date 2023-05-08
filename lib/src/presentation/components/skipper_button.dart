@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
+import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
+import '../../resources/constants/colors.dart';
 
 class SkipperButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -16,36 +17,21 @@ class SkipperButton extends StatelessWidget {
     return SizedBox(
         width: double.infinity,
         height: 40,
-        child: ElevatedButton(
+        child: NeoPopButton(
           key: key,
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            foregroundColor: AppColors.black,
-            backgroundColor: AppColors.yellow,
-            textStyle:
-                const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w600),
+          onTapUp: onPressed,
+          color: AppColors.yellow,
+          disabledColor: AppColors.warmGrey,
+          child: Text(
+            text,
+            selectionColor: AppColors.yellow,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          child: onPressed != null
-              ? Baseline(
-                  baseline: 15,
-                  baselineType: TextBaseline.alphabetic,
-                  child: Text(
-                    text,
-                    selectionColor: AppColors.yellow,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              : Baseline(
-                  baseline: 15,
-                  baselineType: TextBaseline.alphabetic,
-                  child: Text(
-                    text,
-                    selectionColor: AppColors.yellow,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
         ));
   }
 }

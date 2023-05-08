@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:skipper11/src/resources/constants/colors.dart';
+import '../../resources/constants/colors.dart';
 
 class SkipperCheckBox extends StatelessWidget {
   final bool value;
-  final ValueChanged<bool>? onChanged;
+  final ValueChanged<bool>? onChecked;
   final String? label;
   const SkipperCheckBox(
-      {Key? key, required this.value, this.label, this.onChanged})
+      {Key? key, required this.value, this.label, this.onChecked})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onChanged!(!value);
+        onChecked!(!value);
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 16.0,
             width: 16.0,
             child: Checkbox(
+              activeColor: AppColors.white,
+              focusColor: AppColors.white,
               fillColor: MaterialStateProperty.resolveWith(getColor),
               checkColor: AppColors.black,
               value: value,
-              onChanged: onChanged != null
-                  ? (checked) => onChanged!(checked ?? false)
+              onChanged: onChecked != null
+                  ? (checked) => onChecked!(checked ?? false)
                   : null,
             ),
           ),
@@ -67,6 +68,6 @@ class SkipperCheckBox extends StatelessWidget {
     if (states.any(interactiveStates.contains)) {
       return Colors.white;
     }
-    return Colors.pink;
+    return Colors.white;
   }
 }
