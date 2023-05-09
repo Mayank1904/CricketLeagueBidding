@@ -91,6 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
                   child: SkipperButton(
                     onPressed: () => {},
+                    buttonColor: AppColors.warmGrey,
                     text: 'SKIP FOR NOW',
                   ),
                 )

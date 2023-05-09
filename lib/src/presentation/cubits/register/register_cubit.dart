@@ -28,14 +28,20 @@ class RegisterCubit extends BaseCubit<RegisterState, UserAuthResponse>
   }
 
   void backToMainScreen() {
-    emit(state.copyWith(isApiSuccess: false));
+    emit(state.copyWith(
+      isUserRegistered: false,
+      isUserLogin: false,
+      isApiSuccess: false,
+    ));
   }
 
   Future<void> doRegister(String? mobileNo) async {
     if (isBusy) return;
 
     await run(() async {
-      emit(const RegisterStateLoading());
+      emit(state.copyWith(
+        isLoading: true,
+      ));
       var userReq = {};
       userReq["mobileNo"] = mobileNo;
       userReq["countryCode"] = "+91";
@@ -50,9 +56,21 @@ class RegisterCubit extends BaseCubit<RegisterState, UserAuthResponse>
       if (response is DataSuccess) {
         var res = utf8.decode(base64.decode(response.data!.apiResponse!));
         var userAuthRes = UserResponse.fromJson(res);
-        emit(state.copyWith(isApiSuccess: true, user: userAuthRes));
+        emit(state.copyWith(
+          isLoading: false,
+          isUserRegistered: true,
+          isApiSuccess: true,
+          isApiError: false,
+          user: userAuthRes,
+        ));
       } else if (response is DataFailed) {
-        emit(state.copyWith(isApiSuccess: false, error: response.error));
+        emit(state.copyWith(
+          isLoading: false,
+          isApiSuccess: false,
+          isApiError: true,
+          isUserRegistered: false,
+          error: response.error,
+        ));
       }
     });
   }
@@ -61,7 +79,9 @@ class RegisterCubit extends BaseCubit<RegisterState, UserAuthResponse>
     if (isBusy) return;
 
     await run(() async {
-      emit(const RegisterStateLoading());
+      emit(state.copyWith(
+        isLoading: true,
+      ));
       var userReq = {};
       userReq["mobileNo"] = mobileNo;
       userReq["countryCode"] = "+91";
@@ -76,9 +96,20 @@ class RegisterCubit extends BaseCubit<RegisterState, UserAuthResponse>
         var res = utf8.decode(base64.decode(response.data!.apiResponse!));
         var userAuthRes = LoginResponse.fromJson(res);
         await authService.setToken(userAuthRes.access_token);
-        emit(state.copyWith(isApiSuccess: true));
+        emit(state.copyWith(
+          isLoading: false,
+          isUserLogin: true,
+          isApiSuccess: true,
+          isApiError: false,
+        ));
       } else if (response is DataFailed) {
-        emit(state.copyWith(isApiSuccess: false, error: response.error));
+        emit(state.copyWith(
+          isLoading: false,
+          isUserLogin: false,
+          isApiSuccess: false,
+          error: response.error,
+          isApiError: true,
+        ));
       }
     });
   }
@@ -87,7 +118,9 @@ class RegisterCubit extends BaseCubit<RegisterState, UserAuthResponse>
     if (isBusy) return;
 
     await run(() async {
-      emit(const RegisterStateLoading());
+      emit(state.copyWith(
+        isLoading: true,
+      ));
       var userReq = {};
       userReq["mobileNo"] = mobileNo;
       userReq["otp"] = otp;
@@ -103,9 +136,21 @@ class RegisterCubit extends BaseCubit<RegisterState, UserAuthResponse>
       if (response is DataSuccess) {
         var res = utf8.decode(base64.decode(response.data!.apiResponse!));
         var userAuthRes = UserResponse.fromJson(res);
-        emit(state.copyWith(isApiSuccess: true, user: userAuthRes));
+        emit(state.copyWith(
+          isApiSuccess: true,
+          isLoading: false,
+          isOtpVerified: true,
+          user: userAuthRes,
+          isApiError: false,
+        ));
       } else if (response is DataFailed) {
-        emit(state.copyWith(isApiSuccess: false, error: response.error));
+        emit(state.copyWith(
+          isApiSuccess: false,
+          isLoading: false,
+          isOtpVerified: false,
+          error: response.error,
+          isApiError: true,
+        ));
       }
     });
   }
@@ -117,9 +162,17 @@ class RegisterCubit extends BaseCubit<RegisterState, UserAuthResponse>
     await run(() async {
       final res = validateMobile(phoneNumber);
       emit(state.copyWith(
+          isApiSuccess: false,
           isPhoneNumberValid: res == null,
           phoneNumberValidationMsg: res,
-          isAllValid: isRegister ? isValid(res: res) : isValidLogin(res)));
+          isAllValid: isRegister
+              ? isValid(
+                  res: res,
+                  checked: state.isTermsConditionChecked,
+                )
+              : isValidLogin(
+                  res,
+                )));
     });
   }
 

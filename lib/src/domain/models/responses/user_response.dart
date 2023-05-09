@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class UserResponse {
   final String? message;
-  final String? status;
+  final bool? status;
   final String? accessToken;
   UserResponse({
     this.message,
@@ -13,7 +13,7 @@ class UserResponse {
 
   UserResponse copyWith({
     String? message,
-    String? status,
+    bool? status,
     String? accessToken,
   }) {
     return UserResponse(
@@ -34,7 +34,7 @@ class UserResponse {
   factory UserResponse.fromMap(Map<String, dynamic> map) {
     return UserResponse(
       message: map['message'] != null ? map['message'] as String : null,
-      status: map['status'] != null ? map['status'] as String : null,
+      status: map['status'] != null ? map['status'] as bool : null,
       accessToken:
           map['accessToken'] != null ? map['accessToken'] as String : null,
     );

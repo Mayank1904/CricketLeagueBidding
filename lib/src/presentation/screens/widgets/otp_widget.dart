@@ -26,6 +26,7 @@ class OtpWidget extends StatelessWidget {
           height: 25.0,
         ),
         PinFieldAutoFill(
+          autoFocus: true,
           codeLength: otpCode?.length ?? 5,
           currentCode: otpCode,
           decoration: BoxLooseDecoration(
@@ -44,12 +45,15 @@ class OtpWidget extends StatelessWidget {
             ),
           ),
           onCodeChanged: (code) {
-            if (code?.length == otpCode?.length) {
-              Timer(const Duration(seconds: 5), () {
-                // <-- Delay here
-                onSubmitted!(code);
-              });
+            if (code!.length == otpCode!.length) {
+              FocusScope.of(context).requestFocus(FocusNode());
             }
+            // if (code?.length == otpCode?.length) {
+            //   Timer(const Duration(seconds: 5), () {
+            //     // <-- Delay here
+            //     onSubmitted!(code);
+            //   });
+            // }
           },
           onCodeSubmitted: (val) {
             onSubmitted!(val);
