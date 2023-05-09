@@ -26,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late RegisterCubit registerCubit;
   @override
   void dispose() {
-    _mobileInputController.dispose();
+    // _mobileInputController.dispose();
     registerCubit.initState();
     super.dispose();
   }
@@ -40,7 +40,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         body: BlocConsumer<RegisterCubit, RegisterState>(
           listener: (context, state) {
-            if (state.isApiSuccess ?? false) {
+            if (state.isLoading ?? false) {
+              showLoaderDialog(context);
+            } else if (state.isApiSuccess ?? false) {
               Navigator.of(context).pop();
               if (state.user?.message == 'User Already Exist') {
                 showToast(state.user?.message ?? 'Something Went Wrong');
@@ -52,7 +54,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       builder: (context) => const ProfileScreen()),
                 );
               }
-            } else if (state.error?.message != null) {
+            } else if (state.isApiError ?? false) {
+              Navigator.of(context).pop();
               showToast("Something went wrong");
             }
           },
@@ -64,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               child: Container(
                 margin: const EdgeInsets.all(20.0),
-                child: ((state.isApiSuccess ?? false) &&
+                child: ((state.isUserRegistered ?? false) &&
                         state.user?.message != 'User Already Exist')
                     ? OtpWidget(
                         otpCode: "88888",
@@ -117,7 +120,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       : AppColors.shadowGrey2,
                                   onTapUp: state.isAllValid ?? false
                                       ? () => {
-                                            showLoaderDialog(context),
                                             registerCubit.doRegister(
                                               _mobileInputController.text,
                                             ),
