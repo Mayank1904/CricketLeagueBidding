@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../../../domain/models/responses/card.dart';
 import '../../../resources/constants/colors.dart';
+import '../../components/skipper_text.dart';
 
 class UpcomingMatchTile extends StatelessWidget {
-  const UpcomingMatchTile({super.key});
+  final Cards card;
+  const UpcomingMatchTile(
+    this.card, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +21,10 @@ class UpcomingMatchTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: const [
           BoxShadow(
-              color: Color(0x0a000000),
-              offset: Offset(0, 3),
-              blurRadius: 4,
-              spreadRadius: 0),
+            color: Color(0x0a000000),
+            offset: Offset(0, 3),
+            blurRadius: 4,
+          ),
         ],
       ),
       child: Column(
@@ -26,34 +33,27 @@ class UpcomingMatchTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
-                  child: Text(
-                    "Womens Premier League 2023",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontFamily: 'Graphik',
-                      color: Color(0xff333333),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                    ),
-                  ),
-                ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 4.0),
+                    child: SkipperText.textSmall(
+                      card.season.name,
+                      color: AppColors.blackTwo,
+                      textAlign: TextAlign.start,
+                    )),
                 const Divider(
                   height: 1,
-                  color: Color(0xffededed),
+                  color: AppColors.greyED,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 9.0, left: 14.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
+                          Row(
                             children: [
                               Image.asset(
                                 'assets/images/image_14.png',
@@ -61,74 +61,52 @@ class UpcomingMatchTile extends StatelessWidget {
                                 height: 28,
                                 fit: BoxFit.cover,
                               ),
-                              const Text(
-                                "Mumbai",
-                                style: TextStyle(
-                                  fontFamily: 'Graphik',
-                                  color: Color(0xff17001d),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: SkipperText.titleBold(
+                                  card.teams.a.shortName,
+                                  color: AppColors.black,
+                                  textAlign: TextAlign.center,
                                 ),
-                              )
+                              ),
                             ],
                           ),
-                          const Text(
-                            "MUM",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              fontFamily: 'Graphik',
-                              color: Color(0xff000000),
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                            ),
+                          SkipperText.textSmall(
+                            card.teams.a.name.split(' ')[0],
+                            color: AppColors.backgroundColor,
                           ),
                         ],
                       ),
-                      const Text(
-                        "24 March,2023",
-                        style: TextStyle(
-                          fontFamily: 'Graphik',
-                          color: Color(0xff666666),
-                          fontSize: 10.0,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                        ),
+                      SkipperText.textExtraSmall(
+                        DateFormat('d MMMM,yyyy')
+                            .format(DateTime.parse(card.startDate.iso)),
+                        color: AppColors.brownishGrey,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 14.0),
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            const Text(
-                              "GUJR",
-                              style: TextStyle(
-                                fontFamily: 'Graphik',
-                                color: Color(0xff000000),
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                              ),
-                            ),
-                            Column(
+                            Row(
                               children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: SkipperText.titleBold(
+                                    card.teams.b.shortName,
+                                    color: AppColors.black,
+                                  ),
+                                ),
                                 Image.asset(
                                   'assets/images/scroll_group_2.png',
                                   width: 30,
                                   height: 28,
                                   fit: BoxFit.cover,
                                 ),
-                                const Text(
-                                  "Gujarat",
-                                  style: TextStyle(
-                                    fontFamily: 'Graphik',
-                                    color: Color(0xff17001d),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                  ),
-                                )
                               ],
+                            ),
+                            SkipperText.textSmall(
+                              card.teams.b.name.split(' ')[0],
+                              color: AppColors.backgroundColor,
                             ),
                           ],
                         ),

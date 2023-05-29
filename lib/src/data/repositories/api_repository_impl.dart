@@ -1,4 +1,5 @@
 import '../../domain/models/requests/user_auth_request.dart';
+import '../../domain/models/responses/upcoming_matches_response.dart';
 import '../../domain/models/responses/user_auth_response.dart';
 import '../../domain/respositories/skipper_api_repository.dart';
 import '../../utils/resources/data_state.dart';
@@ -31,5 +32,11 @@ class ApiRepositoryImpl extends BaseApiRepository
       {required UserAuthRequest request}) {
     return getStateOf<UserAuthResponse>(
         request: () => _skipperApiService.loginWithPhone(request: request));
+  }
+
+  @override
+  Future<DataState<UpcomingMatchesResponse>> upcomingMatches() {
+    return getStateOf<UpcomingMatchesResponse>(
+        request: () => _skipperApiService.upcomingMatches());
   }
 }

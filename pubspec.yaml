@@ -67,7 +67,8 @@ dependencies:
   provider: ^6.0.5
   neopop: ^1.0.2
   flutter_svg: ^2.0.5
-  
+  animated_splash_screen: ^1.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

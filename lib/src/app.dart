@@ -6,6 +6,8 @@ import 'config/router/app_router.dart';
 import 'domain/respositories/skipper_api_repository.dart';
 import 'locator.dart';
 import 'presentation/cubits/register/register_cubit.dart';
+import 'presentation/cubits/upcomingMatches/upcoming_matches_cubit.dart';
+import 'presentation/screens/splash_screen.dart';
 import 'resources/constants/colors.dart';
 import 'presentation/screens/intro_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,7 +25,14 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => RegisterCubit(
-              locator<SkipperApiRepository>(), locator<AuthService>()),
+            locator<SkipperApiRepository>(),
+            locator<AuthService>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => UpcomingMatchesCubit(
+            locator<SkipperApiRepository>(),
+          ),
         ),
       ],
       child: ChangeNotifierProvider(
@@ -41,7 +50,7 @@ class App extends StatelessWidget {
                   theme: ThemeData(
                       primaryColor: AppColors.backgroundColor,
                       fontFamily: 'Graphik'),
-                  home: const IntroScreen(),
+                  home: const SplashScreen(),
                 ),
               );
             });
