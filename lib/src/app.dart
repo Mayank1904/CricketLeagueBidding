@@ -5,6 +5,7 @@ import '../provider/locale_provider.dart';
 import 'config/router/app_router.dart';
 import 'domain/respositories/skipper_api_repository.dart';
 import 'locator.dart';
+import 'presentation/cubits/cubit/select_contest_cubit.dart';
 import 'presentation/cubits/register/register_cubit.dart';
 import 'presentation/cubits/upcomingMatches/upcoming_matches_cubit.dart';
 import 'presentation/screens/splash_screen.dart';
@@ -31,6 +32,11 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UpcomingMatchesCubit(
+            locator<SkipperApiRepository>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => SelectContestCubit(
             locator<SkipperApiRepository>(),
           ),
         ),

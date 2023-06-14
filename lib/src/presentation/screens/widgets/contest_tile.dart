@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../domain/models/responses/contest.dart';
+
 class ContestTile extends StatelessWidget {
-  const ContestTile({super.key});
+  final Contest contest;
+  const ContestTile(this.contest, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +60,9 @@ class ContestTile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "1 Crore",
-                        style: TextStyle(
+                      Text(
+                        contest.prizepool,
+                        style: const TextStyle(
                           fontFamily: 'Graphik',
                           color: Color(0xff000000),
                           fontSize: 18,
@@ -75,9 +78,9 @@ class ContestTile extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: const Color(0xffc1a621),
                             borderRadius: BorderRadius.circular(4)),
-                        child: const Text(
-                          "₹99",
-                          style: TextStyle(
+                        child: Text(
+                          "₹${contest.enteryfee}",
+                          style: const TextStyle(
                             fontFamily: 'Graphik',
                             color: Color(0xffffffff),
                             fontSize: 14,
@@ -102,10 +105,10 @@ class ContestTile extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
-                        "3,387 spots left",
-                        style: TextStyle(
+                        "${contest.spotsleft} spots left",
+                        style: const TextStyle(
                           fontFamily: 'Graphik',
                           color: Color(0xffc1a621),
                           fontSize: 12,
@@ -114,8 +117,8 @@ class ContestTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "3,390 spots",
-                        style: TextStyle(
+                        "${contest.totalspots} spots",
+                        style: const TextStyle(
                           fontFamily: 'Graphik',
                           color: Color(0xff666666),
                           fontSize: 12,
@@ -144,10 +147,10 @@ class ContestTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Text(
-                      "₹9,500",
-                      style: TextStyle(
+                      "₹ ${contest.enteryfee}",
+                      style: const TextStyle(
                         fontFamily: 'Graphik',
                         color: Color(0xff333333),
                         fontSize: 12,
@@ -156,9 +159,9 @@ class ContestTile extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 12.0),
-                      child: Text("63%",
-                          style: TextStyle(
+                      padding: const EdgeInsets.only(left: 12.0),
+                      child: Text("${contest.wining_percentage}%",
+                          style: const TextStyle(
                             fontFamily: 'Graphik',
                             color: Color(0xff333333),
                             fontSize: 12,

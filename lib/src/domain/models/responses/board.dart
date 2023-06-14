@@ -4,7 +4,7 @@ class Board {
   final String key;
   final String name;
   final String code;
-  final String country;
+  final String? country;
 
   Board({
     required this.key,
@@ -42,7 +42,7 @@ class Board {
       key: map['key'] as String,
       name: map['name'] as String,
       code: map['code'] as String,
-      country: map['country'] as String,
+      country: map['country'] != null ? map['country'] as String : null,
     );
   }
 

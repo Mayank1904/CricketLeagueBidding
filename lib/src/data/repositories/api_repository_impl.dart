@@ -1,4 +1,5 @@
 import '../../domain/models/requests/user_auth_request.dart';
+import '../../domain/models/responses/contest_response.dart';
 import '../../domain/models/responses/upcoming_matches_response.dart';
 import '../../domain/models/responses/user_auth_response.dart';
 import '../../domain/respositories/skipper_api_repository.dart';
@@ -38,5 +39,11 @@ class ApiRepositoryImpl extends BaseApiRepository
   Future<DataState<UpcomingMatchesResponse>> upcomingMatches() {
     return getStateOf<UpcomingMatchesResponse>(
         request: () => _skipperApiService.upcomingMatches());
+  }
+
+  @override
+  Future<DataState<ContestResponse>> contests() {
+    return getStateOf<ContestResponse>(
+        request: () => _skipperApiService.contests());
   }
 }

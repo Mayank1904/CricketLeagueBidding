@@ -4,7 +4,7 @@ import '../components/skipper_app_bar.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
 import '../cubits/upcomingMatches/upcoming_matches_cubit.dart';
-import 'widgets/select_match_screen.dart';
+import 'select_match_screen.dart';
 import 'widgets/upcoming_match_tile.dart';
 
 import '../../resources/constants/colors.dart';

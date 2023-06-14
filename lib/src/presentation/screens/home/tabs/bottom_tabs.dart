@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../create_team_screen.dart';
 import '../../home_screen.dart';
-import '../../widgets/select_match_screen.dart';
+import '../../select_match_screen.dart';
 
 class TabNavigationItem {
   final Widget page;
