@@ -1,15 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/models/responses/card.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_scaffold.dart';
-import '../cubits/cubit/select_contest_cubit.dart';
+import '../cubits/selectContest/select_contest_cubit.dart';
 import 'create_team_screen.dart';
 import 'widgets/chip.dart';
 import 'widgets/contest_tile.dart';
 
+@RoutePage()
 class SelectMatchScreen extends StatefulWidget {
-  const SelectMatchScreen({super.key});
+  final Cards? card;
+  const SelectMatchScreen({super.key, this.card});
 
   @override
   State<SelectMatchScreen> createState() => _SelectMatchScreenState();
@@ -29,7 +33,7 @@ class _SelectMatchScreenState extends State<SelectMatchScreen> {
   Widget build(BuildContext context) {
     return SkipperScaffold(
       appBar: SkipperAppbar(
-        title: 'MUM vs GUJR',
+        title: widget.card?.shortName,
         subTitle: '1h 51m left',
         actions: <Widget>[
           IconButton(
@@ -71,9 +75,9 @@ class _SelectMatchScreenState extends State<SelectMatchScreen> {
                           spacing: 10.0,
                           runSpacing: 10.0,
                           children: <Widget>[
-                            chip('Contests', const Color(0xff252525)),
-                            chip('My Contests(0)', const Color(0xff252525)),
-                            chip('My Team(0)', const Color(0xff252525)),
+                            chip('Contests', true),
+                            chip('My Contests (0)', false),
+                            chip('My Team (0)', false),
                           ],
                         ),
                         Padding(

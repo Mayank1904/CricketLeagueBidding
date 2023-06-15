@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../domain/models/responses/contest.dart';
+import '../../../resources/constants/colors.dart';
+import '../../components/skipper_text.dart';
 
 class ContestTile extends StatelessWidget {
   final Contest contest;
@@ -11,18 +13,83 @@ class ContestTile extends StatelessWidget {
     return Container(
       width: 320,
       decoration: BoxDecoration(
-        color: const Color(0xffffffff),
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: const [
           BoxShadow(
-              color: Color(0x0a000000),
-              offset: Offset(0, 3),
-              blurRadius: 4,
-              spreadRadius: 0)
+              color: Color(0x0a000000), offset: Offset(0, 3), blurRadius: 4)
         ],
       ),
       child: Column(
         children: [
+          Container(
+            width: 320,
+            padding: const EdgeInsets.only(
+                left: 12.0, right: 12.0, top: 5.0, bottom: 5.0),
+            decoration: const BoxDecoration(
+              color: AppColors.greyF5,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8.0),
+                topRight: Radius.circular(8.0),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                        right: 5.0,
+                      ),
+                      width: 20.0,
+                      height: 20.0,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, border: Border.all()),
+                      child: Center(
+                        child: SkipperText.textExtraSmall("1st"),
+                      ),
+                    ),
+                    SkipperText.textSmall(
+                      "₹${contest.enteryfee}",
+                      color: AppColors.blackTwo,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12.0),
+                      child: SkipperText.textSmall(
+                        "${contest.wining_percentage}%",
+                        color: AppColors.blackTwo,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                        right: 5.0,
+                      ),
+                      width: 20.0,
+                      height: 20.0,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, border: Border.all()),
+                      child: const Center(
+                        child: Icon(size: 15.0, Icons.check),
+                      ),
+                    ),
+                    SkipperText.textSmall(
+                      "Guaranteed",
+                      color: AppColors.blackTwo,
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(
                 left: 12.0, right: 12.0, top: 8.0, bottom: 8.0),
@@ -31,27 +98,15 @@ class ContestTile extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      SkipperText.textSmall(
                         "Prize Pool",
-                        style: TextStyle(
-                          fontFamily: 'Graphik',
-                          color: Color(0xff666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                        ),
+                        color: AppColors.brownishGrey,
                       ),
-                      Text(
+                      SkipperText.textSmall(
                         "Entry",
-                        style: TextStyle(
-                          fontFamily: 'Graphik',
-                          color: Color(0xff666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                        ),
-                      )
+                        color: AppColors.brownishGrey,
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -98,7 +153,7 @@ class ContestTile extends StatelessWidget {
                       child: const LinearProgressIndicator(
                         valueColor: AlwaysStoppedAnimation(Color(0xffc1a621)),
                         backgroundColor: Color(0xfffce0df),
-                        value: 0.4,
+                        value: 0.08,
                         minHeight: 4.0,
                       ),
                     ),
@@ -106,25 +161,13 @@ class ContestTile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      SkipperText.textSmall(
                         "${contest.spotsleft} spots left",
-                        style: const TextStyle(
-                          fontFamily: 'Graphik',
-                          color: Color(0xffc1a621),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                        ),
+                        color: AppColors.darkYellow,
                       ),
-                      Text(
+                      SkipperText.textSmall(
                         "${contest.totalspots} spots",
-                        style: const TextStyle(
-                          fontFamily: 'Graphik',
-                          color: Color(0xff666666),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                        ),
+                        color: AppColors.brownishGrey,
                       ),
                     ],
                   )
@@ -132,56 +175,6 @@ class ContestTile extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: 320,
-            padding: const EdgeInsets.only(
-                left: 12.0, right: 12.0, top: 5.0, bottom: 5.0),
-            decoration: const BoxDecoration(
-              color: Color(0xffeaeaea),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(8.0),
-                bottomRight: Radius.circular(8.0),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "₹ ${contest.enteryfee}",
-                      style: const TextStyle(
-                        fontFamily: 'Graphik',
-                        color: Color(0xff333333),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
-                      child: Text("${contest.wining_percentage}%",
-                          style: const TextStyle(
-                            fontFamily: 'Graphik',
-                            color: Color(0xff333333),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                          )),
-                    ),
-                  ],
-                ),
-                const Text("Guaranteed",
-                    style: TextStyle(
-                      fontFamily: 'Graphik',
-                      color: Color(0xff333333),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                    ))
-              ],
-            ),
-          )
         ],
       ),
     );

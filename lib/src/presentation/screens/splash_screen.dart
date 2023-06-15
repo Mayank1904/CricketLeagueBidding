@@ -2,20 +2,24 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../../config/router/app_router.dart';
 import '../../resources/constants/colors.dart';
-import 'home_screen.dart';
-import 'intro_screen.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final appRouter = AppRouter();
+
     return AnimatedSplashScreen(
       duration: 5000,
       splashIconSize: 160.0,
       splash: 'assets/images/skipper_icon.png',
-      nextScreen: const HomeScreen(),
+      nextScreen: MaterialApp.router(
+        routeInformationParser: appRouter.defaultRouteParser(),
+        routerDelegate: appRouter.delegate(),
+      ),
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.scale,
       backgroundColor: AppColors.backgroundColor,

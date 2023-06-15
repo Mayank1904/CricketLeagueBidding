@@ -5,7 +5,8 @@ import '../../components/skipper_text.dart';
 import '../../../resources/constants/text_styles.dart';
 
 class SelectPlayerTile extends StatelessWidget {
-  const SelectPlayerTile({super.key});
+  final List<int>? selectedItemIdList;
+  const SelectPlayerTile({super.key, this.selectedItemIdList});
 
   @override
   Widget build(BuildContext context) {

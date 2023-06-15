@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../config/router/app_router.dart';
+import '../../config/router/app_router.dart';
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
@@ -11,6 +14,7 @@ import '../../resources/constants/colors.dart';
 import 'home/sidemenu/side_menu.dart';
 import 'widgets/page_indicator.dart';
 
+@RoutePage()
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -126,11 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemBuilder: (ctx, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SelectMatchScreen()));
+                                    ctx.router.push(SelectMatchRoute(
+                                        card:
+                                            state.upcomingMatchesList![index]));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(
