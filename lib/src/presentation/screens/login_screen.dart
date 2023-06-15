@@ -10,7 +10,6 @@ import '../cubits/register/register_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
-import '../components/skipper_button.dart';
 import 'profile_screen.dart';
 import 'widgets/otp_widget.dart';
 

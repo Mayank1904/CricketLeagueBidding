@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../domain/models/responses/card.dart';
+import '../components/skipper_text.dart';
+import 'widgets/player_list_widget.dart';
 import 'widgets/select_player_tile.dart';
 
 import '../../resources/constants/colors.dart';
@@ -15,6 +18,8 @@ class CreateTeamScreen extends StatefulWidget {
 
 class _CreateTeamScreenState extends State<CreateTeamScreen>
     with TickerProviderStateMixin {
+  List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  List<int> selectedItemIdList = [];
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 4, vsync: this);
@@ -37,15 +42,10 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
         height: double.maxFinite,
         child: Column(
           children: [
-            // Max 7 players from a team
-            const Text("Max 7 players from a team",
-                style: TextStyle(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "Graphik",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 14.0),
-                textAlign: TextAlign.center),
+            SkipperText.title(
+              "Max 7 players from a team",
+              color: AppColors.white,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 15.0,
@@ -60,14 +60,10 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Players
-                        const Text("Players",
-                            style: TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Graphik",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 12.0),
-                            textAlign: TextAlign.left),
+                        SkipperText.textSmall(
+                          "Players",
+                          color: AppColors.white,
+                        ),
                         // 0/11
                         RichText(
                             text: const TextSpan(children: [
@@ -99,18 +95,14 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                           fit: BoxFit.cover,
                         ),
                         Column(
-                          children: const [
+                          children: [
                             // MUM
-                            Text("MUM",
-                                style: TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "Graphik",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 12.0),
-                                textAlign: TextAlign.center),
+                            SkipperText.textSmall(
+                              "MUM",
+                              color: AppColors.white,
+                            ),
                             // 0
-                            Text("0",
+                            const Text("0",
                                 style: TextStyle(
                                     color: AppColors.white,
                                     fontWeight: FontWeight.w600,
@@ -125,18 +117,13 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                     Row(
                       children: [
                         Column(
-                          children: const [
-                            // MUM
-                            Text("GUJR",
-                                style: TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: "Graphik",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 12.0),
-                                textAlign: TextAlign.center),
+                          children: [
+                            SkipperText.textSmall(
+                              "GUJR",
+                              color: AppColors.white,
+                            ),
                             // 0
-                            Text("0",
+                            const Text("0",
                                 style: TextStyle(
                                     color: AppColors.white,
                                     fontWeight: FontWeight.w600,
@@ -156,19 +143,13 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
-                      children: const [
+                      children: [
                         // Credit left
-                        Text(
-                          "Credit left",
-                          style: TextStyle(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Graphik",
-                              fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
-                          textAlign: TextAlign.left,
+                        SkipperText.textSmall(
+                          "Credit Left",
+                          color: AppColors.white,
                         ), // 100
-                        Text(
+                        const Text(
                           "100",
                           style: TextStyle(
                               color: AppColors.white,
@@ -240,93 +221,29 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
               child: TabBarView(
                 controller: tabController,
                 children: [
+                  PlayerListWidget(
+                    onTap: () {},
+                  ),
                   ListView.builder(
-                      itemCount: 9,
+                      itemCount: 3,
                       itemBuilder: (ctx, index) {
-                        if (index == 0) {
-                          // return the header
-                          return Container(
-                            margin: const EdgeInsets.only(bottom: 8.0),
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            color: const Color(0xfffff7ea),
-                            child: const Text(
-                              "Pick 1-4 Wicket Keeper",
-                              style: TextStyle(
-                                  color: AppColors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "Graphik",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12.0),
-                              textAlign: TextAlign.center,
-                            ),
-                          );
-                        } else if (index == 1) {
-                          return Table(
-                            defaultVerticalAlignment:
-                                TableCellVerticalAlignment.middle,
-                            columnWidths: const {
-                              0: FlexColumnWidth(4.5),
-                              1: FlexColumnWidth(1.5),
-                              2: FlexColumnWidth(1.5),
-                              3: FlexColumnWidth(2),
-                            },
-                            children: [
-                              TableRow(children: [
-                                // SELECTED BY
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 18.0),
-                                  child: Text(
-                                    "SELECTED BY",
-                                    style: TextStyle(
-                                        color: AppColors.brownishGrey,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: "Graphik",
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 12.0),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ),
-                                const Text(
-                                  "POINTS",
-                                  style: TextStyle(
-                                      color: AppColors.brownishGrey,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "Graphik",
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 12.0),
-                                  textAlign: TextAlign.left,
-                                ),
-                                const Text(
-                                  "CREDITS",
-                                  style: TextStyle(
-                                      color: AppColors.brownishGrey,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "Graphik",
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 12.0),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Container(),
-                              ])
-                            ],
-                          );
-                        }
-                        return const SelectPlayerTile();
+                        return SelectPlayerTile(
+                          onTap: () {},
+                        );
                       }),
                   ListView.builder(
                       itemCount: 3,
                       itemBuilder: (ctx, index) {
-                        return const SelectPlayerTile();
+                        return SelectPlayerTile(
+                          onTap: () {},
+                        );
                       }),
                   ListView.builder(
                       itemCount: 3,
                       itemBuilder: (ctx, index) {
-                        return const SelectPlayerTile();
-                      }),
-                  ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (ctx, index) {
-                        return const SelectPlayerTile();
+                        return SelectPlayerTile(
+                          onTap: () {},
+                        );
                       })
                 ],
               ),
