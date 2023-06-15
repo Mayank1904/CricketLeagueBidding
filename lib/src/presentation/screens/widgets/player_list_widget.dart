@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import '../../components/skipper_text.dart';
 import 'select_player_tile.dart';
 
 import '../../../resources/constants/colors.dart';
 
 class PlayerListWidget extends StatelessWidget {
   final Function onTap;
+  final List<int> items;
+  final List<int> selectedItemIdList;
+
   const PlayerListWidget({
     super.key,
     required this.onTap,
+    required this.items,
+    required this.selectedItemIdList,
   });
 
   @override
@@ -21,14 +27,9 @@ class PlayerListWidget extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 8.0),
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               color: const Color(0xfffff7ea),
-              child: const Text(
+              child: SkipperText.textSmall(
                 "Pick 1-4 Wicket Keeper",
-                style: TextStyle(
-                    color: AppColors.black,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "Graphik",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 12.0),
+                color: AppColors.brownishGrey,
                 textAlign: TextAlign.center,
               ),
             );
@@ -44,47 +45,39 @@ class PlayerListWidget extends StatelessWidget {
               children: [
                 TableRow(children: [
                   // SELECTED BY
-                  const Padding(
-                    padding: EdgeInsets.only(left: 18.0),
-                    child: Text(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18.0),
+                    child: SkipperText.textSmall(
                       "SELECTED BY",
-                      style: TextStyle(
-                          color: AppColors.brownishGrey,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Graphik",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 12.0),
+                      color: AppColors.brownishGrey,
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  const Text(
+                  SkipperText.textSmall(
                     "POINTS",
-                    style: TextStyle(
-                        color: AppColors.brownishGrey,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Graphik",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 12.0),
+                    color: AppColors.brownishGrey,
                     textAlign: TextAlign.left,
                   ),
-                  const Text(
+
+                  SkipperText.textSmall(
                     "CREDITS",
-                    style: TextStyle(
-                        color: AppColors.brownishGrey,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Graphik",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 12.0),
+                    color: AppColors.brownishGrey,
                     textAlign: TextAlign.left,
                   ),
+
                   Container(),
                 ])
               ],
             );
           }
+          var item = items[index];
+          // var isSelected = items.firstWhere((element) => item.id == element.id) != null;
+          var isSelected = selectedItemIdList.contains(item);
           return SelectPlayerTile(
-            onTap: (a) {
-              onTap();
+            isSelected: isSelected,
+            position: index + 1,
+            onTap: (val) {
+              onTap(val);
             },
           );
         });

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../domain/models/responses/card.dart';
 import '../components/skipper_text.dart';
 import 'widgets/player_list_widget.dart';
 import 'widgets/select_player_tile.dart';
@@ -66,16 +65,16 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                         ),
                         // 0/11
                         RichText(
-                            text: const TextSpan(children: [
+                            text: TextSpan(children: [
                           TextSpan(
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w700,
                                   fontFamily: "Graphik",
                                   fontStyle: FontStyle.normal,
                                   fontSize: 14.0),
-                              text: "0"),
-                          TextSpan(
+                              text: selectedItemIdList.length.toString()),
+                          const TextSpan(
                               style: TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w400,
@@ -149,9 +148,9 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                           "Credit Left",
                           color: AppColors.white,
                         ), // 100
-                        const Text(
-                          "100",
-                          style: TextStyle(
+                        Text(
+                          (100 - selectedItemIdList.length * 9.0).toString(),
+                          style: const TextStyle(
                               color: AppColors.white,
                               fontWeight: FontWeight.w700,
                               fontFamily: "Graphik",
@@ -186,7 +185,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                 size: 18,
                 selectedColor: AppColors.yellow,
                 unselectedColor: AppColors.white,
-                currentStep: 5,
+                currentStep: selectedItemIdList.length,
               ),
             ),
             Container(
@@ -222,7 +221,17 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                 controller: tabController,
                 children: [
                   PlayerListWidget(
-                    onTap: () {},
+                    items: items,
+                    selectedItemIdList: selectedItemIdList,
+                    onTap: (value) {
+                      setState(() {
+                        if (selectedItemIdList.contains(value)) {
+                          selectedItemIdList.remove(value);
+                        } else {
+                          selectedItemIdList.add(value);
+                        }
+                      });
+                    },
                   ),
                   ListView.builder(
                       itemCount: 3,

@@ -5,6 +5,7 @@ import '../../components/skipper_text.dart';
 import '../../../resources/constants/text_styles.dart';
 
 class SelectPlayerTile extends StatelessWidget {
+  final int? position;
   final Function onTap;
   final bool? isSelected;
   final List<int>? selectedItemIdList;
@@ -12,7 +13,8 @@ class SelectPlayerTile extends StatelessWidget {
       {super.key,
       this.selectedItemIdList,
       required this.onTap,
-      this.isSelected});
+      this.isSelected,
+      this.position});
 
   @override
   Widget build(BuildContext context) {
@@ -138,13 +140,19 @@ class SelectPlayerTile extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                onTap();
+                onTap(position);
               },
-              child: Image.asset(
-                'assets/images/plus.png',
-                width: 21.0,
-                height: 21.0,
-              ),
+              child: isSelected!
+                  ? Image.asset(
+                      'assets/images/minus.png',
+                      width: 21.0,
+                      height: 21.0,
+                    )
+                  : Image.asset(
+                      'assets/images/plus.png',
+                      width: 21.0,
+                      height: 21.0,
+                    ),
             ),
           ],
         ),
