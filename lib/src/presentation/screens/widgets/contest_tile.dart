@@ -58,8 +58,13 @@ class ContestTile extends StatelessWidget {
                 ),
                 Row(
                   children: [
+                    Image.asset(
+                      'assets/images/contest_icon.png',
+                      width: 15.0,
+                      height: 15.0,
+                    ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
+                      padding: const EdgeInsets.only(left: 5.0),
                       child: SkipperText.textSmall(
                         "${contest.wining_percentage}%",
                         color: AppColors.blackTwo,
