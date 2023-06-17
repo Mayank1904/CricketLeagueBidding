@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
 import 'home_screen.dart';
+import 'team_preview.dart';
 import 'widgets/player_list_widget.dart';
 import 'widgets/select_player_tile.dart';
 
@@ -311,7 +312,8 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 13.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 13.0),
               width: double.infinity,
               color: AppColors.greyED,
               height: 70.0,
@@ -321,7 +323,31 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                 children: [
                   Expanded(
                     child: SkipperButton(
-                      onPressed: () => {},
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TeamPreview(
+                                    wicketkeeper: ['D. Conway', 'W Saha'],
+                                    batsmen: [
+                                      'R Gaikwad',
+                                      'S Gill',
+                                      'H Pandya',
+                                      'M Ali',
+                                      'M Pathirana',
+                                      'Mayank',
+                                      'Usjsk'
+                                    ],
+                                    allrounders: [
+                                      'R Jadeja',
+                                    ],
+                                    bowlers: [
+                                      'M Shami',
+                                      'Rashid K',
+                                    ],
+                                  )),
+                        )
+                      },
                       buttonColor: AppColors.warmGrey,
                       text: 'Team Preview',
                     ),

@@ -9,6 +9,7 @@ import 'presentation/cubits/register/register_cubit.dart';
 import 'presentation/cubits/upcomingMatches/upcoming_matches_cubit.dart';
 import 'presentation/screens/save_team_screen.dart';
 import 'presentation/screens/splash_screen.dart';
+import 'presentation/screens/team_preview.dart';
 import 'resources/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -47,16 +48,15 @@ class App extends StatelessWidget {
                 builder: (context, provider, child) {
               return OKToast(
                 child: MaterialApp(
-                  localizationsDelegates:
-                      AppLocalizations.localizationsDelegates,
-                  locale: provider.locale,
-                  supportedLocales: L10n.support,
-                  debugShowCheckedModeBanner: false,
-                  theme: ThemeData(
-                      primaryColor: AppColors.backgroundColor,
-                      fontFamily: 'Graphik'),
-                  home: const SaveTeamScreen(),
-                ),
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
+                    locale: provider.locale,
+                    supportedLocales: L10n.support,
+                    debugShowCheckedModeBanner: false,
+                    theme: ThemeData(
+                        primaryColor: AppColors.backgroundColor,
+                        fontFamily: 'Graphik'),
+                    home: const SaveTeamScreen()),
               );
             });
           }),

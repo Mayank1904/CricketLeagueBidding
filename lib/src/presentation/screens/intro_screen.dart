@@ -1,15 +1,14 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:neopop/neopop.dart';
+
+import '../../models/intro/slider_model.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../models/intro/slider_model.dart';
 import 'widgets/slider.dart';
 
 class IntroScreen extends StatefulWidget {

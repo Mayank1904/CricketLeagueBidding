@@ -15,6 +15,7 @@ class AppColors {
   static const Color greyED = Color(0xffededed);
   static const Color greyF5 = Color(0xfff5f5f5);
   static const Color greyCB = Color(0xffcbcbcb);
+  static const Color greyish = Color(0xffb9b9b9);
   static const Color green = Color(0xff1fb30a);
   static const Color red = Color(0xffff0000);
   static const Color brownishGrey = Color(0xff666666);
@@ -23,6 +24,7 @@ class AppColors {
   static const Color shadowGrey = Color(0xffdadada);
   static const Color shadowGrey2 = Color(0xffc7c7c7);
   static const Color backgroundColor = Color(0xff17001d);
+  static const veryLightGreen = Color(0xffc5ffba);
   static const Gradient linearGradient = LinearGradient(
     begin: Alignment(0.0, 0.0),
     end: Alignment(0.707, -0.707),

@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
+import '../components/skipper_button.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
 import '../cubits/register/register_cubit.dart';
+import 'team_preview.dart';
 
 class SaveTeamScreen extends StatefulWidget {
   final List<String>? batsmen;
@@ -64,7 +66,6 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           return Stack(
-            alignment: AlignmentDirectional.topCenter,
             children: [
               Column(
                 children: [
@@ -289,6 +290,63 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                       .toList(),
                 ),
               ),
+              Container(
+                alignment: Alignment.bottomCenter,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 13.0),
+                width: double.infinity,
+                color: AppColors.greyED,
+                height: 70.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: SkipperButton(
+                        onPressed: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TeamPreview(
+                                      wicketkeeper: ['D. Conway', 'W Saha'],
+                                      batsmen: [
+                                        'R Gaikwad',
+                                        'S Gill',
+                                        'H Pandya',
+                                        'M Ali',
+                                        'M Pathirana',
+                                        'Mayank',
+                                        'Usjsk'
+                                      ],
+                                      allrounders: [
+                                        'R Jadeja',
+                                      ],
+                                      bowlers: [
+                                        'M Shami',
+                                        'Rashid K',
+                                      ],
+                                    )),
+                          )
+                        },
+                        buttonColor: AppColors.warmGrey,
+                        text: 'Team Preview',
+                      ),
+                    ),
+                    Expanded(
+                      child: SkipperButton(
+                        onPressed: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TeamPreview()),
+                          )
+                        },
+                        text: 'Continue',
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           );
         },
