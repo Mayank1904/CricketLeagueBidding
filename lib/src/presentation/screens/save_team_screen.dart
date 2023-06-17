@@ -1,4 +1,6 @@
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../resources/constants/colors.dart';
@@ -61,228 +63,233 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
       body: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {},
         builder: (context, state) {
-          return SingleChildScrollView(
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
+          return Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              Column(
                 children: [
-                  SkipperText.titleBold(
-                    "Choose your Captain and Vice Captain",
-                    color: AppColors.backgroundColor,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: SkipperText.titleBold(
+                      "Choose your Captain and Vice Captain",
+                      color: AppColors.backgroundColor,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 15.0),
                     child: SkipperText.textSmall(
                       "Captain get 2X points, Vice Captain",
                       color: AppColors.backgroundColor,
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  DataTable(
-                      columnSpacing: 20,
-                      horizontalMargin: 12,
-                      dataRowHeight: 70.0,
-                      columns: <DataColumn>[
-                        DataColumn(
-                          label: SkipperText.textSmall(
-                            'TYPE',
-                            color: AppColors.brownishGrey,
-                          ),
+                ],
+              ),
+              Container(
+                margin:
+                    const EdgeInsets.only(left: 18.0, right: 18.0, top: 50.0),
+                child: DataTable2(
+                  sortColumnIndex: 1,
+                  columnSpacing: 10.0,
+                  isVerticalScrollBarVisible: false,
+                  isHorizontalScrollBarVisible: false,
+                  dataRowHeight: 70.0,
+                  columns: <DataColumn>[
+                    DataColumn2(
+                      fixedWidth: 80,
+                      label: SkipperText.textSmall(
+                        'TYPE',
+                        color: AppColors.brownishGrey,
+                      ),
+                    ),
+                    DataColumn2(
+                      fixedWidth: 100,
+                      label: Flexible(
+                        child: SkipperText.textSmall(
+                          'POINTS',
+                          color: AppColors.brownishGrey,
                         ),
-                        DataColumn(
-                          label: SkipperText.textSmall(
-                            'POINTS',
-                            color: AppColors.brownishGrey,
-                          ),
+                      ),
+                    ),
+                    DataColumn2(
+                      fixedWidth: 60.0,
+                      label: Flexible(
+                        child: SkipperText.textSmall(
+                          '% C BY',
+                          color: AppColors.brownishGrey,
                         ),
-                        DataColumn(
-                          label: Flexible(
-                            child: SkipperText.textSmall(
-                              '% C BY',
-                              color: AppColors.brownishGrey,
-                            ),
-                          ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Flexible(
+                        child: SkipperText.textSmall(
+                          '% VC BY',
+                          color: AppColors.brownishGrey,
                         ),
-                        DataColumn(
-                          label: Flexible(
-                            child: SkipperText.textSmall(
-                              '% VC BY',
-                              color: AppColors.brownishGrey,
-                            ),
-                          ),
-                        ),
-                      ],
-                      rows: tempList
-                          .map<DataRow>(
-                            (e) => DataRow(
-                              cells: [
-                                DataCell(
-                                  Row(
+                      ),
+                    ),
+                  ],
+                  rows: tempList
+                      .map<DataRow>(
+                        (e) => DataRow(
+                          cells: [
+                            DataCell(
+                              Row(
+                                children: [
+                                  Stack(
                                     children: [
-                                      Stack(
-                                        children: [
-                                          Container(
-                                            margin: const EdgeInsets.only(
-                                                left: 2.0, bottom: 2.0),
-                                            child: Image.asset(
-                                              'assets/images/player.jpg',
-                                            ),
+                                      Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 2.0, bottom: 2.0),
+                                        child: Image.asset(
+                                          'assets/images/player.jpg',
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 13,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(2),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                  color: Color(0x29000000),
+                                                  offset: Offset(0, 3),
+                                                  blurRadius: 25.0)
+                                            ],
                                           ),
-                                          Positioned(
-                                            bottom: 0,
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              height: 13,
-                                              decoration: BoxDecoration(
-                                                color: AppColors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
-                                                boxShadow: const [
-                                                  BoxShadow(
-                                                      color: Color(0x29000000),
-                                                      offset: Offset(0, 3),
-                                                      blurRadius: 25.0)
-                                                ],
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
+                                                child:
+                                                    SkipperText.textExtraSmall(
+                                                  'MUM',
+                                                  color: AppColors.black,
+                                                  textAlign: TextAlign.center,
+                                                ),
                                               ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            2.0),
-                                                    child: SkipperText
-                                                        .textExtraSmall(
-                                                      'MUM',
-                                                      color: AppColors.black,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            2.0),
-                                                    color: AppColors.black,
-                                                    child: SkipperText
-                                                        .textExtraSmall(
-                                                      'WK',
-                                                      color: AppColors.white,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                  ),
-                                                ],
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
+                                                color: AppColors.black,
+                                                child:
+                                                    SkipperText.textExtraSmall(
+                                                  'WK',
+                                                  color: AppColors.white,
+                                                  textAlign: TextAlign.center,
+                                                ),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            DataCell(
+                              Flexible(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SkipperText.textSmallBold("Alyssa Healy"),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 8.0),
+                                        child: SkipperText.textSmall("116 pts"),
                                       ),
                                     ],
                                   ),
                                 ),
-                                DataCell(
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SkipperText.textSmallBold(
-                                              "Alyssa Healy"),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8.0),
-                                            child: SkipperText.textSmall(
-                                                "116 pts"),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                DataCell(
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(18.0)),
-                                              border: Border.all(
-                                                color: AppColors.greyCB,
-                                              ),
-                                            ),
-                                            child: const CircleAvatar(
-                                              backgroundColor: AppColors.white,
-                                              foregroundColor: AppColors.black,
-                                              radius: 18.0,
-                                              child: Text('C'),
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          SkipperText.textExtraSmall(
-                                            "56%",
-                                            color: AppColors.brownishGrey,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                DataCell(
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(18.0)),
-                                              border: Border.all(
-                                                color: AppColors.greyCB,
-                                              ),
-                                            ),
-                                            child: const CircleAvatar(
-                                              backgroundColor: AppColors.white,
-                                              foregroundColor: AppColors.black,
-                                              radius: 18.0,
-                                              child: Text('VC'),
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          SkipperText.textExtraSmall(
-                                            "56%",
-                                            color: AppColors.brownishGrey,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          )
-                          .toList()),
-                ],
+                            DataCell(
+                              Flexible(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(18.0)),
+                                          border: Border.all(
+                                            color: AppColors.greyCB,
+                                          ),
+                                        ),
+                                        child: const CircleAvatar(
+                                          backgroundColor: AppColors.white,
+                                          foregroundColor: AppColors.black,
+                                          radius: 18.0,
+                                          child: Text('C'),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      SkipperText.textExtraSmall(
+                                        "56%",
+                                        color: AppColors.brownishGrey,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Flexible(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(18.0)),
+                                          border: Border.all(
+                                            color: AppColors.greyCB,
+                                          ),
+                                        ),
+                                        child: const CircleAvatar(
+                                          backgroundColor: AppColors.white,
+                                          foregroundColor: AppColors.black,
+                                          radius: 18.0,
+                                          child: Text('VC'),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      SkipperText.textExtraSmall(
+                                        "56%",
+                                        color: AppColors.brownishGrey,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
-            ),
+            ],
           );
         },
       ),
