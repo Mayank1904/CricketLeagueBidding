@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
+import 'home_screen.dart';
 import 'widgets/player_list_widget.dart';
 import 'widgets/select_player_tile.dart';
 
@@ -9,7 +11,12 @@ import '../components/skipper_scaffold.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class CreateTeamScreen extends StatefulWidget {
-  const CreateTeamScreen({super.key});
+  final String? team1;
+  final String? team2;
+  final String? match_id;
+  final String? start_time;
+  const CreateTeamScreen(
+      {super.key, this.team1, this.team2, this.match_id, this.start_time});
 
   @override
   State<CreateTeamScreen> createState() => _CreateTeamScreenState();
@@ -17,11 +24,40 @@ class CreateTeamScreen extends StatefulWidget {
 
 class _CreateTeamScreenState extends State<CreateTeamScreen>
     with TickerProviderStateMixin {
-  List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  late List<bool> _color_batsmen = List.filled(30, false, growable: false);
+  late List<bool> _color_bowler = List.filled(30, false, growable: false);
+  late List<bool> _color_wk = List.filled(30, false, growable: false);
+  late List<bool> _color_allrounder = List.filled(30, false, growable: false);
+
+  late List<String> _batsmen_selected = List.filled(0, '', growable: true);
+  late List<String> _bowler_selected = List.filled(0, '', growable: true);
+  late List<String> _wk_selected = List.filled(0, '', growable: true);
+  late List<String> _allrounder_selected = List.filled(0, '', growable: true);
+
+  late int _wk_count = 0;
+  late int _bowler_count = 0;
+  late int _batsmen_count = 0;
+  late int _allrounder_count = 0;
+  late int _total_players = 0;
+
+  late TabController tabController;
+
+  List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   List<int> selectedItemIdList = [];
+
+  late List<String> batsmen = [];
+  late List<String> bowlers = [];
+  late List<String> allrounders = [];
+  late List<String> wicketkeepers = [];
+
+  @override
+  void initState() {
+    tabController = TabController(length: 4, vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TabController tabController = TabController(length: 4, vsync: this);
     return SkipperScaffold(
       appBar: SkipperAppbar(
         title: 'Create Team',
@@ -189,13 +225,14 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
               ),
             ),
             Container(
+              height: 40.0,
               width: double.maxFinite,
               color: AppColors.darkGreen,
               child: TabBar(
                 isScrollable: true,
                 indicatorColor: AppColors.yellow,
                 controller: tabController,
-                labelColor: AppColors.black,
+                labelColor: AppColors.white,
                 unselectedLabelColor: AppColors.warmGrey,
                 tabs: const <Widget>[
                   Tab(
@@ -213,22 +250,38 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                 ],
               ),
             ),
-            Container(
-              color: AppColors.white,
-              width: double.maxFinite,
-              height: 480,
+            Expanded(
               child: TabBarView(
+                physics: const BouncingScrollPhysics(
+                  parent: PageScrollPhysics(),
+                ),
                 controller: tabController,
                 children: [
                   PlayerListWidget(
                     items: items,
                     selectedItemIdList: selectedItemIdList,
-                    onTap: (value) {
+                    onTap: (value, index) {
                       setState(() {
                         if (selectedItemIdList.contains(value)) {
                           selectedItemIdList.remove(value);
                         } else {
                           selectedItemIdList.add(value);
+                        }
+                      });
+                      setState(() {
+                        if (_wk_count < 2 &&
+                            _color_wk[index] == false &&
+                            _total_players < 11) {
+                          _color_wk[index] = !_color_wk[index];
+                          _wk_count = _wk_count + 1;
+                          _total_players = _total_players + 1;
+                          _wk_selected.add(wicketkeepers[index]);
+                        } else if (_color_wk[index] == true) {
+                          _color_wk[index] = !_color_wk[index];
+                          _wk_count = _wk_count - 1;
+                          _total_players = _total_players - 1;
+                          _wk_selected.removeWhere(
+                              (item) => item == wicketkeepers[index]);
                         }
                       });
                     },
@@ -254,6 +307,37 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                           onTap: () {},
                         );
                       })
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 13.0),
+              width: double.infinity,
+              color: AppColors.greyED,
+              height: 70.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: SkipperButton(
+                      onPressed: () => {},
+                      buttonColor: AppColors.warmGrey,
+                      text: 'Team Preview',
+                    ),
+                  ),
+                  Expanded(
+                    child: SkipperButton(
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreen()),
+                        )
+                      },
+                      text: 'Continue',
+                    ),
+                  ),
                 ],
               ),
             )

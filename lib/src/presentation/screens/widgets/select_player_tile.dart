@@ -140,7 +140,7 @@ class SelectPlayerTile extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                onTap(position);
+                onTap(position, position);
               },
               child: isSelected!
                   ? Image.asset(

@@ -130,6 +130,24 @@ class SkipperText extends StatelessWidget {
             maxLines: maxLines,
             key: key);
 
+  SkipperText.textSmallBold(String text,
+      {Color? color,
+      TextAlign? textAlign,
+      bool? softwrap,
+      TextOverflow? overflow,
+      int? maxLines,
+      Key? keyText,
+      Key? key})
+      : this._(
+            text,
+            (c) => TextStyle(
+                color: color, fontSize: 12.0, fontWeight: FontWeight.w600),
+            textAlign: textAlign,
+            softwrap: softwrap,
+            overflow: overflow,
+            maxLines: maxLines,
+            key: key);
+
   SkipperText.textExtraSmall(String text,
       {Color? color,
       TextAlign? textAlign,

@@ -19,12 +19,11 @@ class PlayerListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: 9,
+        itemCount: items.length,
         itemBuilder: (ctx, index) {
           if (index == 0) {
             // return the header
             return Container(
-              margin: const EdgeInsets.only(bottom: 8.0),
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               color: const Color(0xfffff7ea),
               child: SkipperText.textSmall(
@@ -43,30 +42,34 @@ class PlayerListWidget extends StatelessWidget {
                 3: FlexColumnWidth(2),
               },
               children: [
-                TableRow(children: [
-                  // SELECTED BY
-                  Padding(
-                    padding: const EdgeInsets.only(left: 18.0),
-                    child: SkipperText.textSmall(
-                      "SELECTED BY",
-                      color: AppColors.brownishGrey,
-                      textAlign: TextAlign.left,
+                TableRow(
+                    decoration: const BoxDecoration(
+                      color: AppColors.white,
                     ),
-                  ),
-                  SkipperText.textSmall(
-                    "POINTS",
-                    color: AppColors.brownishGrey,
-                    textAlign: TextAlign.left,
-                  ),
+                    children: [
+                      // SELECTED BY
+                      Padding(
+                        padding: const EdgeInsets.only(left: 18.0),
+                        child: SkipperText.textSmall(
+                          "SELECTED BY",
+                          color: AppColors.brownishGrey,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      SkipperText.textSmall(
+                        "POINTS",
+                        color: AppColors.brownishGrey,
+                        textAlign: TextAlign.left,
+                      ),
 
-                  SkipperText.textSmall(
-                    "CREDITS",
-                    color: AppColors.brownishGrey,
-                    textAlign: TextAlign.left,
-                  ),
+                      SkipperText.textSmall(
+                        "CREDITS",
+                        color: AppColors.brownishGrey,
+                        textAlign: TextAlign.left,
+                      ),
 
-                  Container(),
-                ])
+                      Container(),
+                    ])
               ],
             );
           }
@@ -76,8 +79,8 @@ class PlayerListWidget extends StatelessWidget {
           return SelectPlayerTile(
             isSelected: isSelected,
             position: index + 1,
-            onTap: (val) {
-              onTap(val);
+            onTap: (val, pos) {
+              onTap(val, index);
             },
           );
         });

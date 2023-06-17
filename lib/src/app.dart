@@ -7,6 +7,7 @@ import 'locator.dart';
 import 'presentation/cubits/selectContest/select_contest_cubit.dart';
 import 'presentation/cubits/register/register_cubit.dart';
 import 'presentation/cubits/upcomingMatches/upcoming_matches_cubit.dart';
+import 'presentation/screens/save_team_screen.dart';
 import 'presentation/screens/splash_screen.dart';
 import 'resources/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -54,7 +55,7 @@ class App extends StatelessWidget {
                   theme: ThemeData(
                       primaryColor: AppColors.backgroundColor,
                       fontFamily: 'Graphik'),
-                  home: const SplashScreen(),
+                  home: const SaveTeamScreen(),
                 ),
               );
             });
