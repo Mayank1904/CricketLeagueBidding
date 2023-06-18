@@ -4,6 +4,7 @@ import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
+import 'widgets/player_icon.dart';
 
 class TeamPreview extends StatelessWidget {
   final List<String>? batsmen;
@@ -34,6 +35,7 @@ class TeamPreview extends StatelessWidget {
       body: Stack(
         children: [
           Container(
+            padding: const EdgeInsets.all(8.0),
             color: AppColors.backgroundColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -50,31 +52,6 @@ class TeamPreview extends StatelessWidget {
                     )
                   ],
                 ),
-                Container(
-                  width: 56,
-                  height: 24,
-                  decoration: const BoxDecoration(
-                    color: AppColors.yellow,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(44),
-                    ),
-                  ),
-                  child: SkipperText.bodyBold(
-                    'IND 6',
-                    color: AppColors.white,
-                  ),
-                ),
-                // Rectangle 2693
-                Container(
-                    width: 59,
-                    height: 12,
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.transparent, width: 0.0),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(44),
-                        ),
-                        color: const Color(0xff3c006d))),
                 Column(
                   children: [
                     SkipperText.textSmall(
@@ -84,7 +61,7 @@ class TeamPreview extends StatelessWidget {
                     SkipperText.titleBold(
                       '26.5',
                       color: AppColors.white,
-                    )
+                    ),
                   ],
                 )
               ],
@@ -92,7 +69,6 @@ class TeamPreview extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(top: 45.0),
-            constraints: const BoxConstraints.expand(),
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/ground.jpg"),
@@ -169,46 +145,6 @@ class TeamPreview extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class PlayerIcon extends StatelessWidget {
-  const PlayerIcon({
-    Key? key,
-    required this.player,
-    required this.i,
-    required this.playerType,
-  }) : super(key: key);
-
-  final List<String> player;
-  final int i;
-  final String playerType;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(5),
-          child: CircleAvatar(
-            backgroundImage: AssetImage('assets/images/$playerType.jpg'),
-            backgroundColor: Colors.white,
-            radius: 27,
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SkipperText.textSmall(
-            player[i],
-            color: AppColors.white,
-          ),
-        ),
-      ],
     );
   }
 }

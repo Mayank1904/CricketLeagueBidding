@@ -56,7 +56,25 @@ class App extends StatelessWidget {
                     theme: ThemeData(
                         primaryColor: AppColors.backgroundColor,
                         fontFamily: 'Graphik'),
-                    home: const SaveTeamScreen()),
+                    home: const TeamPreview(
+                      wicketkeeper: ['D. Conway', 'W Saha'],
+                      batsmen: [
+                        'R Gaikwad',
+                        'S Gill',
+                        'H Pandya',
+                        'M Ali',
+                        'M Pathirana',
+                        'Mayank',
+                        'Usjsk'
+                      ],
+                      allrounders: [
+                        'R Jadeja',
+                      ],
+                      bowlers: [
+                        'M Shami',
+                        'Rashid K',
+                      ],
+                    )),
               );
             });
           }),

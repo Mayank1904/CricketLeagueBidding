@@ -67,25 +67,27 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
         builder: (context, state) {
           return Stack(
             children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
-                    child: SkipperText.titleBold(
-                      "Choose your Captain and Vice Captain",
-                      color: AppColors.backgroundColor,
-                      textAlign: TextAlign.center,
+              Align(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: SkipperText.titleBold(
+                        "Choose your Captain and Vice Captain",
+                        color: AppColors.backgroundColor,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 15.0),
-                    child: SkipperText.textSmall(
-                      "Captain get 2X points, Vice Captain",
-                      color: AppColors.backgroundColor,
-                      textAlign: TextAlign.center,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 15.0),
+                      child: SkipperText.textSmall(
+                        "Captain get 2X points, Vice Captain",
+                        color: AppColors.backgroundColor,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Container(
                 margin:
@@ -290,63 +292,65 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                       .toList(),
                 ),
               ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 13.0),
-                width: double.infinity,
-                color: AppColors.greyED,
-                height: 70.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                      child: SkipperButton(
-                        onPressed: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TeamPreview(
-                                      wicketkeeper: ['D. Conway', 'W Saha'],
-                                      batsmen: [
-                                        'R Gaikwad',
-                                        'S Gill',
-                                        'H Pandya',
-                                        'M Ali',
-                                        'M Pathirana',
-                                        'Mayank',
-                                        'Usjsk'
-                                      ],
-                                      allrounders: [
-                                        'R Jadeja',
-                                      ],
-                                      bowlers: [
-                                        'M Shami',
-                                        'Rashid K',
-                                      ],
-                                    )),
-                          )
-                        },
-                        buttonColor: AppColors.warmGrey,
-                        text: 'Team Preview',
-                      ),
-                    ),
-                    Expanded(
-                      child: SkipperButton(
-                        onPressed: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TeamPreview()),
-                          )
-                        },
-                        text: 'Continue',
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              // Positioned(
+              //   bottom: 0,
+              //   child: Container(
+              //     padding: const EdgeInsets.symmetric(
+              //         horizontal: 20.0, vertical: 13.0),
+              //     width: double.infinity,
+              //     color: AppColors.greyED,
+              //     height: 70.0,
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       mainAxisSize: MainAxisSize.min,
+              //       children: [
+              //         Expanded(
+              //           child: SkipperButton(
+              //             onPressed: () => {
+              //               Navigator.push(
+              //                 context,
+              //                 MaterialPageRoute(
+              //                     builder: (context) => const TeamPreview(
+              //                           wicketkeeper: ['D. Conway', 'W Saha'],
+              //                           batsmen: [
+              //                             'R Gaikwad',
+              //                             'S Gill',
+              //                             'H Pandya',
+              //                             'M Ali',
+              //                             'M Pathirana',
+              //                             'Mayank',
+              //                             'Usjsk'
+              //                           ],
+              //                           allrounders: [
+              //                             'R Jadeja',
+              //                           ],
+              //                           bowlers: [
+              //                             'M Shami',
+              //                             'Rashid K',
+              //                           ],
+              //                         )),
+              //               )
+              //             },
+              //             buttonColor: AppColors.warmGrey,
+              //             text: 'Team Preview',
+              //           ),
+              //         ),
+              //         Expanded(
+              //           child: SkipperButton(
+              //             onPressed: () => {
+              //               Navigator.push(
+              //                 context,
+              //                 MaterialPageRoute(
+              //                     builder: (context) => const TeamPreview()),
+              //               )
+              //             },
+              //             text: 'Continue',
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // )
             ],
           );
         },
