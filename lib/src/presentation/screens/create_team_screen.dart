@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
 import 'home_screen.dart';
+import 'save_team_screen.dart';
 import 'team_preview.dart';
 import 'widgets/player_list_widget.dart';
 import 'widgets/select_player_tile.dart';
@@ -358,7 +359,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomeScreen()),
+                              builder: (context) => const SaveTeamScreen()),
                         )
                       },
                       text: 'Continue',

@@ -212,7 +212,12 @@ class _SelectMatchScreenState extends State<SelectMatchScreen> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const CreateTeamScreen()));
+                                                        CreateTeamScreen(
+                                                          team1: widget.card
+                                                              ?.teams.a.name,
+                                                          team2: widget.card
+                                                              ?.teams.b.name,
+                                                        )));
                                           },
                                           child: const Text(
                                             "Create team",
