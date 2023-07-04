@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../../domain/models/requests/create_team_request.dart';
 import '../../../domain/models/requests/user_auth_request.dart';
 import '../../../domain/models/responses/contest_response.dart';
+import '../../../domain/models/responses/create_team_response.dart';
 import '../../../domain/models/responses/upcoming_matches_response.dart';
 import '../../../domain/models/responses/user_auth_response.dart';
 import '../../../utils/constants/strings.dart';
@@ -34,4 +36,9 @@ abstract class SkipperApiService {
 
   @GET('/v1/contest')
   Future<HttpResponse<ContestResponse>> contests();
+
+  @POST('/v1/create-team')
+  Future<HttpResponse<CreateTeamResponse>> createTeam({
+    @Body() CreateTeamRequest? request,
+  });
 }

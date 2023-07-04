@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
-import 'home_screen.dart';
 import 'save_team_screen.dart';
 import 'team_preview.dart';
 import 'widgets/player_list_widget.dart';
@@ -26,20 +25,20 @@ class CreateTeamScreen extends StatefulWidget {
 
 class _CreateTeamScreenState extends State<CreateTeamScreen>
     with TickerProviderStateMixin {
-  late List<bool> _color_batsmen = List.filled(30, false, growable: false);
-  late List<bool> _color_bowler = List.filled(30, false, growable: false);
-  late List<bool> _color_wk = List.filled(30, false, growable: false);
-  late List<bool> _color_allrounder = List.filled(30, false, growable: false);
+  late final List<bool> _color_batsmen = List.filled(30, false);
+  late final List<bool> _color_bowler = List.filled(30, false);
+  late final List<bool> _color_wk = List.filled(30, false);
+  late final List<bool> _color_allrounder = List.filled(30, false);
 
-  late List<String> _batsmen_selected = List.filled(0, '', growable: true);
-  late List<String> _bowler_selected = List.filled(0, '', growable: true);
-  late List<String> _wk_selected = List.filled(0, '', growable: true);
-  late List<String> _allrounder_selected = List.filled(0, '', growable: true);
+  late final List<String> _batsmen_selected = List.filled(0, '', growable: true);
+  late final List<String> _bowler_selected = List.filled(0, '', growable: true);
+  late final List<String> _wk_selected = List.filled(0, '', growable: true);
+  late final List<String> _allrounder_selected = List.filled(0, '', growable: true);
 
   late int _wk_count = 0;
-  late int _bowler_count = 0;
-  late int _batsmen_count = 0;
-  late int _allrounder_count = 0;
+  late final int _bowler_count = 0;
+  late final int _batsmen_count = 0;
+  late final int _allrounder_count = 0;
   late int _total_players = 0;
 
   late TabController tabController;

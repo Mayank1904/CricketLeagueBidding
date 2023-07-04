@@ -1,6 +1,4 @@
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../resources/constants/colors.dart';
@@ -10,6 +8,7 @@ import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
 import '../cubits/register/register_cubit.dart';
 import 'team_preview.dart';
+import 'widgets/save_team_datatable_widget.dart';
 
 class SaveTeamScreen extends StatefulWidget {
   final List<String>? batsmen;
@@ -20,34 +19,27 @@ class SaveTeamScreen extends StatefulWidget {
   final String? team1;
   final String? team2;
   final String? start_time;
-  const SaveTeamScreen(
-      {super.key,
-      this.batsmen,
-      this.wicketkeeper,
-      this.bowlers,
-      this.allrounders,
-      this.match_id,
-      this.team1,
-      this.team2,
-      this.start_time});
+
+  const SaveTeamScreen({
+    super.key,
+    this.batsmen,
+    this.wicketkeeper,
+    this.bowlers,
+    this.allrounders,
+    this.match_id,
+    this.team1,
+    this.team2,
+    this.start_time,
+  });
 
   @override
   State<SaveTeamScreen> createState() => _SaveTeamScreenState();
 }
 
 class _SaveTeamScreenState extends State<SaveTeamScreen> {
-  final tempList = [
-    1,
-    2,
-    3,
-    4,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-  ];
+  int? selectedCaptainPosition;
+  int? selectedViceCaptainPosition;
+
   @override
   Widget build(BuildContext context) {
     return SkipperScaffold(
@@ -89,268 +81,87 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                   ],
                 ),
               ),
-              Container(
-                margin:
-                    const EdgeInsets.only(left: 18.0, right: 18.0, top: 50.0),
-                child: DataTable2(
-                  sortColumnIndex: 1,
-                  columnSpacing: 10.0,
-                  isVerticalScrollBarVisible: false,
-                  isHorizontalScrollBarVisible: false,
-                  dataRowHeight: 70.0,
-                  columns: <DataColumn>[
-                    DataColumn2(
-                      fixedWidth: 80,
-                      label: SkipperText.textSmall(
-                        'TYPE',
-                        color: AppColors.brownishGrey,
+              Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                          left: 18.0, right: 18.0, top: 50.0),
+                      child: DatatableWidget(
+                        selectedCaptainPosition: selectedCaptainPosition,
+                        selectedViceCaptainPosition:
+                            selectedViceCaptainPosition,
+                        onCaptainSelected: (pos) {
+                          setState(() {
+                            selectedCaptainPosition = pos;
+                          });
+                        },
+                        onViceCaptainSelected: (pos) {
+                          setState(() {
+                            selectedViceCaptainPosition = pos;
+                          });
+                        },
                       ),
                     ),
-                    DataColumn2(
-                      fixedWidth: 100,
-                      label: Flexible(
-                        child: SkipperText.textSmall(
-                          'POINTS',
-                          color: AppColors.brownishGrey,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 13.0),
+                    width: double.infinity,
+                    color: AppColors.greyED,
+                    height: 70.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: SkipperButton(
+                            onPressed: () => {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const TeamPreview(
+                                          wicketkeeper: ['D. Conway', 'W Saha'],
+                                          batsmen: [
+                                            'R Gaikwad',
+                                            'S Gill',
+                                            'H Pandya',
+                                            'M Ali',
+                                            'M Pathirana',
+                                            'Mayank',
+                                            'Usjsk'
+                                          ],
+                                          allrounders: [
+                                            'R Jadeja',
+                                          ],
+                                          bowlers: [
+                                            'M Shami',
+                                            'Rashid K',
+                                          ],
+                                        )),
+                              )
+                            },
+                            buttonColor: AppColors.warmGrey,
+                            text: 'Team Preview',
+                          ),
                         ),
-                      ),
+                        Expanded(
+                          child: SkipperButton(
+                            onPressed: () => {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => const TeamPreview()),
+                              // )
+                            },
+                            text: 'Continue',
+                          ),
+                        ),
+                      ],
                     ),
-                    DataColumn2(
-                      fixedWidth: 60.0,
-                      label: Flexible(
-                        child: SkipperText.textSmall(
-                          '% C BY',
-                          color: AppColors.brownishGrey,
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Flexible(
-                        child: SkipperText.textSmall(
-                          '% VC BY',
-                          color: AppColors.brownishGrey,
-                        ),
-                      ),
-                    ),
-                  ],
-                  rows: tempList
-                      .map<DataRow>(
-                        (e) => DataRow(
-                          cells: [
-                            DataCell(
-                              Row(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                            left: 2.0, bottom: 2.0),
-                                        child: Image.asset(
-                                          'assets/images/player.jpg',
-                                        ),
-                                      ),
-                                      Positioned(
-                                        bottom: 0,
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 13,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(2),
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                  color: Color(0x29000000),
-                                                  offset: Offset(0, 3),
-                                                  blurRadius: 25.0)
-                                            ],
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child:
-                                                    SkipperText.textExtraSmall(
-                                                  'MUM',
-                                                  color: AppColors.black,
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                color: AppColors.black,
-                                                child:
-                                                    SkipperText.textExtraSmall(
-                                                  'WK',
-                                                  color: AppColors.white,
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            DataCell(
-                              Flexible(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SkipperText.textSmallBold("Alyssa Healy"),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 8.0),
-                                        child: SkipperText.textSmall("116 pts"),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            DataCell(
-                              Flexible(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(18.0)),
-                                          border: Border.all(
-                                            color: AppColors.greyCB,
-                                          ),
-                                        ),
-                                        child: const CircleAvatar(
-                                          backgroundColor: AppColors.white,
-                                          foregroundColor: AppColors.black,
-                                          radius: 18.0,
-                                          child: Text('C'),
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      SkipperText.textExtraSmall(
-                                        "56%",
-                                        color: AppColors.brownishGrey,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            DataCell(
-                              Flexible(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(18.0)),
-                                          border: Border.all(
-                                            color: AppColors.greyCB,
-                                          ),
-                                        ),
-                                        child: const CircleAvatar(
-                                          backgroundColor: AppColors.white,
-                                          foregroundColor: AppColors.black,
-                                          radius: 18.0,
-                                          child: Text('VC'),
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      SkipperText.textExtraSmall(
-                                        "56%",
-                                        color: AppColors.brownishGrey,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                      .toList(),
-                ),
+                  ),
+                ],
               ),
-              // Positioned(
-              //   bottom: 0,
-              //   child: Container(
-              //     padding: const EdgeInsets.symmetric(
-              //         horizontal: 20.0, vertical: 13.0),
-              //     width: double.infinity,
-              //     color: AppColors.greyED,
-              //     height: 70.0,
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //       mainAxisSize: MainAxisSize.min,
-              //       children: [
-              //         Expanded(
-              //           child: SkipperButton(
-              //             onPressed: () => {
-              //               Navigator.push(
-              //                 context,
-              //                 MaterialPageRoute(
-              //                     builder: (context) => const TeamPreview(
-              //                           wicketkeeper: ['D. Conway', 'W Saha'],
-              //                           batsmen: [
-              //                             'R Gaikwad',
-              //                             'S Gill',
-              //                             'H Pandya',
-              //                             'M Ali',
-              //                             'M Pathirana',
-              //                             'Mayank',
-              //                             'Usjsk'
-              //                           ],
-              //                           allrounders: [
-              //                             'R Jadeja',
-              //                           ],
-              //                           bowlers: [
-              //                             'M Shami',
-              //                             'Rashid K',
-              //                           ],
-              //                         )),
-              //               )
-              //             },
-              //             buttonColor: AppColors.warmGrey,
-              //             text: 'Team Preview',
-              //           ),
-              //         ),
-              //         Expanded(
-              //           child: SkipperButton(
-              //             onPressed: () => {
-              //               Navigator.push(
-              //                 context,
-              //                 MaterialPageRoute(
-              //                     builder: (context) => const TeamPreview()),
-              //               )
-              //             },
-              //             text: 'Continue',
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // )
             ],
           );
         },

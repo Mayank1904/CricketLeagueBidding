@@ -1,6 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../../l10n/support_locale.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../config/router/app_router.dart';
 import '../../resources/constants/colors.dart';
@@ -17,6 +19,8 @@ class SplashScreen extends StatelessWidget {
       splashIconSize: 160.0,
       splash: 'assets/images/skipper_icon.png',
       nextScreen: MaterialApp.router(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: L10n.support,
         routeInformationParser: appRouter.defaultRouteParser(),
         routerDelegate: appRouter.delegate(),
       ),

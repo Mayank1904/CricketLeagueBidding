@@ -59,8 +59,7 @@ class SelectPlayerTile extends StatelessWidget {
                               BoxShadow(
                                   color: Color(0x29000000),
                                   offset: Offset(0, 3),
-                                  blurRadius: 25.0,
-                                  spreadRadius: 0)
+                                  blurRadius: 25.0)
                             ],
                           ),
                           child: SkipperText.textSmall(
