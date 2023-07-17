@@ -119,8 +119,7 @@ class RegisterCubit extends BaseCubit<RegisterState, UserAuthResponse>
 
     await run(() async {
       emit(state.copyWith(
-        isLoading: true,
-      ));
+          isLoading: true, isApiSuccess: false, isUserLogin: false));
       var userReq = {};
       userReq["mobileNo"] = mobileNo;
       userReq["otp"] = otp;

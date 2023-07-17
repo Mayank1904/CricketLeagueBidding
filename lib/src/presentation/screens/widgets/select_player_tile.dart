@@ -5,16 +5,21 @@ import '../../components/skipper_text.dart';
 import '../../../resources/constants/text_styles.dart';
 
 class SelectPlayerTile extends StatelessWidget {
-  const SelectPlayerTile({super.key});
+  final int? position;
+  final Function onTap;
+  final bool? isSelected;
+  final List<int>? selectedItemIdList;
+  const SelectPlayerTile(
+      {super.key,
+      this.selectedItemIdList,
+      required this.onTap,
+      this.isSelected,
+      this.position});
 
   @override
   Widget build(BuildContext context) {
     return Table(
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      border: TableBorder.all(
-        color: AppColors.white,
-        width: 2.0,
-      ),
       columnWidths: const {
         0: FlexColumnWidth(4.5),
         1: FlexColumnWidth(1.5),
@@ -23,6 +28,9 @@ class SelectPlayerTile extends StatelessWidget {
       },
       children: [
         TableRow(
+          decoration: BoxDecoration(
+            color: isSelected == true ? AppColors.orange : AppColors.white,
+          ),
           children: [
             Padding(
               padding:
@@ -51,8 +59,7 @@ class SelectPlayerTile extends StatelessWidget {
                               BoxShadow(
                                   color: Color(0x29000000),
                                   offset: Offset(0, 3),
-                                  blurRadius: 25.0,
-                                  spreadRadius: 0)
+                                  blurRadius: 25.0)
                             ],
                           ),
                           child: SkipperText.textSmall(
@@ -130,10 +137,21 @@ class SelectPlayerTile extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            Image.asset(
-              'assets/images/player.jpg',
-              width: 21.0,
-              height: 21.0,
+            InkWell(
+              onTap: () {
+                onTap(position, position);
+              },
+              child: isSelected!
+                  ? Image.asset(
+                      'assets/images/minus.png',
+                      width: 21.0,
+                      height: 21.0,
+                    )
+                  : Image.asset(
+                      'assets/images/plus.png',
+                      width: 21.0,
+                      height: 21.0,
+                    ),
             ),
           ],
         ),

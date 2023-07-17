@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../tabs/tabspage.dart';
 
 class SideMenu extends StatefulWidget {
+  const SideMenu({super.key});
+
   @override
   _SideMenuState createState() => _SideMenuState();
 }

@@ -15,25 +15,114 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    RegisterRoute.name: (routeData) {
+    HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const RegisterScreen(),
+        child: const HomeScreen(),
       );
-    }
+    },
+    LoginRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LoginScreen(),
+      );
+    },
+    ProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfileScreen(),
+      );
+    },
+    SelectMatchRoute.name: (routeData) {
+      final args = routeData.argsAs<SelectMatchRouteArgs>(
+          orElse: () => const SelectMatchRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SelectMatchScreen(
+          key: args.key,
+          card: args.card,
+        ),
+      );
+    },
   };
 }
 
 /// generated route for
-/// [RegisterScreen]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute({List<PageRouteInfo>? children})
+/// [HomeScreen]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
       : super(
-          RegisterRoute.name,
+          HomeRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'RegisterRoute';
+  static const String name = 'HomeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LoginScreen]
+class LoginRoute extends PageRouteInfo<void> {
+  const LoginRoute({List<PageRouteInfo>? children})
+      : super(
+          LoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProfileScreen]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SelectMatchScreen]
+class SelectMatchRoute extends PageRouteInfo<SelectMatchRouteArgs> {
+  SelectMatchRoute({
+    Key? key,
+    Cards? card,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SelectMatchRoute.name,
+          args: SelectMatchRouteArgs(
+            key: key,
+            card: card,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectMatchRoute';
+
+  static const PageInfo<SelectMatchRouteArgs> page =
+      PageInfo<SelectMatchRouteArgs>(name);
+}
+
+class SelectMatchRouteArgs {
+  const SelectMatchRouteArgs({
+    this.key,
+    this.card,
+  });
+
+  final Key? key;
+
+  final Cards? card;
+
+  @override
+  String toString() {
+    return 'SelectMatchRouteArgs{key: $key, card: $card}';
+  }
 }

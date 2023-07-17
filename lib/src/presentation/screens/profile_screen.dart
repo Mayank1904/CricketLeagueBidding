@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/text_field_widget.dart';
@@ -7,6 +8,7 @@ import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
 import 'home_screen.dart';
 
+@RoutePage()
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 

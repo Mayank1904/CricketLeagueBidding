@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
-Widget chip(String label, Color color) {
+import '../../../resources/constants/colors.dart';
+
+Widget chip(String label, bool isSelected) {
   // Use FilterChip for filteration
-  return ActionChip(
+  return ChoiceChip(
+    selected: isSelected,
     labelPadding: const EdgeInsets.all(5.0),
     label: Text(
       label,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 12.0,
-        color: Colors.white,
+        color: isSelected ? Colors.black : AppColors.white,
       ),
     ),
-    backgroundColor: color,
+    selectedColor: AppColors.greyF5,
+    disabledColor: AppColors.yellow,
+    backgroundColor: AppColors.transparent,
     elevation: 6.0,
-    shadowColor: Colors.grey[60],
-    onPressed: () {},
+    onSelected: (selected) {},
   );
 }
