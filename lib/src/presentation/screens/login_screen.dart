@@ -1,19 +1,18 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:oktoast/oktoast.dart';
+
 import '../../config/router/app_router.dart';
+import '../../resources/constants/colors.dart';
+import '../components/skipper_app_bar.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
 import '../components/text_field_widget.dart';
 import '../cubits/register/register_cubit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../resources/constants/colors.dart';
-import '../components/skipper_app_bar.dart';
-import 'profile_screen.dart';
 import 'widgets/loading_dialog.dart';
 import 'widgets/otp_widget.dart';
 
@@ -39,7 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     loginCubit = BlocProvider.of<RegisterCubit>(context);
     final mobileInputController = TextEditingController();
-    late AlertDialog? alertDialog;
     return SkipperScaffold(
       appBar: SkipperAppbar(
         title: AppLocalizations.of(context).logIn,
@@ -58,14 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
             }
             if (state.isOtpVerified ?? false) {
               context.router.push(const ProfileRoute());
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const ProfileScreen()),
-              // );
             }
           } else if (state.isApiError ?? false) {
             LoadingDialog.hide(context);
-
             showToast("Something went wrong");
             loginCubit.initState();
           }

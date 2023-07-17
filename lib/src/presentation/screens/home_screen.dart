@@ -113,34 +113,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               textAlign: TextAlign.left,
                               color: AppColors.white,
                             )),
-                        RefreshIndicator(
-                          color: AppColors.yellow,
-                          onRefresh: () {
-                            return Future.delayed(const Duration(seconds: 1),
-                                () {
-                              upcomingMatchesCubit.loadUpcomingMatchesList();
-                            });
-                          },
-                          child: ListView.builder(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: state.upcomingMatchesList?.length,
-                              itemBuilder: (ctx, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    ctx.router.push(SelectMatchRoute(
-                                        card:
-                                            state.upcomingMatchesList![index]));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10.0, left: 20.0, right: 20.0),
-                                    child: UpcomingMatchTile(
-                                        state.upcomingMatchesList![index]),
-                                  ),
-                                );
-                              }),
-                        )
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: state.upcomingMatchesList?.length,
+                            itemBuilder: (ctx, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  ctx.router.push(SelectMatchRoute(
+                                      card: state.upcomingMatchesList![index]));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10.0, left: 20.0, right: 20.0),
+                                  child: UpcomingMatchTile(
+                                      state.upcomingMatchesList![index]),
+                                ),
+                              );
+                            })
                       ],
                     ),
                   ),

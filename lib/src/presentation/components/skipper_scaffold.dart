@@ -26,9 +26,7 @@ class SkipperScaffold extends StatelessWidget {
         key: scaffoldKey,
         body: body != null
             ? SafeArea(
-                child: Expanded(
-                  child: body!,
-                ),
+                child: body!,
               )
             : body!);
   }

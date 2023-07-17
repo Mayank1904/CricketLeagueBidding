@@ -98,86 +98,84 @@ class ContestTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
                 left: 12.0, right: 12.0, top: 8.0, bottom: 8.0),
-            child: Expanded(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SkipperText.textSmall(
-                        "Prize Pool",
-                        color: AppColors.brownishGrey,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SkipperText.textSmall(
+                      "Prize Pool",
+                      color: AppColors.brownishGrey,
+                    ),
+                    SkipperText.textSmall(
+                      "Entry",
+                      color: AppColors.brownishGrey,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      contest.prizepool,
+                      style: const TextStyle(
+                        fontFamily: 'Graphik',
+                        color: Color(0xff000000),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
                       ),
-                      SkipperText.textSmall(
-                        "Entry",
-                        color: AppColors.brownishGrey,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 2.0,
+                        horizontal: 17.0,
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        contest.prizepool,
+                      decoration: BoxDecoration(
+                          color: const Color(0xffc1a621),
+                          borderRadius: BorderRadius.circular(4)),
+                      child: Text(
+                        "₹${contest.enteryfee}",
                         style: const TextStyle(
                           fontFamily: 'Graphik',
-                          color: Color(0xff000000),
-                          fontSize: 18,
+                          color: Color(0xffffffff),
+                          fontSize: 14,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.normal,
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 2.0,
-                          horizontal: 17.0,
-                        ),
-                        decoration: BoxDecoration(
-                            color: const Color(0xffc1a621),
-                            borderRadius: BorderRadius.circular(4)),
-                        child: Text(
-                          "₹${contest.enteryfee}",
-                          style: const TextStyle(
-                            fontFamily: 'Graphik',
-                            color: Color(0xffffffff),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            fontStyle: FontStyle.normal,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: const LinearProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation(Color(0xffc1a621)),
-                        backgroundColor: Color(0xfffce0df),
-                        value: 0.08,
-                        minHeight: 4.0,
-                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: const LinearProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(Color(0xffc1a621)),
+                      backgroundColor: Color(0xfffce0df),
+                      value: 0.08,
+                      minHeight: 4.0,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SkipperText.textSmall(
-                        "${contest.spotsleft} spots left",
-                        color: AppColors.darkYellow,
-                      ),
-                      SkipperText.textSmall(
-                        "${contest.totalspots} spots",
-                        color: AppColors.brownishGrey,
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SkipperText.textSmall(
+                      "${contest.spotsleft} spots left",
+                      color: AppColors.darkYellow,
+                    ),
+                    SkipperText.textSmall(
+                      "${contest.totalspots} spots",
+                      color: AppColors.brownishGrey,
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ],

@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:sms_autofill/sms_autofill.dart';
@@ -47,12 +48,12 @@ class OtpWidget extends StatelessWidget {
             if (code!.length == otpCode!.length) {
               FocusScope.of(context).requestFocus(FocusNode());
             }
-            // if (code?.length == otpCode?.length) {
-            //   Timer(const Duration(seconds: 5), () {
-            //     // <-- Delay here
-            //     onSubmitted!(code);
-            //   });
-            // }
+            if (code.length == otpCode?.length) {
+              Timer(const Duration(seconds: 3), () {
+                // <-- Delay here
+                onSubmitted!(code);
+              });
+            }
           },
           onCodeSubmitted: (val) {
             onSubmitted!(val);
