@@ -18,44 +18,42 @@ class DatatableRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(18.0)),
-                border: Border.all(
-                  color: isCaptainSelected == false
-                      ? AppColors.greyCB
-                      : AppColors.blackTwo,
-                ),
-              ),
-              child: GestureDetector(
-                onTap: () {
-                  onCaptainSelected!();
-                },
-                child: CircleAvatar(
-                  backgroundColor: isCaptainSelected == false
-                      ? AppColors.white
-                      : AppColors.blackTwo,
-                  foregroundColor: isCaptainSelected == false
-                      ? AppColors.blackTwo
-                      : AppColors.white,
-                  radius: 18.0,
-                  child: SkipperText.titleBold(
-                      isCaptainSelected == false ? 'C' : '2X'),
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(18.0)),
+              border: Border.all(
+                color: isCaptainSelected == false
+                    ? AppColors.greyCB
+                    : AppColors.blackTwo,
               ),
             ),
-            const Spacer(),
-            SkipperText.textExtraSmall(
-              "56%",
-              color: AppColors.brownishGrey,
-            )
-          ],
-        ),
+            child: GestureDetector(
+              onTap: () {
+                onCaptainSelected!();
+              },
+              child: CircleAvatar(
+                backgroundColor: isCaptainSelected == false
+                    ? AppColors.white
+                    : AppColors.blackTwo,
+                foregroundColor: isCaptainSelected == false
+                    ? AppColors.blackTwo
+                    : AppColors.white,
+                radius: 18.0,
+                child: SkipperText.titleBold(
+                    isCaptainSelected == false ? 'C' : '2X'),
+              ),
+            ),
+          ),
+          const Spacer(),
+          SkipperText.textExtraSmall(
+            "56%",
+            color: AppColors.brownishGrey,
+          )
+        ],
       ),
     );
   }

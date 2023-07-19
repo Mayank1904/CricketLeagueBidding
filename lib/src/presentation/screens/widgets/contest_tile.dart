@@ -23,7 +23,7 @@ class ContestTile extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 320,
+            width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.only(
                 left: 12.0, right: 12.0, top: 5.0, bottom: 5.0),
             decoration: const BoxDecoration(

@@ -54,28 +54,22 @@ class DatatableWidget extends StatelessWidget {
         ),
         DataColumn2(
           fixedWidth: 100,
-          label: Flexible(
-            child: SkipperText.textSmall(
-              'POINTS',
-              color: AppColors.brownishGrey,
-            ),
+          label: SkipperText.textSmall(
+            'POINTS',
+            color: AppColors.brownishGrey,
           ),
         ),
         DataColumn2(
           fixedWidth: 60.0,
-          label: Flexible(
-            child: SkipperText.textSmall(
-              '% C BY',
-              color: AppColors.brownishGrey,
-            ),
+          label: SkipperText.textSmall(
+            '% C BY',
+            color: AppColors.brownishGrey,
           ),
         ),
-        DataColumn(
-          label: Flexible(
-            child: SkipperText.textSmall(
-              '% VC BY',
-              color: AppColors.brownishGrey,
-            ),
+        DataColumn2(
+          label: SkipperText.textSmall(
+            '% VC BY',
+            color: AppColors.brownishGrey,
           ),
         ),
       ],
@@ -141,20 +135,18 @@ class DatatableWidget extends StatelessWidget {
                   ),
                 ),
                 DataCell(
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SkipperText.textSmallBold("Alyssa Healy"),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: SkipperText.textSmall("116 pts"),
-                          ),
-                        ],
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SkipperText.textSmallBold("Alyssa Healy"),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: SkipperText.textSmall("116 pts"),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -168,33 +160,31 @@ class DatatableWidget extends StatelessWidget {
                   ),
                 ),
                 DataCell(
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(18.0)),
-                              border: Border.all(
-                                color: AppColors.greyCB,
-                              ),
-                            ),
-                            child: const CircleAvatar(
-                              backgroundColor: AppColors.white,
-                              foregroundColor: AppColors.black,
-                              radius: 18.0,
-                              child: Text('VC'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(18.0)),
+                            border: Border.all(
+                              color: AppColors.greyCB,
                             ),
                           ),
-                          const Spacer(),
-                          SkipperText.textExtraSmall(
-                            "56%",
-                            color: AppColors.brownishGrey,
-                          )
-                        ],
-                      ),
+                          child: const CircleAvatar(
+                            backgroundColor: AppColors.white,
+                            foregroundColor: AppColors.black,
+                            radius: 18.0,
+                            child: Text('VC'),
+                          ),
+                        ),
+                        const Spacer(),
+                        SkipperText.textExtraSmall(
+                          "56%",
+                          color: AppColors.brownishGrey,
+                        )
+                      ],
                     ),
                   ),
                 ),
