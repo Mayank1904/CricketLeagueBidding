@@ -4,9 +4,22 @@ import 'package:flutter/material.dart';
 import '../../../resources/constants/colors.dart';
 import '../../../utils/extensions/extensions.dart';
 import '../../components/skipper_text.dart';
-import 'datatable_row_widget.dart';
 
-class DatatableWidget extends StatelessWidget {
+class Player {
+  String name;
+  String role;
+  bool isCaptain;
+  bool isViceCaptain;
+
+  Player(this.name, this.role, this.isCaptain, this.isViceCaptain);
+}
+
+enum SortOrder {
+  ascending,
+  descending,
+}
+
+class DatatableWidget extends StatefulWidget {
   final Function? onCaptainSelected;
   final Function? onViceCaptainSelected;
   final bool? isCaptainSelected;
@@ -25,35 +38,83 @@ class DatatableWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<DatatableWidget> createState() => _DatatableWidgetState();
+}
+
+class _DatatableWidgetState extends State<DatatableWidget> {
+  final List<Player> players = [
+    Player('Player 1', 'Batsman', false, false),
+    Player('Player 2', 'Bowler', false, false),
+    Player('Player 3', 'All-Rounder', false, false),
+    Player('Player 1', 'Batsman', false, false),
+    Player('Player 2', 'Bowler', false, false),
+    Player('Player 3', 'All-Rounder', false, false),
+    Player('Player 1', 'Batsman', false, false),
+    Player('Player 2', 'Bowler', false, false),
+    Player('Player 3', 'All-Rounder', false, false),
+    Player('Player 3', 'All-Rounder', false, false),
+    // Add more players as needed
+  ];
+
+  int _sortColumnIndex = 0;
+  SortOrder _sortOrder = SortOrder.ascending;
+
+  void _sort<T>(Comparable<T> Function(Player player) getField, int columnIndex,
+      bool ascending) {
+    setState(() {
+      _sortColumnIndex = columnIndex;
+      _sortOrder = ascending ? SortOrder.ascending : SortOrder.descending;
+      players.sort((a, b) {
+        final aValue = getField(a);
+        final bValue = getField(b);
+        return ascending
+            ? Comparable.compare(aValue, bValue)
+            : Comparable.compare(bValue, aValue);
+      });
+    });
+  }
+
+  void _selectCaptain(int index) {
+    setState(() {
+      for (var i = 0; i < players.length; i++) {
+        players[i].isCaptain = (i == index);
+        if (players[i].isCaptain) {
+          players[i].isViceCaptain = false;
+        }
+      }
+    });
+  }
+
+  void _selectViceCaptain(int index) {
+    setState(() {
+      for (var i = 0; i < players.length; i++) {
+        players[i].isViceCaptain = (i == index);
+        if (players[i].isViceCaptain) {
+          players[i].isCaptain = false;
+        }
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final tempList = [
-      1,
-      2,
-      3,
-      4,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-    ];
     return DataTable2(
-      sortColumnIndex: 1,
-      columnSpacing: 10.0,
+      sortAscending: _sortOrder == SortOrder.ascending,
+      sortColumnIndex: _sortColumnIndex,
+      columnSpacing: 5.0,
       isVerticalScrollBarVisible: false,
       isHorizontalScrollBarVisible: false,
       dataRowHeight: 70.0,
-      columns: <DataColumn>[
+      columns: <DataColumn2>[
         DataColumn2(
-          fixedWidth: 80,
+          fixedWidth: 60,
           label: SkipperText.textSmall(
             'TYPE',
             color: AppColors.brownishGrey,
           ),
         ),
         DataColumn2(
-          fixedWidth: 100,
+          fixedWidth: 70,
           label: SkipperText.textSmall(
             'POINTS',
             color: AppColors.brownishGrey,
@@ -67,15 +128,16 @@ class DatatableWidget extends StatelessWidget {
           ),
         ),
         DataColumn2(
+          fixedWidth: 60.0,
           label: SkipperText.textSmall(
             '% VC BY',
             color: AppColors.brownishGrey,
           ),
         ),
       ],
-      rows: tempList
+      rows: players
           .mapIndexed<DataRow>(
-            (e, i) => DataRow(
+            (player, i) => DataRow(
               cells: [
                 DataCell(
                   Row(
@@ -151,15 +213,6 @@ class DatatableWidget extends StatelessWidget {
                   ),
                 ),
                 DataCell(
-                  DatatableRowWidget(
-                    isCaptainSelected: isCaptainSelected,
-                    isViceCaptainSelected: isViceCaptainSelected,
-                    onCaptainSelected: () {
-                      onCaptainSelected!(i);
-                    },
-                  ),
-                ),
-                DataCell(
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Column(
@@ -169,14 +222,79 @@ class DatatableWidget extends StatelessWidget {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(18.0)),
                             border: Border.all(
-                              color: AppColors.greyCB,
+                              color: player.isCaptain == false
+                                  ? AppColors.greyCB
+                                  : AppColors.blackTwo,
                             ),
                           ),
-                          child: const CircleAvatar(
-                            backgroundColor: AppColors.white,
-                            foregroundColor: AppColors.black,
-                            radius: 18.0,
-                            child: Text('VC'),
+                          child: GestureDetector(
+                            onTap: () =>
+                                _selectCaptain(players.indexOf(player)),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  strokeAlign: BorderSide.strokeAlignOutside,
+                                  color: player.isCaptain
+                                      ? AppColors.blackTwo
+                                      : AppColors.greyCB,
+                                ),
+                              ),
+                              child: CircleAvatar(
+                                backgroundColor: player.isCaptain == false
+                                    ? AppColors.white
+                                    : AppColors.blackTwo,
+                                radius: 17.5,
+                                child: SkipperText.titleBold(
+                                    color: player.isCaptain
+                                        ? AppColors.white
+                                        : AppColors.blackTwo,
+                                    player.isCaptain == false ? 'C' : '2X'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        SkipperText.textExtraSmall(
+                          "56%",
+                          color: AppColors.brownishGrey,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                DataCell(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              strokeAlign: BorderSide.strokeAlignOutside,
+                              color: player.isViceCaptain
+                                  ? AppColors.blackTwo
+                                  : AppColors.greyCB,
+                            ),
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              _selectViceCaptain(players.indexOf(player));
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: player.isViceCaptain == false
+                                  ? AppColors.white
+                                  : AppColors.blackTwo,
+                              foregroundColor: player.isViceCaptain == false
+                                  ? AppColors.blackTwo
+                                  : AppColors.white,
+                              radius: 18.0,
+                              child: SkipperText.titleBold(
+                                  player.isViceCaptain == false
+                                      ? 'VC'
+                                      : '1.5X'),
+                            ),
                           ),
                         ),
                         const Spacer(),

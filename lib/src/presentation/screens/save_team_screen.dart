@@ -59,32 +59,33 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
         builder: (context, state) {
           return Stack(
             children: [
-              Align(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: SkipperText.titleBold(
-                        "Choose your Captain and Vice Captain",
-                        color: AppColors.backgroundColor,
-                        textAlign: TextAlign.center,
-                      ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: SkipperText.titleBold(
+                      "Choose your Captain and Vice Captain",
+                      color: AppColors.backgroundColor,
+                      textAlign: TextAlign.center,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 15.0),
-                      child: SkipperText.textSmall(
-                        "Captain get 2X points, Vice Captain",
-                        color: AppColors.backgroundColor,
-                        textAlign: TextAlign.center,
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 15.0),
+                    child: SkipperText.textSmall(
+                      "Captain get 2X points, Vice Captain",
+                      color: AppColors.backgroundColor,
+                      textAlign: TextAlign.center,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
                     child: Container(
+                      width: double.infinity,
                       margin: const EdgeInsets.only(
                           left: 18.0, right: 18.0, top: 50.0),
                       child: DatatableWidget(

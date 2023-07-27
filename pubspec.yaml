@@ -69,6 +69,7 @@ dependencies:
   flutter_svg: ^2.0.5
   animated_splash_screen: ^1.2.0
   data_table_2: ^2.5.3
+  syncfusion_flutter_datagrid: ^22.1.39
 
 dev_dependencies:
   flutter_test:
