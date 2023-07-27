@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SkipperScaffold(
       drawer: const SideMenu(),
+      bottomNavigationBar: buildNavigationBar(),
       appBar: SkipperAppbar(
         centerTitle: true,
         actions: <Widget>[
@@ -137,6 +138,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
         },
       ),
+    );
+  }
+
+  Widget buildNavigationBar() {
+    return BottomNavigationBar(
+      selectedItemColor: AppColors.white,
+      unselectedItemColor: AppColors.unselectedColor,
+      selectedFontSize: 11.0,
+      iconSize: 22.0,
+      showUnselectedLabels: true,
+      backgroundColor: AppColors.black,
+      items: const [
+        BottomNavigationBarItem(
+          backgroundColor: AppColors.black,
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: AppColors.black,
+          icon: Icon(Icons.search),
+          label: 'My Matches',
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: AppColors.black,
+          icon: Icon(Icons.money),
+          label: 'Rewards',
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: AppColors.black,
+          icon: Icon(Icons.chat_outlined),
+          label: 'Chat',
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: AppColors.black,
+          icon: Icon(Icons.warning_amber),
+          label: 'Winners',
+        ),
+      ],
     );
   }
 }
