@@ -30,15 +30,17 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
   late final List<bool> _color_wk = List.filled(30, false);
   late final List<bool> _color_allrounder = List.filled(30, false);
 
-  late final List<String> _batsmen_selected = List.filled(0, '', growable: true);
+  late final List<String> _batsmen_selected =
+      List.filled(0, '', growable: true);
   late final List<String> _bowler_selected = List.filled(0, '', growable: true);
   late final List<String> _wk_selected = List.filled(0, '', growable: true);
-  late final List<String> _allrounder_selected = List.filled(0, '', growable: true);
+  late final List<String> _allrounder_selected =
+      List.filled(0, '', growable: true);
 
   late int _wk_count = 0;
-  late final int _bowler_count = 0;
-  late final int _batsmen_count = 0;
-  late final int _allrounder_count = 0;
+  late int _bowler_count = 0;
+  late int _batsmen_count = 0;
+  late int _allrounder_count = 0;
   late int _total_players = 0;
 
   late TabController tabController;
@@ -235,18 +237,18 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                 controller: tabController,
                 labelColor: AppColors.white,
                 unselectedLabelColor: AppColors.warmGrey,
-                tabs: const <Widget>[
+                tabs: <Widget>[
                   Tab(
-                    child: Text('WK (0)'),
+                    child: Text('WK ($_wk_count)'),
                   ),
                   Tab(
-                    child: Text('BAT (0)'),
+                    child: Text('BAT ($_batsmen_count)'),
                   ),
                   Tab(
-                    child: Text('AR (0)'),
+                    child: Text('AR ($_allrounder_count)'),
                   ),
                   Tab(
-                    child: Text('BOWL (0)'),
+                    child: Text('BOWL ($_bowler_count)'),
                   ),
                 ],
               ),
@@ -287,27 +289,93 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                       });
                     },
                   ),
-                  ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (ctx, index) {
-                        return SelectPlayerTile(
-                          onTap: () {},
-                        );
-                      }),
-                  ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (ctx, index) {
-                        return SelectPlayerTile(
-                          onTap: () {},
-                        );
-                      }),
-                  ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (ctx, index) {
-                        return SelectPlayerTile(
-                          onTap: () {},
-                        );
-                      })
+                  PlayerListWidget(
+                    items: items,
+                    selectedItemIdList: selectedItemIdList,
+                    onTap: (value, index) {
+                      setState(() {
+                        if (selectedItemIdList.contains(value)) {
+                          selectedItemIdList.remove(value);
+                        } else {
+                          selectedItemIdList.add(value);
+                        }
+                      });
+                      setState(() {
+                        if (_batsmen_count < 5 &&
+                            _color_batsmen[index] == false &&
+                            _total_players < 11) {
+                          _color_batsmen[index] = !_color_batsmen[index];
+                          _batsmen_count = _batsmen_count + 1;
+                          _total_players = _total_players + 1;
+                          _batsmen_selected.add(batsmen[index]);
+                        } else if (_color_batsmen[index] == true) {
+                          _color_batsmen[index] = !_color_batsmen[index];
+                          _batsmen_count = _batsmen_count - 1;
+                          _total_players = _total_players - 1;
+                          _batsmen_selected
+                              .removeWhere((item) => item == (batsmen[index]));
+                        }
+                      });
+                    },
+                  ),
+                  PlayerListWidget(
+                    items: items,
+                    selectedItemIdList: selectedItemIdList,
+                    onTap: (value, index) {
+                      setState(() {
+                        if (selectedItemIdList.contains(value)) {
+                          selectedItemIdList.remove(value);
+                        } else {
+                          selectedItemIdList.add(value);
+                        }
+                      });
+                      setState(() {
+                        if (_allrounder_count < 3 &&
+                            _color_allrounder[index] == false &&
+                            _total_players < 11) {
+                          _color_allrounder[index] = !_color_allrounder[index];
+                          _allrounder_count = _allrounder_count + 1;
+                          _total_players = _total_players + 1;
+                          _allrounder_selected.add(allrounders[index]);
+                        } else if (_color_allrounder[index] == true) {
+                          _color_allrounder[index] = !_color_allrounder[index];
+                          _allrounder_count = _allrounder_count - 1;
+                          _total_players = _total_players - 1;
+                          _allrounder_selected.removeWhere(
+                              (item) => item == (allrounders[index]));
+                        }
+                      });
+                    },
+                  ),
+                  PlayerListWidget(
+                    items: items,
+                    selectedItemIdList: selectedItemIdList,
+                    onTap: (value, index) {
+                      setState(() {
+                        if (selectedItemIdList.contains(value)) {
+                          selectedItemIdList.remove(value);
+                        } else {
+                          selectedItemIdList.add(value);
+                        }
+                      });
+                      setState(() {
+                        if (_bowler_count < 5 &&
+                            _color_bowler[index] == false &&
+                            _total_players < 11) {
+                          _color_bowler[index] = !_color_bowler[index];
+                          _bowler_count = _bowler_count + 1;
+                          _total_players = _total_players + 1;
+                          _bowler_selected.add(bowlers[index]);
+                        } else if (_color_bowler[index] == true) {
+                          _color_bowler[index] = !_color_bowler[index];
+                          _bowler_count = _bowler_count - 1;
+                          _total_players = _total_players - 1;
+                          _bowler_selected
+                              .removeWhere((item) => item == (bowlers[index]));
+                        }
+                      });
+                    },
+                  ),
                 ],
               ),
             ),

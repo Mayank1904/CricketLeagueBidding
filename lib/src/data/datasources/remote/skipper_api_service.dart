@@ -41,4 +41,7 @@ abstract class SkipperApiService {
   Future<HttpResponse<CreateTeamResponse>> createTeam({
     @Body() CreateTeamRequest? request,
   });
+
+  @GET('/v1/matches-detail')
+  Future<HttpResponse<CreateTeamResponse>> matchesDetail();
 }

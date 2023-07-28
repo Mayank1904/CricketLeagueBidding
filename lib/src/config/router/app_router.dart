@@ -6,6 +6,7 @@ import '../../presentation/screens/home_screen.dart';
 import '../../presentation/screens/login_screen.dart';
 import '../../presentation/screens/profile_screen.dart';
 import '../../presentation/screens/select_match_screen.dart';
+import '../../presentation/screens/upcoming_matches_screen.dart';
 part 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
@@ -14,7 +15,7 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: LoginRoute.page, initial: true),
         AutoRoute(page: ProfileRoute.page),
-        AutoRoute(page: HomeRoute.page),
+        AutoRoute(page: UpcomingMatchesRoute.page),
         AutoRoute(page: SelectMatchRoute.page),
       ];
 }

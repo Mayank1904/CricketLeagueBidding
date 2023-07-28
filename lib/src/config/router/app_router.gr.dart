@@ -15,12 +15,6 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomeScreen(),
-      );
-    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -44,21 +38,13 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    UpcomingMatchesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const UpcomingMatchesScreen(),
+      );
+    },
   };
-}
-
-/// generated route for
-/// [HomeScreen]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -125,4 +111,18 @@ class SelectMatchRouteArgs {
   String toString() {
     return 'SelectMatchRouteArgs{key: $key, card: $card}';
   }
+}
+
+/// generated route for
+/// [UpcomingMatchesScreen]
+class UpcomingMatchesRoute extends PageRouteInfo<void> {
+  const UpcomingMatchesRoute({List<PageRouteInfo>? children})
+      : super(
+          UpcomingMatchesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UpcomingMatchesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

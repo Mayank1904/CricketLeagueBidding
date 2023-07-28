@@ -1,44 +1,38 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import 'package:equatable/equatable.dart';
 
 import 'card.dart';
 
-class Data {
-  final String? cardType;
-  final List<dynamic>? intelligentOrder;
+class Data extends Equatable {
+  final String? card_type;
   final List<Cards>? cards;
-  Data({
-    this.cardType,
-    this.intelligentOrder,
+  const Data({
+    this.card_type,
     this.cards,
   });
 
   Data copyWith({
-    String? cardType,
-    List<String>? intelligentOrder,
+    String? card_type,
+    List<String>? intelligent_order,
     List<Cards>? cards,
   }) {
     return Data(
-      cardType: cardType ?? this.cardType,
-      intelligentOrder: intelligentOrder ?? this.intelligentOrder,
+      card_type: card_type ?? this.card_type,
       cards: cards ?? this.cards,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'cardType': cardType,
-      'intelligentOrder': intelligentOrder,
+      'card_type': card_type,
       'cards': cards?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory Data.fromMap(Map<String, dynamic> map) {
     return Data(
-      cardType: map['card_type'] as String,
-      intelligentOrder:
-          List<dynamic>.from((map['intelligent_order'] as List<dynamic>)),
+      card_type: (map['card_type'] ?? '') as String,
       cards: List<Cards>.from(
         (map['cards'] as List<dynamic>).map<Cards>(
           (x) => Cards.fromMap(x as Map<String, dynamic>),
@@ -53,19 +47,8 @@ class Data {
       Data.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'Data(cardType: $cardType, intelligentOrder: $intelligentOrder, cards: $cards)';
+  bool get stringify => true;
 
   @override
-  bool operator ==(covariant Data other) {
-    if (identical(this, other)) return true;
-
-    return other.cardType == cardType &&
-        listEquals(other.intelligentOrder, intelligentOrder) &&
-        listEquals(other.cards, cards);
-  }
-
-  @override
-  int get hashCode =>
-      cardType.hashCode ^ intelligentOrder.hashCode ^ cards.hashCode;
+  List<Object?> get props => [card_type, cards];
 }
