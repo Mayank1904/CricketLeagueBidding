@@ -1,0 +1,22 @@
+{
+  "es": [
+    "register",
+    "invitedByFriend",
+    "enterCode",
+    "alreadyUser",
+    "logIn",
+    "facebook",
+    "google",
+    "mobileNo",
+    "receiveOtpVerification",
+    "notAMember",
+    "next",
+    "or",
+    "registerAndPlay",
+    "enterMobileNo",
+    "registerAgree",
+    "maxPlayersTeam",
+    "players",
+    "creditLeft"
+  ]
+}
