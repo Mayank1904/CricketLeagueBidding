@@ -20,6 +20,11 @@ class SelectMatchScreen extends StatefulWidget {
 }
 
 class _SelectMatchScreenState extends State<SelectMatchScreen> {
+  String dropdownvalue = 'Entry';
+
+  // List of items in our dropdown menu
+  var items = ['Entry', 'Spots', 'Prize Pool', '%Winners'];
+
   late SelectContestCubit selectContestCubit;
 
   @override
@@ -95,25 +100,43 @@ class _SelectMatchScreenState extends State<SelectMatchScreen> {
                                   fontSize: 16.0),
                               textAlign: TextAlign.left,
                             ),
-                            RichText(
-                                text: const TextSpan(children: [
-                              TextSpan(
+                            Row(children: [
+                              const Text(
                                   style: TextStyle(
                                       color: Color(0xffb5b5b5),
                                       fontWeight: FontWeight.w400,
                                       fontFamily: "Graphik",
                                       fontStyle: FontStyle.normal,
                                       fontSize: 12.0),
-                                  text: "Sort By: "),
-                              TextSpan(
-                                  style: TextStyle(
+                                  "Sort By: "),
+                              DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  dropdownColor: Colors.black,
+                                  style: const TextStyle(
                                       color: AppColors.white,
                                       fontWeight: FontWeight.w600,
                                       fontFamily: "Graphik",
                                       fontStyle: FontStyle.normal,
                                       fontSize: 12.0),
-                                  text: "Entry")
-                            ]))
+                                  // Initial Value
+                                  value: dropdownvalue,
+                                  // Array list of items
+                                  items: items.map((String items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Text(items),
+                                    );
+                                  }).toList(),
+                                  // After selecting the desired option,it will
+                                  // change button value to selected value
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ])
                           ],
                         ),
                       ),

@@ -22,17 +22,9 @@ enum SortOrder {
 class DatatableWidget extends StatefulWidget {
   final Function? onCaptainSelected;
   final Function? onViceCaptainSelected;
-  final bool? isCaptainSelected;
-  final bool? isViceCaptainSelected;
-  final int? selectedCaptainPosition;
-  final int? selectedViceCaptainPosition;
 
   const DatatableWidget({
     Key? key,
-    this.isCaptainSelected,
-    this.isViceCaptainSelected,
-    required this.selectedCaptainPosition,
-    required this.selectedViceCaptainPosition,
     this.onCaptainSelected,
     this.onViceCaptainSelected,
   }) : super(key: key);
@@ -53,7 +45,6 @@ class _DatatableWidgetState extends State<DatatableWidget> {
     Player('Player 2', 'Bowler', false, false),
     Player('Player 3', 'All-Rounder', false, false),
     Player('Player 3', 'All-Rounder', false, false),
-    // Add more players as needed
   ];
 
   int _sortColumnIndex = 0;
@@ -74,7 +65,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
     });
   }
 
-  void _selectCaptain(int index) {
+  Future<void> _selectCaptain(int index) async {
     setState(() {
       for (var i = 0; i < players.length; i++) {
         players[i].isCaptain = (i == index);
@@ -85,7 +76,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
     });
   }
 
-  void _selectViceCaptain(int index) {
+  Future<void> _selectViceCaptain(int index) async {
     setState(() {
       for (var i = 0; i < players.length; i++) {
         players[i].isViceCaptain = (i == index);
@@ -228,8 +219,10 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                             ),
                           ),
                           child: GestureDetector(
-                            onTap: () =>
-                                _selectCaptain(players.indexOf(player)),
+                            onTap: () async {
+                              await _selectCaptain(players.indexOf(player));
+                              widget.onCaptainSelected?.call(player.isCaptain);
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -279,8 +272,10 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                             ),
                           ),
                           child: GestureDetector(
-                            onTap: () {
-                              _selectViceCaptain(players.indexOf(player));
+                            onTap: () async {
+                              await _selectViceCaptain(players.indexOf(player));
+                              widget.onViceCaptainSelected
+                                  ?.call(player.isViceCaptain);
                             },
                             child: CircleAvatar(
                               backgroundColor: player.isViceCaptain == false

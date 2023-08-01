@@ -177,13 +177,13 @@ class _SkipperApiService implements SkipperApiService {
   }
 
   @override
-  Future<HttpResponse<CreateTeamResponse>> matchesDetail() async {
+  Future<HttpResponse<MatchesDetailResponse>> matchesDetail() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<CreateTeamResponse>>(Options(
+        _setStreamType<HttpResponse<MatchesDetailResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -195,7 +195,7 @@ class _SkipperApiService implements SkipperApiService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CreateTeamResponse.fromMap(_result.data!);
+    final value = MatchesDetailResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

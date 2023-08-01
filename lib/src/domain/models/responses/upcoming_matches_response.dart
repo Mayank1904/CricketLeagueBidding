@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'data_1.dart';
+import 'data.dart';
 
 class UpcomingMatchesResponse {
   final Data data;

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/models/requests/create_team_request.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
 import '../cubits/register/register_cubit.dart';
+import '../cubits/saveTeam/save_team_cubit.dart';
 import 'team_preview.dart';
 import 'widgets/save_team_datatable_widget.dart';
 
@@ -37,8 +39,11 @@ class SaveTeamScreen extends StatefulWidget {
 }
 
 class _SaveTeamScreenState extends State<SaveTeamScreen> {
-  int? selectedCaptainPosition;
-  int? selectedViceCaptainPosition;
+  bool? isCaptainSelected = false;
+  bool? isViceCaptainSelected = false;
+  late CreateTeamRequest createTeamRequest;
+
+  late SaveTeamCubit saveTeamCubit = BlocProvider.of<SaveTeamCubit>(context);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +59,7 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
         title: 'Your Fantasy Team',
         subTitle: '1h 51m left',
       ),
-      body: BlocConsumer<RegisterCubit, RegisterState>(
+      body: BlocConsumer<SaveTeamCubit, SaveTeamState>(
         listener: (context, state) {},
         builder: (context, state) {
           return Stack(
@@ -89,17 +94,14 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                       margin: const EdgeInsets.only(
                           left: 18.0, right: 18.0, top: 50.0),
                       child: DatatableWidget(
-                        selectedCaptainPosition: selectedCaptainPosition,
-                        selectedViceCaptainPosition:
-                            selectedViceCaptainPosition,
-                        onCaptainSelected: (pos) {
+                        onCaptainSelected: (val) {
                           setState(() {
-                            selectedCaptainPosition = pos;
+                            isCaptainSelected = val;
                           });
                         },
-                        onViceCaptainSelected: (pos) {
+                        onViceCaptainSelected: (val) {
                           setState(() {
-                            selectedViceCaptainPosition = pos;
+                            isViceCaptainSelected = val;
                           });
                         },
                       ),
@@ -148,13 +150,10 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                         ),
                         Expanded(
                           child: SkipperButton(
-                            onPressed: () => {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => const TeamPreview()),
-                              // )
-                            },
+                            onPressed: () => (isCaptainSelected! &&
+                                    isViceCaptainSelected!)
+                                ? saveTeamCubit.createTeam(createTeamRequest)
+                                : null,
                             text: 'Continue',
                           ),
                         ),
