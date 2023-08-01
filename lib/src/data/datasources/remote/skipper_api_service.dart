@@ -5,6 +5,7 @@ import '../../../domain/models/requests/create_team_request.dart';
 import '../../../domain/models/requests/user_auth_request.dart';
 import '../../../domain/models/responses/contest_response.dart';
 import '../../../domain/models/responses/create_team_response.dart';
+import '../../../domain/models/responses/matches_detail_response.dart';
 import '../../../domain/models/responses/upcoming_matches_response.dart';
 import '../../../domain/models/responses/user_auth_response.dart';
 import '../../../utils/constants/strings.dart';
@@ -43,5 +44,5 @@ abstract class SkipperApiService {
   });
 
   @GET('/v1/matches-detail')
-  Future<HttpResponse<CreateTeamResponse>> matchesDetail();
+  Future<HttpResponse<MatchesDetailResponse>> matchesDetail();
 }

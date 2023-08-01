@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 class CreateTeamRequest extends Equatable {
   final int userDetailId;
   final String matchCardKey;
-  final List<String> mTeam;
+  final List<MTeam> mTeam;
   const CreateTeamRequest({
     required this.userDetailId,
     required this.matchCardKey,
@@ -15,7 +15,7 @@ class CreateTeamRequest extends Equatable {
   CreateTeamRequest copyWith({
     int? userDetailId,
     String? matchCardKey,
-    List<String>? mTeam,
+    List<MTeam>? mTeam,
   }) {
     return CreateTeamRequest(
       userDetailId: userDetailId ?? this.userDetailId,
@@ -28,7 +28,7 @@ class CreateTeamRequest extends Equatable {
     return <String, dynamic>{
       'userDetailId': userDetailId,
       'matchCardKey': matchCardKey,
-      'mTeam': mTeam,
+      'mTeam': mTeam.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -36,8 +36,11 @@ class CreateTeamRequest extends Equatable {
     return CreateTeamRequest(
       userDetailId: (map['userDetailId'].toInt() ?? 0) as int,
       matchCardKey: (map['matchCardKey'] ?? '') as String,
-      mTeam:
-          List<String>.from((map['mTeam'] ?? const <String>[]) as List<String>),
+      mTeam: List<MTeam>.from(
+        (map['mTeam'] as List<int>).map<MTeam>(
+          (x) => MTeam.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 
@@ -51,4 +54,48 @@ class CreateTeamRequest extends Equatable {
 
   @override
   List<Object> get props => [userDetailId, matchCardKey, mTeam];
+}
+
+class MTeam extends Equatable {
+  final String Name;
+  final String Role;
+  const MTeam({
+    required this.Name,
+    required this.Role,
+  });
+
+  MTeam copyWith({
+    String? Name,
+    String? Role,
+  }) {
+    return MTeam(
+      Name: Name ?? this.Name,
+      Role: Role ?? this.Role,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'Name': Name,
+      'Role': Role,
+    };
+  }
+
+  factory MTeam.fromMap(Map<String, dynamic> map) {
+    return MTeam(
+      Name: (map['Name'] ?? '') as String,
+      Role: (map['Role'] ?? '') as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory MTeam.fromJson(String source) =>
+      MTeam.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  bool get stringify => true;
+
+  @override
+  List<Object> get props => [Name, Role];
 }

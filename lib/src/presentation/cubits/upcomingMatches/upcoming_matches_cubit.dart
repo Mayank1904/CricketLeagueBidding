@@ -28,7 +28,7 @@ class UpcomingMatchesCubit extends BaseCubit<UpcomingMatchesState, Data>
 
       if (response is DataSuccess) {
         emit(UpcomingMatchesLoaded(
-          upcomingMatchesList: response.data?.data.data.cards,
+          upcomingMatchesList: response.data?.data.cards,
         ));
       } else if (response is DataFailed) {
         emit(UpcomingMatchesError(errorMessage: response.error?.message));
