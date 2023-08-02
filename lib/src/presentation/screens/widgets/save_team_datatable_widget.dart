@@ -6,12 +6,12 @@ import '../../../utils/extensions/extensions.dart';
 import '../../components/skipper_text.dart';
 
 class Player {
-  String name;
-  String role;
-  bool isCaptain;
-  bool isViceCaptain;
+  String? name;
+  String? role;
+  bool? isCaptain;
+  bool? isViceCaptain;
 
-  Player(this.name, this.role, this.isCaptain, this.isViceCaptain);
+  Player({this.name, this.role, this.isCaptain, this.isViceCaptain});
 }
 
 enum SortOrder {
@@ -35,16 +35,56 @@ class DatatableWidget extends StatefulWidget {
 
 class _DatatableWidgetState extends State<DatatableWidget> {
   final List<Player> players = [
-    Player('Player 1', 'Batsman', false, false),
-    Player('Player 2', 'Bowler', false, false),
-    Player('Player 3', 'All-Rounder', false, false),
-    Player('Player 1', 'Batsman', false, false),
-    Player('Player 2', 'Bowler', false, false),
-    Player('Player 3', 'All-Rounder', false, false),
-    Player('Player 1', 'Batsman', false, false),
-    Player('Player 2', 'Bowler', false, false),
-    Player('Player 3', 'All-Rounder', false, false),
-    Player('Player 3', 'All-Rounder', false, false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
+    Player(
+        name: 'Player 1',
+        role: 'Batsman',
+        isCaptain: false,
+        isViceCaptain: false),
   ];
 
   int _sortColumnIndex = 0;
@@ -69,7 +109,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
     setState(() {
       for (var i = 0; i < players.length; i++) {
         players[i].isCaptain = (i == index);
-        if (players[i].isCaptain) {
+        if (players[i].isCaptain!) {
           players[i].isViceCaptain = false;
         }
       }
@@ -80,7 +120,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
     setState(() {
       for (var i = 0; i < players.length; i++) {
         players[i].isViceCaptain = (i == index);
-        if (players[i].isViceCaptain) {
+        if (players[i].isViceCaptain!) {
           players[i].isCaptain = false;
         }
       }
@@ -228,7 +268,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   strokeAlign: BorderSide.strokeAlignOutside,
-                                  color: player.isCaptain
+                                  color: player.isCaptain!
                                       ? AppColors.blackTwo
                                       : AppColors.greyCB,
                                 ),
@@ -239,7 +279,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                                     : AppColors.blackTwo,
                                 radius: 17.5,
                                 child: SkipperText.titleBold(
-                                    color: player.isCaptain
+                                    color: player.isCaptain!
                                         ? AppColors.white
                                         : AppColors.blackTwo,
                                     player.isCaptain == false ? 'C' : '2X'),
@@ -266,7 +306,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                             shape: BoxShape.circle,
                             border: Border.all(
                               strokeAlign: BorderSide.strokeAlignOutside,
-                              color: player.isViceCaptain
+                              color: player.isViceCaptain!
                                   ? AppColors.blackTwo
                                   : AppColors.greyCB,
                             ),

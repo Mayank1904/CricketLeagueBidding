@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/models/responses/matches_detail_response.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_scaffold.dart';
@@ -7,10 +8,10 @@ import '../components/skipper_text.dart';
 import 'widgets/player_icon.dart';
 
 class TeamPreview extends StatelessWidget {
-  final List<String>? batsmen;
-  final List<String>? bowlers;
-  final List<String>? wicketkeeper;
-  final List<String>? allrounders;
+  final List<Player>? batsmen;
+  final List<Player>? bowlers;
+  final List<Player>? wicketkeeper;
+  final List<Player>? allrounders;
 
   const TeamPreview(
       {super.key,

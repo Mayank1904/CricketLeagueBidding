@@ -27,6 +27,7 @@ class AppColors {
   static const Color backgroundColor = Color(0xff17001d);
   static const veryLightGreen = Color(0xffc5ffba);
   static const unselectedColor = Color(0xff898989);
+  static const dividerColor = Color(0xffe8e8e8);
   static const Gradient linearGradient = LinearGradient(
     begin: Alignment(0.0, 0.0),
     end: Alignment(0.707, -0.707),

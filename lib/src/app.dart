@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../provider/locale_provider.dart';
 import 'domain/respositories/skipper_api_repository.dart';
 import 'locator.dart';
+import 'presentation/cubits/matchesDetail/matches_detail_cubit.dart';
+import 'presentation/cubits/saveTeam/save_team_cubit.dart';
 import 'presentation/cubits/selectContest/select_contest_cubit.dart';
 import 'presentation/cubits/register/register_cubit.dart';
 import 'presentation/cubits/upcomingMatches/upcoming_matches_cubit.dart';
+import 'presentation/screens/create_team_screen.dart';
 import 'presentation/screens/splash_screen.dart';
 import 'resources/constants/colors.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +39,16 @@ class App extends StatelessWidget {
             locator<SkipperApiRepository>(),
           ),
         ),
+        BlocProvider(
+          create: (context) => MatchesDetailCubit(
+            locator<SkipperApiRepository>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => SaveTeamCubit(
+            locator<SkipperApiRepository>(),
+          ),
+        ),
       ],
       child: ChangeNotifierProvider(
           create: (context) => LocaleProvider(),
@@ -49,7 +62,7 @@ class App extends StatelessWidget {
                   theme: ThemeData(
                       primaryColor: AppColors.backgroundColor,
                       fontFamily: 'Graphik'),
-                  home: const SplashScreen(),
+                  home: const CreateTeamScreen(),
                 ),
               );
             });

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'widgets/save_team_datatable_widget.dart';
 
 import '../../domain/models/requests/create_team_request.dart';
+import '../../domain/models/responses/matches_detail_response.dart' as P;
 import '../../resources/constants/colors.dart';
 import '../components/skipper_app_bar.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
-import '../cubits/register/register_cubit.dart';
 import '../cubits/saveTeam/save_team_cubit.dart';
-import 'team_preview.dart';
-import 'widgets/save_team_datatable_widget.dart';
 
 class SaveTeamScreen extends StatefulWidget {
-  final List<String>? batsmen;
-  final List<String>? wicketkeeper;
-  final List<String>? bowlers;
-  final List<String>? allrounders;
+  final List<P.Player> batsmen;
+  final List<P.Player>? wicketkeeper;
+  final List<P.Player> bowlers;
+  final List<P.Player> allrounders;
   final String? match_id;
   final String? team1;
   final String? team2;
@@ -24,10 +23,10 @@ class SaveTeamScreen extends StatefulWidget {
 
   const SaveTeamScreen({
     super.key,
-    this.batsmen,
-    this.wicketkeeper,
-    this.bowlers,
-    this.allrounders,
+    required this.batsmen,
+    required this.wicketkeeper,
+    required this.bowlers,
+    required this.allrounders,
     this.match_id,
     this.team1,
     this.team2,
@@ -120,29 +119,29 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                         Expanded(
                           child: SkipperButton(
                             onPressed: () => {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const TeamPreview(
-                                          wicketkeeper: ['D. Conway', 'W Saha'],
-                                          batsmen: [
-                                            'R Gaikwad',
-                                            'S Gill',
-                                            'H Pandya',
-                                            'M Ali',
-                                            'M Pathirana',
-                                            'Mayank',
-                                            'Usjsk'
-                                          ],
-                                          allrounders: [
-                                            'R Jadeja',
-                                          ],
-                                          bowlers: [
-                                            'M Shami',
-                                            'Rashid K',
-                                          ],
-                                        )),
-                              )
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => const TeamPreview(
+                              //             wicketkeeper: ['D. Conway', 'W Saha'],
+                              //             batsmen: [
+                              //               'R Gaikwad',
+                              //               'S Gill',
+                              //               'H Pandya',
+                              //               'M Ali',
+                              //               'M Pathirana',
+                              //               'Mayank',
+                              //               'Usjsk'
+                              //             ],
+                              //             allrounders: [
+                              //               'R Jadeja',
+                              //             ],
+                              //             bowlers: [
+                              //               'M Shami',
+                              //               'Rashid K',
+                              //             ],
+                              //           )),
+                              // )
                             },
                             buttonColor: AppColors.warmGrey,
                             text: 'Team Preview',

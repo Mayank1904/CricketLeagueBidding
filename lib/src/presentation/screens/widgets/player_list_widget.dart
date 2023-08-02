@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../domain/models/responses/matches_detail_response.dart';
 import '../../components/skipper_text.dart';
 import 'select_player_tile.dart';
 
@@ -6,21 +7,33 @@ import '../../../resources/constants/colors.dart';
 
 class PlayerListWidget extends StatelessWidget {
   final Function onTap;
-  final List<int> items;
-  final List<int> selectedItemIdList;
-
+  final List<Player>? items;
+  final bool? isSelected;
+  final List<bool>? color;
   const PlayerListWidget({
     super.key,
     required this.onTap,
     required this.items,
-    required this.selectedItemIdList,
+    this.isSelected,
+    this.color,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: items.length,
+    items?.insert(0, const Player());
+    items?.insert(1, const Player());
+    return ListView.separated(
+        separatorBuilder: (context, index) {
+          return index != 0
+              ? Container(
+                  height: 1,
+                  color: AppColors.dividerColor, // Custom style
+                )
+              : Container();
+        },
+        itemCount: (items!.length),
         itemBuilder: (ctx, index) {
+          var item = items?[index];
           if (index == 0) {
             // return the header
             return Container(
@@ -36,10 +49,10 @@ class PlayerListWidget extends StatelessWidget {
             return Table(
               defaultVerticalAlignment: TableCellVerticalAlignment.middle,
               columnWidths: const {
-                0: FlexColumnWidth(4.5),
-                1: FlexColumnWidth(1.5),
+                0: FlexColumnWidth(6.5),
+                1: FlexColumnWidth(2),
                 2: FlexColumnWidth(1.5),
-                3: FlexColumnWidth(2),
+                3: FlexColumnWidth(1),
               },
               children: [
                 TableRow(
@@ -49,7 +62,8 @@ class PlayerListWidget extends StatelessWidget {
                     children: [
                       // SELECTED BY
                       Padding(
-                        padding: const EdgeInsets.only(left: 18.0),
+                        padding: const EdgeInsets.only(
+                            left: 18.0, top: 12.0, bottom: 12.0),
                         child: SkipperText.textSmall(
                           "SELECTED BY",
                           color: AppColors.brownishGrey,
@@ -73,11 +87,9 @@ class PlayerListWidget extends StatelessWidget {
               ],
             );
           }
-          var item = items[index];
-          // var isSelected = items.firstWhere((element) => item.id == element.id) != null;
-          var isSelected = selectedItemIdList.contains(item);
           return SelectPlayerTile(
-            isSelected: isSelected,
+            player: item,
+            isSelected: color?[index],
             position: index + 1,
             onTap: (val, pos) {
               onTap(val, index);

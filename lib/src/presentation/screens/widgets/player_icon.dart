@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../domain/models/responses/matches_detail_response.dart';
 import '../../../resources/constants/colors.dart';
 import '../../components/skipper_text.dart';
 
@@ -11,7 +12,7 @@ class PlayerIcon extends StatelessWidget {
     required this.playerType,
   }) : super(key: key);
 
-  final List<String> player;
+  final List<Player> player;
   final int i;
   final String playerType;
 
@@ -51,7 +52,7 @@ class PlayerIcon extends StatelessWidget {
                   ],
                 ),
                 child: SkipperText.textExtraSmall(
-                  player[i],
+                  player[i].card_name ?? '',
                   color: (i % 2) == 0 ? AppColors.white : AppColors.black,
                   textAlign: TextAlign.center,
                 ),

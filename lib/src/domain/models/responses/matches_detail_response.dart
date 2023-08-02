@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class MatchesDetailResponse extends Equatable {
-  final Data data;
-  final String token;
+  final Data? data;
+  final String? token;
   const MatchesDetailResponse({
-    required this.data,
-    required this.token,
+    this.data,
+    this.token,
   });
 
   MatchesDetailResponse copyWith({
@@ -22,7 +22,7 @@ class MatchesDetailResponse extends Equatable {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'data': data.toMap(),
+      'data': data?.toMap(),
       'token': token,
     };
   }
@@ -75,7 +75,7 @@ class Data extends Equatable {
   factory Data.fromMap(Map<String, dynamic> map) {
     return Data(
       players: List<Player>.from(
-        (map['players'] as List<int>).map<Player>(
+        (map['players'] as List<dynamic>).map<Player>(
           (x) => Player.fromMap(x as Map<String, dynamic>),
         ),
       ),
@@ -96,35 +96,35 @@ class Data extends Equatable {
 }
 
 class Player extends Equatable {
-  final String fullname;
-  final Identified_roles identified_roles;
-  final String key;
-  final String name;
-  final String gender;
-  final String seasonal_role;
-  final String team_key;
-  final String nationality;
-  final String date_of_birth;
-  final String card_name;
-  final bool isPlaying;
-  final int credit_value;
-  final double score;
-  final String selectedByPercentage;
+  final String? fullname;
+  final Identified_roles? identified_roles;
+  final String? key;
+  final String? name;
+  final String? gender;
+  final String? seasonal_role;
+  final String? team_key;
+  final String? nationality;
+  final String? date_of_birth;
+  final String? card_name;
+  final bool? isPlaying;
+  final int? credit_value;
+  final double? score;
+  final String? selectedByPercentage;
   const Player({
-    required this.fullname,
-    required this.identified_roles,
-    required this.key,
-    required this.name,
-    required this.gender,
-    required this.seasonal_role,
-    required this.team_key,
-    required this.nationality,
-    required this.date_of_birth,
-    required this.card_name,
-    required this.isPlaying,
-    required this.credit_value,
-    required this.score,
-    required this.selectedByPercentage,
+    this.fullname,
+    this.identified_roles,
+    this.key,
+    this.name,
+    this.gender,
+    this.seasonal_role,
+    this.team_key,
+    this.nationality,
+    this.date_of_birth,
+    this.card_name,
+    this.isPlaying,
+    this.credit_value,
+    this.score,
+    this.selectedByPercentage,
   });
 
   Player copyWith({
@@ -164,7 +164,7 @@ class Player extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'fullname': fullname,
-      'identified_roles': identified_roles.toMap(),
+      'identified_roles': identified_roles?.toMap(),
       'key': key,
       'name': name,
       'gender': gender,
@@ -195,7 +195,7 @@ class Player extends Equatable {
       card_name: (map['card_name'] ?? '') as String,
       isPlaying: (map['isPlaying'] ?? false) as bool,
       credit_value: (map['credit_value'].toInt() ?? 0) as int,
-      score: (map['score'].toDouble() ?? 0.0) as double,
+      score: (double.tryParse(map["score"].toString()) ?? 0.0),
       selectedByPercentage: (map['selectedByPercentage'] ?? '') as String,
     );
   }

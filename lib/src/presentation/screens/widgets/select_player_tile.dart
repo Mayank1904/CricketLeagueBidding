@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../resources/constants/colors.dart';
+import '../../../domain/models/responses/matches_detail_response.dart';
 import '../../components/skipper_text.dart';
 
 import '../../../resources/constants/text_styles.dart';
@@ -8,23 +9,23 @@ class SelectPlayerTile extends StatelessWidget {
   final int? position;
   final Function onTap;
   final bool? isSelected;
-  final List<int>? selectedItemIdList;
+  final Player? player;
   const SelectPlayerTile(
       {super.key,
-      this.selectedItemIdList,
       required this.onTap,
       this.isSelected,
-      this.position});
+      this.position,
+      this.player});
 
   @override
   Widget build(BuildContext context) {
     return Table(
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       columnWidths: const {
-        0: FlexColumnWidth(4.5),
-        1: FlexColumnWidth(1.5),
-        2: FlexColumnWidth(1.5),
-        3: FlexColumnWidth(2),
+        0: FlexColumnWidth(6.5),
+        1: FlexColumnWidth(2),
+        2: FlexColumnWidth(1),
+        3: FlexColumnWidth(1.5),
       },
       children: [
         TableRow(
@@ -63,7 +64,7 @@ class SelectPlayerTile extends StatelessWidget {
                             ],
                           ),
                           child: SkipperText.textSmall(
-                            'MUM',
+                            player?.team_key ?? '',
                             color: AppColors.white,
                             textAlign: TextAlign.center,
                           ),
@@ -77,13 +78,16 @@ class SelectPlayerTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Alyssa Healy
-                        const Text(
-                          "Alyssa Healy",
+                        Text(
+                          player?.name ?? '',
+                          softWrap: true,
                           style: AppTextStyles.normalBlackw600,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                         // Sel by 10.09%
-                        const Text(
-                          "Sel by 10.09%",
+                        Text(
+                          "Sel by ${player?.selectedByPercentage ?? ''}%",
                           style: AppTextStyles.smallNormalGreyw400,
                         ),
                         Row(
@@ -92,14 +96,16 @@ class SelectPlayerTile extends StatelessWidget {
                               margin: const EdgeInsets.only(right: 5.0),
                               width: 5,
                               height: 5,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: AppColors.red,
+                                color: (player?.isPlaying == true)
+                                    ? AppColors.green
+                                    : AppColors.red,
                               ),
                             ), // Announced
-                            const Text(
-                              "Announced",
-                              style: TextStyle(
+                            Text(
+                              (player?.isPlaying == true) ? "Announced" : '',
+                              style: const TextStyle(
                                   color: AppColors.green,
                                   fontWeight: FontWeight.w400,
                                   fontFamily: "Graphik",
@@ -116,10 +122,10 @@ class SelectPlayerTile extends StatelessWidget {
             ),
 
             // 0
-            const Center(
+            Center(
               child: Text(
-                "0",
-                style: TextStyle(
+                player?.score.toString() ?? '',
+                style: const TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 12.0),
@@ -127,10 +133,10 @@ class SelectPlayerTile extends StatelessWidget {
               ),
             ),
             // 9.0
-            const Center(
+            Center(
               child: Text(
-                "9.0",
-                style: TextStyle(
+                player?.credit_value.toString() ?? '',
+                style: const TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.w600,
                     fontSize: 12.0),
@@ -139,9 +145,9 @@ class SelectPlayerTile extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                onTap(position, position);
+                onTap(player, position);
               },
-              child: isSelected!
+              child: isSelected ?? false
                   ? Image.asset(
                       'assets/images/minus.png',
                       width: 21.0,
