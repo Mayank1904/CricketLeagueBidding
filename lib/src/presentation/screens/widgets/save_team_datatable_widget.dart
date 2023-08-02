@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import '../../../resources/constants/colors.dart';
 import '../../../utils/extensions/extensions.dart';
 import '../../components/skipper_text.dart';
+import '../../../domain/models/responses/matches_detail_response.dart' as P;
 
 class Player {
   String? name;
   String? role;
   bool? isCaptain;
   bool? isViceCaptain;
+  double? points;
 
-  Player({this.name, this.role, this.isCaptain, this.isViceCaptain});
+  Player(
+      {this.name, this.role, this.isCaptain, this.isViceCaptain, this.points});
 }
 
 enum SortOrder {
@@ -22,11 +25,13 @@ enum SortOrder {
 class DatatableWidget extends StatefulWidget {
   final Function? onCaptainSelected;
   final Function? onViceCaptainSelected;
+  final List<P.Player> players;
 
   const DatatableWidget({
     Key? key,
     this.onCaptainSelected,
     this.onViceCaptainSelected,
+    required this.players,
   }) : super(key: key);
 
   @override
@@ -34,58 +39,59 @@ class DatatableWidget extends StatefulWidget {
 }
 
 class _DatatableWidgetState extends State<DatatableWidget> {
-  final List<Player> players = [
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-    Player(
-        name: 'Player 1',
-        role: 'Batsman',
-        isCaptain: false,
-        isViceCaptain: false),
-  ];
+  late List<Player> players;
+  // final List<Player> players = [
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  //   Player(
+  //       name: 'Player 1',
+  //       role: 'Batsman',
+  //       isCaptain: false,
+  //       isViceCaptain: false),
+  // ];
 
   int _sortColumnIndex = 0;
   SortOrder _sortOrder = SortOrder.ascending;
@@ -127,8 +133,15 @@ class _DatatableWidgetState extends State<DatatableWidget> {
     });
   }
 
+  final _convert = (P.Player e) => Player(
+        role: e.seasonal_role,
+        name: e.name,
+        points: e.score,
+      );
+
   @override
   Widget build(BuildContext context) {
+    players = widget.players.map((e) => _convert(e)).toList();
     return DataTable2(
       sortAscending: _sortOrder == SortOrder.ascending,
       sortColumnIndex: _sortColumnIndex,
@@ -234,10 +247,10 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SkipperText.textSmallBold("Alyssa Healy"),
+                        SkipperText.textSmallBold(player.name ?? ''),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
-                          child: SkipperText.textSmall("116 pts"),
+                          child: SkipperText.textSmall("${player.points} pts"),
                         ),
                       ],
                     ),
@@ -268,7 +281,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   strokeAlign: BorderSide.strokeAlignOutside,
-                                  color: player.isCaptain!
+                                  color: player.isCaptain ?? false
                                       ? AppColors.blackTwo
                                       : AppColors.greyCB,
                                 ),
@@ -279,7 +292,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                                     : AppColors.blackTwo,
                                 radius: 17.5,
                                 child: SkipperText.titleBold(
-                                    color: player.isCaptain!
+                                    color: player.isCaptain ?? false
                                         ? AppColors.white
                                         : AppColors.blackTwo,
                                     player.isCaptain == false ? 'C' : '2X'),
@@ -306,7 +319,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                             shape: BoxShape.circle,
                             border: Border.all(
                               strokeAlign: BorderSide.strokeAlignOutside,
-                              color: player.isViceCaptain!
+                              color: player.isViceCaptain ?? false
                                   ? AppColors.blackTwo
                                   : AppColors.greyCB,
                             ),

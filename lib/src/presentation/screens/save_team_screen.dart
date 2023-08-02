@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'team_preview.dart';
 import 'widgets/save_team_datatable_widget.dart';
 
 import '../../domain/models/requests/create_team_request.dart';
@@ -41,6 +42,10 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
   bool? isCaptainSelected = false;
   bool? isViceCaptainSelected = false;
   late CreateTeamRequest createTeamRequest;
+  late List<P.Player> players = widget.wicketkeeper! +
+      widget.batsmen +
+      widget.allrounders +
+      widget.bowlers;
 
   late SaveTeamCubit saveTeamCubit = BlocProvider.of<SaveTeamCubit>(context);
 
@@ -93,6 +98,7 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                       margin: const EdgeInsets.only(
                           left: 18.0, right: 18.0, top: 50.0),
                       child: DatatableWidget(
+                        players: players,
                         onCaptainSelected: (val) {
                           setState(() {
                             isCaptainSelected = val;
@@ -119,29 +125,16 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                         Expanded(
                           child: SkipperButton(
                             onPressed: () => {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => const TeamPreview(
-                              //             wicketkeeper: ['D. Conway', 'W Saha'],
-                              //             batsmen: [
-                              //               'R Gaikwad',
-                              //               'S Gill',
-                              //               'H Pandya',
-                              //               'M Ali',
-                              //               'M Pathirana',
-                              //               'Mayank',
-                              //               'Usjsk'
-                              //             ],
-                              //             allrounders: [
-                              //               'R Jadeja',
-                              //             ],
-                              //             bowlers: [
-                              //               'M Shami',
-                              //               'Rashid K',
-                              //             ],
-                              //           )),
-                              // )
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TeamPreview(
+                                          wicketkeeper: widget.wicketkeeper,
+                                          batsmen: widget.batsmen,
+                                          allrounders: widget.allrounders,
+                                          bowlers: widget.bowlers,
+                                        )),
+                              )
                             },
                             buttonColor: AppColors.warmGrey,
                             text: 'Team Preview',
