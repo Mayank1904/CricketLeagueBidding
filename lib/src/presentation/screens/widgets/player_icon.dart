@@ -66,7 +66,7 @@ class PlayerIcon extends StatelessWidget {
           child: Opacity(
             opacity: 0.8,
             child: SkipperText.textSmall(
-              "9 Cr",
+              "${player[i].credit_value ?? ''} Cr",
               color: AppColors.white,
               textAlign: TextAlign.left,
             ),

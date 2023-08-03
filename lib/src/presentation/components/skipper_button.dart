@@ -7,18 +7,20 @@ class SkipperButton extends StatelessWidget {
   final String text;
   final bool isInProgress;
   final Color? buttonColor;
+  final bool? isDisabled;
   const SkipperButton(
       {super.key,
       required this.text,
       this.buttonColor,
       this.onPressed,
-      this.isInProgress = false});
+      this.isInProgress = false,
+      this.isDisabled});
 
   @override
   Widget build(BuildContext context) {
     return NeoPopButton(
       key: key,
-      onTapUp: onPressed,
+      onTapUp: isDisabled == false ? onPressed : null,
       color: buttonColor ?? AppColors.yellow,
       disabledColor: AppColors.warmGrey,
       child: Padding(

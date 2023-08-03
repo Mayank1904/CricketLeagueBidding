@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,6 +12,7 @@ import 'login_screen.dart';
 import 'register_screen.dart';
 import 'widgets/slider.dart';
 
+@RoutePage()
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
 

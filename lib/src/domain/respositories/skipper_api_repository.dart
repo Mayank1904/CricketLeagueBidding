@@ -19,6 +19,8 @@ abstract class SkipperApiRepository {
   Future<DataState<UpcomingMatchesResponse>> upcomingMatches();
   Future<DataState<ContestResponse>> contests();
   Future<DataState<MatchesDetailResponse>> matchesDetail();
-  Future<DataState<CreateTeamResponse>> createTeam(
-      {required CreateTeamRequest request});
+  Future<DataState<CreateTeamResponse>> createTeam({
+    required CreateTeamRequest request,
+    required String? token,
+  });
 }

@@ -151,11 +151,15 @@ class _SkipperApiService implements SkipperApiService {
   }
 
   @override
-  Future<HttpResponse<CreateTeamResponse>> createTeam({request}) async {
+  Future<HttpResponse<CreateTeamResponse>> createTeam({
+    token,
+    request,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'authorization': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(request?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(

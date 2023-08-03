@@ -8,17 +8,21 @@ import '../components/skipper_text.dart';
 import 'widgets/player_icon.dart';
 
 class TeamPreview extends StatelessWidget {
+  final int totalPlayers;
   final List<Player>? batsmen;
   final List<Player>? bowlers;
   final List<Player>? wicketkeeper;
   final List<Player>? allrounders;
+  final double creditLeft;
 
   const TeamPreview(
       {super.key,
       this.batsmen,
       this.bowlers,
       this.allrounders,
-      this.wicketkeeper});
+      this.wicketkeeper,
+      required this.totalPlayers,
+      required this.creditLeft});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,7 @@ class TeamPreview extends StatelessWidget {
                       color: AppColors.greyish,
                     ),
                     SkipperText.titleBold(
-                      '11/11',
+                      '$totalPlayers/11',
                       color: AppColors.white,
                     )
                   ],
@@ -60,7 +64,7 @@ class TeamPreview extends StatelessWidget {
                       color: AppColors.greyish,
                     ),
                     SkipperText.titleBold(
-                      '26.5',
+                      creditLeft.toString(),
                       color: AppColors.white,
                     ),
                   ],

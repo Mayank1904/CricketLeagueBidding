@@ -12,9 +12,14 @@ class Player {
   bool? isCaptain;
   bool? isViceCaptain;
   double? points;
-
+  String? teamName;
   Player(
-      {this.name, this.role, this.isCaptain, this.isViceCaptain, this.points});
+      {this.name,
+      this.role,
+      this.isCaptain,
+      this.isViceCaptain,
+      this.points,
+      this.teamName});
 }
 
 enum SortOrder {
@@ -40,58 +45,12 @@ class DatatableWidget extends StatefulWidget {
 
 class _DatatableWidgetState extends State<DatatableWidget> {
   late List<Player> players;
-  // final List<Player> players = [
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  //   Player(
-  //       name: 'Player 1',
-  //       role: 'Batsman',
-  //       isCaptain: false,
-  //       isViceCaptain: false),
-  // ];
+
+  @override
+  void initState() {
+    players = widget.players.map((e) => _convert(e)).toList();
+    super.initState();
+  }
 
   int _sortColumnIndex = 0;
   SortOrder _sortOrder = SortOrder.ascending;
@@ -137,11 +96,27 @@ class _DatatableWidgetState extends State<DatatableWidget> {
         role: e.seasonal_role,
         name: e.name,
         points: e.score,
+        isCaptain: false,
+        isViceCaptain: false,
+        teamName: e.team_key,
       );
+
+  String getRole(String role) {
+    if (role == 'bowler') {
+      return 'BOWL';
+    }
+    if (role == 'batsman') {
+      return 'BAT';
+    }
+    if (role == 'allrounder') {
+      return 'ALL';
+    } else {
+      return 'WK';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    players = widget.players.map((e) => _convert(e)).toList();
     return DataTable2(
       sortAscending: _sortOrder == SortOrder.ascending,
       sortColumnIndex: _sortColumnIndex,
@@ -217,7 +192,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                                   Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: SkipperText.textExtraSmall(
-                                      'MUM',
+                                      player.teamName ?? '',
                                       color: AppColors.black,
                                       textAlign: TextAlign.center,
                                     ),
@@ -226,7 +201,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                                     padding: const EdgeInsets.all(2.0),
                                     color: AppColors.black,
                                     child: SkipperText.textExtraSmall(
-                                      'WK',
+                                      getRole(player.role ?? ''),
                                       color: AppColors.white,
                                       textAlign: TextAlign.center,
                                     ),
@@ -274,7 +249,8 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                           child: GestureDetector(
                             onTap: () async {
                               await _selectCaptain(players.indexOf(player));
-                              widget.onCaptainSelected?.call(player.isCaptain);
+                              widget.onCaptainSelected
+                                  ?.call(player.isCaptain, players);
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -292,9 +268,9 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                                     : AppColors.blackTwo,
                                 radius: 17.5,
                                 child: SkipperText.titleBold(
-                                    color: player.isCaptain ?? false
-                                        ? AppColors.white
-                                        : AppColors.blackTwo,
+                                    color: player.isCaptain == false
+                                        ? AppColors.blackTwo
+                                        : AppColors.white,
                                     player.isCaptain == false ? 'C' : '2X'),
                               ),
                             ),
@@ -328,7 +304,7 @@ class _DatatableWidgetState extends State<DatatableWidget> {
                             onTap: () async {
                               await _selectViceCaptain(players.indexOf(player));
                               widget.onViceCaptainSelected
-                                  ?.call(player.isViceCaptain);
+                                  ?.call(player.isViceCaptain, players);
                             },
                             child: CircleAvatar(
                               backgroundColor: player.isViceCaptain == false

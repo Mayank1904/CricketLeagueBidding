@@ -17,9 +17,8 @@ class SaveTeamScreen extends StatefulWidget {
   final List<P.Player>? wicketkeeper;
   final List<P.Player> bowlers;
   final List<P.Player> allrounders;
-  final String? match_id;
-  final String? team1;
-  final String? team2;
+  final String? matchId;
+  final double creditLeft;
   final String? start_time;
 
   const SaveTeamScreen({
@@ -28,10 +27,9 @@ class SaveTeamScreen extends StatefulWidget {
     required this.wicketkeeper,
     required this.bowlers,
     required this.allrounders,
-    this.match_id,
-    this.team1,
-    this.team2,
+    this.matchId,
     this.start_time,
+    required this.creditLeft,
   });
 
   @override
@@ -41,7 +39,7 @@ class SaveTeamScreen extends StatefulWidget {
 class _SaveTeamScreenState extends State<SaveTeamScreen> {
   bool? isCaptainSelected = false;
   bool? isViceCaptainSelected = false;
-  late CreateTeamRequest createTeamRequest;
+  late List<Player> selectedPlayers;
   late List<P.Player> players = widget.wicketkeeper! +
       widget.batsmen +
       widget.allrounders +
@@ -99,14 +97,16 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                           left: 18.0, right: 18.0, top: 50.0),
                       child: DatatableWidget(
                         players: players,
-                        onCaptainSelected: (val) {
+                        onCaptainSelected: (val, selPlayers) {
                           setState(() {
                             isCaptainSelected = val;
+                            selectedPlayers = selPlayers;
                           });
                         },
-                        onViceCaptainSelected: (val) {
+                        onViceCaptainSelected: (val, selPlayers) {
                           setState(() {
                             isViceCaptainSelected = val;
+                            selectedPlayers = selPlayers;
                           });
                         },
                       ),
@@ -124,6 +124,7 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                       children: [
                         Expanded(
                           child: SkipperButton(
+                            isDisabled: false,
                             onPressed: () => {
                               Navigator.push(
                                 context,
@@ -133,6 +134,8 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                                           batsmen: widget.batsmen,
                                           allrounders: widget.allrounders,
                                           bowlers: widget.bowlers,
+                                          totalPlayers: players.length,
+                                          creditLeft: widget.creditLeft,
                                         )),
                               )
                             },
@@ -142,10 +145,15 @@ class _SaveTeamScreenState extends State<SaveTeamScreen> {
                         ),
                         Expanded(
                           child: SkipperButton(
-                            onPressed: () => (isCaptainSelected! &&
-                                    isViceCaptainSelected!)
-                                ? saveTeamCubit.createTeam(createTeamRequest)
-                                : null,
+                            isDisabled:
+                                !(isCaptainSelected! && isViceCaptainSelected!),
+                            onPressed: () =>
+                                (isCaptainSelected! && isViceCaptainSelected!)
+                                    ? saveTeamCubit.createTeam(
+                                        selectedPlayers,
+                                        widget.matchId,
+                                      )
+                                    : null,
                             text: 'Continue',
                           ),
                         ),

@@ -159,6 +159,7 @@ class _SelectMatchScreenState extends State<SelectMatchScreen> {
                                                       widget.card?.teams.a.name,
                                                   team2:
                                                       widget.card?.teams.b.name,
+                                                  matchId: widget.card?.key,
                                                 )));
                                   },
                                   child: Padding(

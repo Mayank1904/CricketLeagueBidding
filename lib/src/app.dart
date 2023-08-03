@@ -47,6 +47,7 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => SaveTeamCubit(
             locator<SkipperApiRepository>(),
+            locator<AuthService>(),
           ),
         ),
       ],
@@ -62,7 +63,7 @@ class App extends StatelessWidget {
                   theme: ThemeData(
                       primaryColor: AppColors.backgroundColor,
                       fontFamily: 'Graphik'),
-                  home: const CreateTeamScreen(),
+                  home: const SplashScreen(),
                 ),
               );
             });

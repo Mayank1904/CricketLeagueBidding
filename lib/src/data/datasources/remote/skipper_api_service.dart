@@ -40,6 +40,7 @@ abstract class SkipperApiService {
 
   @POST('/v1/create-team')
   Future<HttpResponse<CreateTeamResponse>> createTeam({
+    @Header('authorization') required String? token,
     @Body() CreateTeamRequest? request,
   });
 

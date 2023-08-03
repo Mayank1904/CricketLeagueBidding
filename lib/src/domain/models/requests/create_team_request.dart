@@ -57,34 +57,34 @@ class CreateTeamRequest extends Equatable {
 }
 
 class MTeam extends Equatable {
-  final String Name;
-  final String Role;
+  final String name;
+  final String role;
   const MTeam({
-    required this.Name,
-    required this.Role,
+    required this.name,
+    required this.role,
   });
 
   MTeam copyWith({
-    String? Name,
-    String? Role,
+    String? name,
+    String? role,
   }) {
     return MTeam(
-      Name: Name ?? this.Name,
-      Role: Role ?? this.Role,
+      name: name ?? this.name,
+      role: role ?? this.role,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'Name': Name,
-      'Role': Role,
+      'name': name,
+      'role': role,
     };
   }
 
   factory MTeam.fromMap(Map<String, dynamic> map) {
     return MTeam(
-      Name: (map['Name'] ?? '') as String,
-      Role: (map['Role'] ?? '') as String,
+      name: (map['name'] ?? '') as String,
+      role: (map['role'] ?? '') as String,
     );
   }
 
@@ -97,5 +97,5 @@ class MTeam extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [Name, Role];
+  List<Object> get props => [name, role];
 }

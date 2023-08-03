@@ -58,8 +58,9 @@ class ApiRepositoryImpl extends BaseApiRepository
 
   @override
   Future<DataState<CreateTeamResponse>> createTeam(
-      {required CreateTeamRequest request}) {
+      {required CreateTeamRequest request, required String? token}) {
     return getStateOf<CreateTeamResponse>(
-        request: () => _skipperApiService.createTeam(request: request));
+        request: () =>
+            _skipperApiService.createTeam(request: request, token: token));
   }
 }

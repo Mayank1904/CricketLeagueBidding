@@ -10,10 +10,12 @@ class PlayerListWidget extends StatelessWidget {
   final List<Player>? items;
   final bool? isSelected;
   final List<bool>? color;
+  final String role;
   const PlayerListWidget({
     super.key,
     required this.onTap,
     required this.items,
+    required this.role,
     this.isSelected,
     this.color,
   });
@@ -40,7 +42,7 @@ class PlayerListWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               color: const Color(0xfffff7ea),
               child: SkipperText.textSmall(
-                "Pick 1-4 Wicket Keeper",
+                "Pick 1-4 $role",
                 color: AppColors.brownishGrey,
                 textAlign: TextAlign.center,
               ),

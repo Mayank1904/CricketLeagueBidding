@@ -17,10 +17,10 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 class CreateTeamScreen extends StatefulWidget {
   final String? team1;
   final String? team2;
-  final String? match_id;
+  final String? matchId;
   final String? start_time;
   const CreateTeamScreen(
-      {super.key, this.team1, this.team2, this.match_id, this.start_time});
+      {super.key, this.team1, this.team2, this.matchId, this.start_time});
 
   @override
   State<CreateTeamScreen> createState() => _CreateTeamScreenState();
@@ -296,6 +296,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                             controller: tabController,
                             children: [
                               PlayerListWidget(
+                                role: 'Wicket-Keepers',
                                 color: colorKeeper,
                                 items: state.players
                                     ?.where((element) =>
@@ -303,7 +304,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                     .toList(),
                                 onTap: (value, index) {
                                   setState(() {
-                                    if (keeperCount < 2 &&
+                                    if (keeperCount < 8 &&
                                         colorKeeper[index] == false &&
                                         _total_players < 11) {
                                       colorKeeper[index] = !colorKeeper[index];
@@ -324,6 +325,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                 },
                               ),
                               PlayerListWidget(
+                                role: 'Batters',
                                 color: _color_batsmen,
                                 items: state.players
                                     ?.where((element) =>
@@ -331,7 +333,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                     .toList(),
                                 onTap: (value, index) {
                                   setState(() {
-                                    if (_batsmen_count < 5 &&
+                                    if (_batsmen_count < 8 &&
                                         _color_batsmen[index] == false &&
                                         _total_players < 11) {
                                       _color_batsmen[index] =
@@ -354,6 +356,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                 },
                               ),
                               PlayerListWidget(
+                                role: 'All-Rounders',
                                 color: _color_allrounder,
                                 items: state.players
                                     ?.where((element) =>
@@ -361,7 +364,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                     .toList(),
                                 onTap: (value, index) {
                                   setState(() {
-                                    if (_allrounder_count < 3 &&
+                                    if (_allrounder_count < 8 &&
                                         _color_allrounder[index] == false &&
                                         _total_players < 11) {
                                       _color_allrounder[index] =
@@ -384,6 +387,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                 },
                               ),
                               PlayerListWidget(
+                                role: 'Bowlers',
                                 color: _color_bowler,
                                 items: state.players
                                     ?.where((element) =>
@@ -391,7 +395,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                     .toList(),
                                 onTap: (value, index) {
                                   setState(() {
-                                    if (_bowler_count < 5 &&
+                                    if (_bowler_count < 8 &&
                                         _color_bowler[index] == false &&
                                         _total_players < 11) {
                                       _color_bowler[index] =
@@ -437,6 +441,9 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                               batsmen: _batsmen_selected,
                                               allrounders: _allrounder_selected,
                                               bowlers: _bowler_selected,
+                                              totalPlayers: _total_players,
+                                              creditLeft: (100 - totalCredit)
+                                                  .toDouble(),
                                             )),
                                   )
                                 },
@@ -446,6 +453,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                             ),
                             Expanded(
                               child: SkipperButton(
+                                isDisabled: _total_players < 11,
                                 onPressed: () => {
                                   Navigator.push(
                                     context,
@@ -455,6 +463,9 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                               batsmen: _batsmen_selected,
                                               allrounders: _allrounder_selected,
                                               bowlers: _bowler_selected,
+                                              matchId: widget.matchId,
+                                              creditLeft: (100 - totalCredit)
+                                                  .toDouble(),
                                             )),
                                   )
                                 },
