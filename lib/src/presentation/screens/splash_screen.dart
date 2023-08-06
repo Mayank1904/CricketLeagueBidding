@@ -25,7 +25,7 @@ class SplashScreen extends StatelessWidget {
         routerDelegate: appRouter.delegate(),
       ),
       splashTransition: SplashTransition.fadeTransition,
-      pageTransitionType: PageTransitionType.scale,
+      pageTransitionType: PageTransitionType.bottomToTop,
       backgroundColor: AppColors.backgroundColor,
     );
   }
