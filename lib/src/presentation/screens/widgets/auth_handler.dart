@@ -17,7 +17,7 @@ class AuthHandler extends StatelessWidget {
       initialData: false,
       future: authService.isTokenValid(),
       builder: (_, AsyncSnapshot<bool> snapshot) =>
-          (snapshot.hasData && snapshot.data != null)
+          (snapshot.hasData && snapshot.data == true)
               ? const HomeScreen()
               : const IntroScreen(),
     );

@@ -24,7 +24,6 @@ class SelectPlayerTile extends StatelessWidget {
       columnWidths: const {
         0: FlexColumnWidth(6.5),
         1: FlexColumnWidth(2),
-        2: FlexColumnWidth(1),
         3: FlexColumnWidth(1.5),
       },
       children: [

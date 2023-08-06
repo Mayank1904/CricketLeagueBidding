@@ -16,7 +16,7 @@ class UpcomingMatchesCubit extends BaseCubit<UpcomingMatchesState, Data>
   UpcomingMatchesCubit(this._apiRepository)
       : super(
           UpcomingMatchesInitial(),
-          Data(),
+          const Data(),
         );
 
   void loadUpcomingMatchesList() async {

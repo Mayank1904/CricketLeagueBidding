@@ -52,7 +52,6 @@ class PlayerListWidget extends StatelessWidget {
                 0: FlexColumnWidth(6.5),
                 1: FlexColumnWidth(2),
                 2: FlexColumnWidth(1.5),
-                3: FlexColumnWidth(1),
               },
               children: [
                 TableRow(

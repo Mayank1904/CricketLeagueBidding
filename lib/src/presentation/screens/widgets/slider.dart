@@ -4,10 +4,10 @@ import '../../components/skipper_text.dart';
 import '../../../resources/constants/colors.dart';
 
 class SliderWidget extends StatelessWidget {
-  String image, title, description;
+  final String image, title, description;
 
   //Constructor created
-  SliderWidget(
+  const SliderWidget(
       {super.key,
       required this.image,
       required this.title,

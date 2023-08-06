@@ -17,6 +17,6 @@ class AuthService {
 
   Future<bool> isTokenValid() async {
     String? token = await _secureStorage.read(key: _keyToken);
-    return token == null;
+    return token != null;
   }
 }
