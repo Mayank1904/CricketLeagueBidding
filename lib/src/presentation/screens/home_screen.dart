@@ -7,6 +7,7 @@ import 'upcoming_matches_screen.dart';
 import '../../resources/constants/colors.dart';
 import 'home/sidemenu/side_menu.dart';
 
+@RoutePage()
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

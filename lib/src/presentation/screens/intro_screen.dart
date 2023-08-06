@@ -1,14 +1,14 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:neopop/neopop.dart';
 
+import '../../config/router/app_router.dart';
 import '../../models/intro/slider_model.dart';
 import '../../resources/constants/colors.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/skipper_text.dart';
-import 'login_screen.dart';
 import 'register_screen.dart';
 import 'widgets/slider.dart';
 
@@ -131,12 +131,7 @@ class _IntroScreenState extends State<IntroScreen> {
                           style: const TextStyle(fontWeight: FontWeight.w700),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginScreen(),
-                                ),
-                              );
+                              context.router.replace(const LoginRoute());
                             },
                         ),
                       ],

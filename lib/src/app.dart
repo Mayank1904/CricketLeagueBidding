@@ -8,7 +8,6 @@ import 'presentation/cubits/saveTeam/save_team_cubit.dart';
 import 'presentation/cubits/selectContest/select_contest_cubit.dart';
 import 'presentation/cubits/register/register_cubit.dart';
 import 'presentation/cubits/upcomingMatches/upcoming_matches_cubit.dart';
-import 'presentation/screens/create_team_screen.dart';
 import 'presentation/screens/splash_screen.dart';
 import 'resources/constants/colors.dart';
 import 'package:provider/provider.dart';

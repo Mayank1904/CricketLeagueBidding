@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               showToast(state.user?.message ?? 'Something Went Wrong');
             }
             if (state.isOtpVerified ?? false) {
-              context.router.push(const ProfileRoute());
+              context.router.replace(const ProfileRoute());
             }
           } else if (state.isApiError ?? false) {
             LoadingDialog.hide(context);

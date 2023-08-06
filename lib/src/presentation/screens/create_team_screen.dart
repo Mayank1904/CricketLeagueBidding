@@ -167,7 +167,6 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                                   ),
                                   Column(
                                     children: [
-                                      // MUM
                                       SkipperText.textSmall(
                                         state.teams?.a.short_name ?? '',
                                         color: AppColors.white,

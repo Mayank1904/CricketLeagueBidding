@@ -1,12 +1,12 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import '../../config/router/app_router.dart';
 import '../components/skipper_scaffold.dart';
 import '../components/text_field_widget.dart';
 
 import '../../resources/constants/colors.dart';
 import '../components/skipper_button.dart';
 import '../components/skipper_text.dart';
-import 'home_screen.dart';
 
 @RoutePage()
 class ProfileScreen extends StatefulWidget {
@@ -81,13 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 SkipperButton(
                   isDisabled: false,
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    )
-                  },
+                  onPressed: () => {context.router.replace(const HomeRoute())},
                   text: 'SAVE NAME',
                 ),
                 Padding(
