@@ -155,10 +155,8 @@ class _SelectMatchScreenState extends State<SelectMatchScreen> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 CreateTeamScreen(
-                                                  team1:
-                                                      widget.card?.teams.a.name,
-                                                  team2:
-                                                      widget.card?.teams.b.name,
+                                                  team1: 'NGL',
+                                                  team2: 'MGL',
                                                   matchId: widget.card?.key,
                                                 )));
                                   },

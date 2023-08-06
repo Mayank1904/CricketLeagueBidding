@@ -60,7 +60,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
   void addTeamPlayer(Player player) {
     totalCredit = totalCredit + player.credit_value!;
 
-    if (player.team_key == 'a') {
+    if (player.team_key == widget.team1) {
       firstTeamPlayers.add(player);
     } else {
       secondTeamPlayers.add(player);
@@ -297,10 +297,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                               PlayerListWidget(
                                 role: 'Wicket-Keepers',
                                 color: colorKeeper,
-                                items: state.players
-                                    ?.where((element) =>
-                                        element.seasonal_role == 'keeper')
-                                    .toList(),
+                                items: filterPlayerListByRole(state, 'keeper'),
                                 onTap: (value, index) {
                                   setState(() {
                                     if (keeperCount < 8 &&
@@ -326,10 +323,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                               PlayerListWidget(
                                 role: 'Batters',
                                 color: _color_batsmen,
-                                items: state.players
-                                    ?.where((element) =>
-                                        element.seasonal_role == 'batsman')
-                                    .toList(),
+                                items: filterPlayerListByRole(state, 'batsman'),
                                 onTap: (value, index) {
                                   setState(() {
                                     if (_batsmen_count < 8 &&
@@ -357,10 +351,8 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                               PlayerListWidget(
                                 role: 'All-Rounders',
                                 color: _color_allrounder,
-                                items: state.players
-                                    ?.where((element) =>
-                                        element.seasonal_role == 'allrounder')
-                                    .toList(),
+                                items:
+                                    filterPlayerListByRole(state, 'allrounder'),
                                 onTap: (value, index) {
                                   setState(() {
                                     if (_allrounder_count < 8 &&
@@ -388,10 +380,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
                               PlayerListWidget(
                                 role: 'Bowlers',
                                 color: _color_bowler,
-                                items: state.players
-                                    ?.where((element) =>
-                                        element.seasonal_role == 'bowler')
-                                    .toList(),
+                                items: filterPlayerListByRole(state, 'bowler'),
                                 onTap: (value, index) {
                                   setState(() {
                                     if (_bowler_count < 8 &&
@@ -480,5 +469,25 @@ class _CreateTeamScreenState extends State<CreateTeamScreen>
         },
       ),
     );
+  }
+
+  List<Player>? filterPlayerListByRole(MatchesDetailState state, String role) {
+    return state.players
+        ?.where((element) => element.seasonal_role == role)
+        .map((e) => e.copyWith(team_key: getTeamName(state, e.team_key)))
+        .toList()
+      ?..insertAll(0, getDummyList());
+  }
+
+  String getTeamName(MatchesDetailState state, String? teamKey) {
+    if (teamKey == 'a') {
+      return state.teams?.a.short_name ?? '';
+    } else {
+      return state.teams?.b.short_name ?? '';
+    }
+  }
+
+  List<Player> getDummyList() {
+    return [const Player(), const Player()];
   }
 }

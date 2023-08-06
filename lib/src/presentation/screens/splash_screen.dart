@@ -5,6 +5,7 @@ import '../../../l10n/support_locale.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../config/router/app_router.dart';
+import '../../locator.dart';
 import '../../resources/constants/colors.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -12,8 +13,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = AppRouter();
-
+    final appRouter = locator<AppRouter>();
     return AnimatedSplashScreen(
       duration: 5000,
       splashIconSize: 160.0,

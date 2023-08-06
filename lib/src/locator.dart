@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
+import 'config/router/app_router.dart';
 import 'data/datasources/remote/skipper_api_service.dart';
 import 'data/repositories/api_repository_impl.dart';
 import 'domain/respositories/skipper_api_repository.dart';
@@ -30,4 +31,6 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<SkipperApiRepository>(
     ApiRepositoryImpl(locator<SkipperApiService>()),
   );
+
+  locator.registerSingleton<AppRouter>(AppRouter());
 }

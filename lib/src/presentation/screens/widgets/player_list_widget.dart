@@ -22,8 +22,6 @@ class PlayerListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    items?.insert(0, const Player());
-    items?.insert(1, const Player());
     return ListView.separated(
         separatorBuilder: (context, index) {
           return index != 0

@@ -56,6 +56,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const UpcomingMatchesScreen(),
       );
     },
+    AuthHandlerRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AuthHandler(),
+      );
+    },
   };
 }
 
@@ -163,6 +169,20 @@ class UpcomingMatchesRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'UpcomingMatchesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AuthHandler]
+class AuthHandlerRoute extends PageRouteInfo<void> {
+  const AuthHandlerRoute({List<PageRouteInfo>? children})
+      : super(
+          AuthHandlerRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AuthHandler';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

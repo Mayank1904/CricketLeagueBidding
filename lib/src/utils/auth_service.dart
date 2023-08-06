@@ -14,4 +14,9 @@ class AuthService {
     final token = await _secureStorage.read(key: _keyToken);
     return 'Bearer $token';
   }
+
+  Future<bool> isTokenValid() async {
+    String? token = await _secureStorage.read(key: _keyToken);
+    return token == null;
+  }
 }
